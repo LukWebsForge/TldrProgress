@@ -31,8 +31,9 @@ You can configure certain details using environment variables.
 | GIT_NAME             | The committers name                          | Yes      |
 | GIT_EMAIL            | The committers email                         | Yes      |
 | SITE_REMOTE_URL      | The Git SSH url of the deployment repository | Yes      |
-| SSH_KEY_PASSWORD     | A password for the SSH key                   | No       |
+| CHECK_KNOWN_HOSTS    | Checks the known_hosts file when connecting  | No       |
 | DONT_PUBLISH         | No changes will be committed & pushed        | No       |
+| SSH_KEY_PASSWORD     | A password for the SSH key                   | No       |
 
 You can either let the program generate a new SSH key pair, or you can use your own even if a password is required.
 This application doesn't support HTTP authentication.

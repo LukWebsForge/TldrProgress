@@ -5,6 +5,8 @@ import (
 	"github.com/go-git/go-git/v5/config"
 	"github.com/go-git/go-git/v5/plumbing/object"
 	"github.com/go-git/go-git/v5/plumbing/transport/ssh"
+	ssh2 "golang.org/x/crypto/ssh"
+	"net"
 	"os"
 	"time"
 )
@@ -23,6 +25,18 @@ func NewTldrGit(name string, email string, sshKeyPath string, sshKeyPassword str
 	if err != nil {
 		return nil, err
 	}
+
+	// If CHECK_KNOWN_HOSTS is set, the ssh library of go-git tries to validate the remote ssh keys
+	// by checking your local known_hosts file.
+	if _, exists := os.LookupEnv("CHECK_KNOWN_HOSTS"); !exists {
+		publicKey.HostKeyCallback = func(hostname string, remote net.Addr, key ssh2.PublicKey) error {
+			// We're not checking the SSH key of remote, because it would be difficult to keep track of them.
+			// Feel free to work on this problem, this might be useful:
+			// https://pkg.go.dev/golang.org/x/crypto/ssh/knownhosts
+			return nil
+		}
+	}
+
 	return &TldrGit{
 		name:      name,
 		email:     email,
