@@ -15,7 +15,7 @@ tasks:
     deps: [ assets ]
     dir: lib/html
     cmds:
-      - go generate
+      - go generate -v
     sources:
       - ../../resources/output.css
     generates:

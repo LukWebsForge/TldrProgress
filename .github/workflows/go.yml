@@ -22,13 +22,13 @@ jobs:
       uses: actions/setup-node@v2.1.2
     
     - name: Setup Task
-      uses: Arduino/actions/setup-taskfile@master
+      run: curl -sL https://taskfile.dev/install.sh | sh
 
     - name: Check out code into the Go module directory
       uses: actions/checkout@v2
     
     - name: Build using Taskfile.yml
-      run: task build
+      run: ./bin/task build
     
     - name: Archive production artifacts
       uses: actions/upload-artifact@v2
