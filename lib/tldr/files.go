@@ -11,30 +11,24 @@ import (
 	"sync"
 )
 
-const (
-	StatusTranslated    = iota
-	StatusOutdated      = iota
-	StatusNoTranslation = iota
-)
-
+const DefaultFileMask = 0740
 const DefaultLanguage = "en"
 
-// [os][name][lang] = page
-type IndexMap map[Os]map[Name]map[Lang]Page
-
-// [os][name][lang] = status
-type StatusMap map[Os]map[Name]map[Lang]StatusEnum
-
-// [os] = []string
-type OrderedNameMap map[Os][]Name
-
-// [os][lang] = float64
-type ProgressMap map[Os]map[Lang]float64
+const (
+	StatusTranslated    StatusEnum = iota
+	StatusOutdated      StatusEnum = iota
+	StatusNoTranslation StatusEnum = iota
+)
 
 type Os string
 type Name string
 type Lang string
 type StatusEnum int
+
+type IndexMap map[Os]map[Name]map[Lang]Page
+type StatusMap map[Os]map[Name]map[Lang]StatusEnum
+type OrderedNameMap map[Os][]Name
+type ProgressMap map[Os]map[Lang]float64
 
 type Page struct {
 	Name     Name
@@ -112,7 +106,7 @@ func mapFile(path string, basePath string) (*Page, error) {
 		lang = "en"
 	}
 
-	file, err := os.OpenFile(path, os.O_RDONLY, 0640)
+	file, err := os.OpenFile(path, os.O_RDONLY, DefaultFileMask)
 	if err != nil {
 		return nil, fmt.Errorf("unable to open the file: %v", err)
 	}

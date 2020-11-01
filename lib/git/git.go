@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-const DefaultFileMask = 0640
+const DefaultFileMask = 0740
 const DefaultRemoteName = "origin"
 
 type TldrGit struct {

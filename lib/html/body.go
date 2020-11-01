@@ -12,6 +12,8 @@ import (
 	"tldr-translation-progress/lib/tldr"
 )
 
+const DefaultFileMask = 0740
+
 // If you create new files, which contain html templates, don't forget to add them to the file
 // ../../resources/tailwind.config.js, otherwise used css classes may not be available in the purged css file.
 const styleFilename = "style.css"
@@ -81,12 +83,12 @@ func GenerateHtml(index *tldr.Index, path string) error {
 	}
 
 	// Opening the file
-	err = os.MkdirAll(filepath.Dir(path), 0640)
+	err = os.MkdirAll(filepath.Dir(path), DefaultFileMask)
 	if err != nil {
 		return err
 	}
 
-	file, err := os.OpenFile(path, os.O_CREATE|os.O_TRUNC|os.O_WRONLY, 0640)
+	file, err := os.OpenFile(path, os.O_CREATE|os.O_TRUNC|os.O_WRONLY, DefaultFileMask)
 	if err != nil {
 		return err
 	}
@@ -107,7 +109,7 @@ func GenerateHtml(index *tldr.Index, path string) error {
 }
 
 func copyStyle(path string) error {
-	return ioutil.WriteFile(path, []byte(styleFromAssets()), 0640)
+	return ioutil.WriteFile(path, []byte(styleFromAssets()), DefaultFileMask)
 }
 
 func styleName() string {
