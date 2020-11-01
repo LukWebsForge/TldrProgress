@@ -154,7 +154,7 @@ func (g *TldrGit) Push(path string, origin string) error {
 		RemoteName: DefaultRemoteName,
 		Auth:       g.publicKey,
 	})
-	if err == git.NoErrAlreadyUpToDate && err != nil {
+	if err != git.NoErrAlreadyUpToDate && err != nil {
 		return err
 	}
 
