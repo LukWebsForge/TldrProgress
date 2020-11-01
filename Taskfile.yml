@@ -6,9 +6,6 @@ tasks:
     deps: [ pack ]
     cmds:
       - go build -v -i -o out/ cmd/update.go
-    sources:
-      - cmd/**/*.go
-      - lib/**/*.go
 
   pack:
     desc: Packs the assets into a .go file
