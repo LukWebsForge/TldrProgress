@@ -1,0 +1,19 @@
+{
+  "name": "tldr-progress",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/LukWebsForge/TldrProgress",
+  "author": "LukBukkit",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "postcss -o output.css styles.css"
+  },
+  "dependencies": {
+    "tailwindcss": "^1.9.6",
+    "autoprefixer": "^10.0.1",
+    "cssnano": "^4.1.10",
+    "postcss": "^8.1.4",
+    "postcss-cli": "^8.2.0"
+  }
+}

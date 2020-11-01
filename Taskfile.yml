@@ -1,0 +1,36 @@
+version: '3'
+
+tasks:
+  build:
+    desc: Builds the executable application
+    deps: [ pack ]
+    cmds:
+      - go build -v -i -o out/ cmd/update.go
+    sources:
+      - cmd/**/*.go
+      - lib/**/*.go
+
+  pack:
+    desc: Packs the assets into a .go file
+    deps: [ assets ]
+    dir: lib/html
+    cmds:
+      - go generate
+    sources:
+      - ../../resources/output.css
+    generates:
+      - style.go
+
+  assets:
+    desc: Creates the assets using yarn
+    dir: resources
+    cmds:
+      - yarn
+      - yarn run build
+    sources:
+      - styles.css
+    generates:
+      - output.css
+    env:
+      NODE_ENV:
+        sh: echo {{if .PURGE}} production {{else}} development {{end}}
