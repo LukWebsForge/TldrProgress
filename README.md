@@ -12,12 +12,14 @@ Install [Task](https://taskfile.dev/#/installation) and run
 task build
 ```
 
-You can also minimize size (from ~2MB to 6KB) of the css files by using the build switch `PURGE`
+By default, the css file is minimized (from ~2MB to 6KB), so it just contains the used classes, 
+but if you want to tinker on this application, it might be useful to activate the development mode.
+In this mode the css file won't be minimized.
 ```shell script
-task build PURGE=true
+task build DEV=true
 ```
 
-If you've already built the project and then activate the purge mode it may not work.
+If you've already built the project and then activate the development mode it may not work.
 Please append the `--force` switch to the task command to force a rebuild.
 
 ## Configuration

@@ -30,4 +30,4 @@ tasks:
       - output.css
     env:
       NODE_ENV:
-        sh: echo {{if .PURGE}} production {{else}} development {{end}}
+        sh: echo {{if .DEV}} development {{else}} production {{end}}
