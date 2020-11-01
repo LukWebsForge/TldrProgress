@@ -33,5 +33,5 @@ jobs:
     - name: Archive production artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: compiled-application-x64-ubuntu
+        name: compiled-application-amd64-ubuntu
         path: out/*
