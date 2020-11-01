@@ -1,0 +1,15 @@
+[Unit]
+Description=tldr translation progress website builder
+Documentation=https://github.com/LukWebsForge/TldrProgress
+
+[Service]
+Type=oneshot
+ExecStart=/home/tldr/progress/update
+WorkingDirectory=/home/tldr/progress/
+User=tldr
+Group=tldr
+
+# https://github.com/LukWebsForge/TldrProgress#configuration
+Environment=GIT_NAME=LukWebBuilder
+Environment=GIT_EMAIL=gitbuilder@lukweb.de
+Environment=SITE_REMOTE_URL=git@github.com:LukWebsForge/tldri18n.git

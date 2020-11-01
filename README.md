@@ -44,11 +44,24 @@ Add the public key as a deploy key (with writing access) to the specified reposi
 
 In the next run the software will generate the status page in the `upstream` folder, commit the changes and push it. 
 
-It's recommended to execute this software daily to keep the website up-to-date.
-
 If you want to test your changes, I recommend you set the environment variable `DONT_PUBLISH` 
 and view the updated website locally before deploying it.
 The value of this environment variable doesn't matter, it just has be set.
+
+## Scheduled executions using systemd
+
+It's recommended to execute this software daily to keep the website up-to-date.
+This repository contains systemd configurations files, which run the program daily at 2am.
+
+If you want to use these files
+1. Create a user named `tldr`
+2. Put the executable at the path `/home/tldr/progress/update`
+3. Copy the files from the [`systemd`](systemd) folder into `/etc/systemd/system/`
+4. Finally, run
+```shell script
+systemctl daemon-reload
+systemctl enable --now tldr-progress.timer
+```
 
 ## Contributing
 
