@@ -1,5 +1,5 @@
 # Binaries
-/out/
+/out/*
 
 # Testing
 /test/
@@ -15,3 +15,7 @@
 # IntelliJ
 /.idea/
 *.iml
+
+# Keep .gitkeep files
+# Such directories must be ignored with a wildcard at the end: hello/*
+!/**/.gitkeep
