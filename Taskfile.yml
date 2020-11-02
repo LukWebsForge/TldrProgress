@@ -7,6 +7,14 @@ tasks:
     cmds:
       - go build -v -i -o out/ cmd/update.go
 
+  release:
+    desc: Builds executables for Windows (amd64) and Linux (amd64, armhf)
+    deps: [ pack ]
+    cmds:
+      - GOOS=windows GOARCH=amd64 go build -v -i -o out/update_windows_amd64.exe cmd/update.go
+      - GOOS=linux GOARCH=amd64 go build -v -i -o out/update_linux_amd64 cmd/update.go
+      - GOOS=linux GOARCH=arm go build -v -i -o out/update_linux_arm cmd/update.go
+
   pack:
     desc: Packs the assets into a .go file
     deps: [ assets ]
