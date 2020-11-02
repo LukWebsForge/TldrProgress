@@ -3,6 +3,10 @@
 Generates and publishes a website, which shows the progress of translation of the 
 [tldr](https://github.com/tldr-pages/tldr/) project.
 
+This project is inspired by
+* [Extension Registration Wall of Superpowers](https://extreg-wos.toolforge.org/)
+* [Python 3 Wall of Superpowers](http://python3wos.appspot.com/)
+
 ## Building
 
 This software is build using a [`Taskfile.yml`](Taskfile.yml). 
