@@ -43,5 +43,12 @@ jobs:
         files: |
           out/update_linux_amd64
           out/update_linux_arm
-          out/update_windows_amd64
+          out/update_windows_amd64.exe
         draft: true
+        name: Release ${{ github.ref }}
+        body: |
+          Changes in this Release
+          - First Change
+          - Second Change
+
+          - [ ] You've listed all important changes / pull requests
