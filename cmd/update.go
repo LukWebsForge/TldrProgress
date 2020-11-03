@@ -3,7 +3,6 @@ package main
 import (
 	"log"
 	"os"
-	"path/filepath"
 	"strings"
 	"time"
 	"tldr-translation-progress/lib/git"
@@ -58,7 +57,7 @@ func main() {
 	}
 	log.Println("Site repository updated")
 
-	err = html.GenerateHtml(index, filepath.Join(UpstreamDir, "index.html"))
+	err = html.GenerateHtml(index, UpstreamDir)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -86,6 +85,9 @@ func main() {
 	log.Println("Successful")
 }
 
+// Gets a value for an environment variable with the given key.
+// If defaultEmpty is true, then an empty string is returned when variable doesn't exists,
+// else the program terminates if the environment variable is not set.
 func env(key string, defaultEmpty bool) string {
 	value, ok := os.LookupEnv(key)
 	if !ok {

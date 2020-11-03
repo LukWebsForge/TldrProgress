@@ -17,6 +17,7 @@ const DefaultFileMask = 0740
 // If you create new files, which contain html templates, don't forget to add them to the file
 // ../../resources/tailwind.config.js, otherwise used css classes may not be available in the purged css file.
 const styleFilename = "style.css"
+const indexFilename = "index.html"
 const htmlSite string = `
 {{- define "site" -}}
 <!DOCTYPE HTML>
@@ -60,13 +61,20 @@ const htmlSite string = `
 {{- end -}}
 `
 
+// Generates a html file path/index.html, which shows the progress of translating the tldr pages.
+// This information nis provided by the index.
+// A css file path/style.css used for styling the website also will be copied.
 func GenerateHtml(index *tldr.Index, path string) error {
 	// Adding custom function
 	funcs := make(template.FuncMap)
 	funcs["status2html"] = statusToHtml
 	funcs["print_percentage"] = printPercentage
-	funcs["style_name"] = styleName
-	funcs["current_date_time"] = currentDateTime
+	funcs["style_name"] = func() string {
+		return styleFilename
+	}
+	funcs["current_date_time"] = func() string {
+		return time.Now().Format(time.RFC850)
+	}
 
 	tmpl := template.New("page")
 	tmpl.Funcs(funcs)
@@ -83,12 +91,12 @@ func GenerateHtml(index *tldr.Index, path string) error {
 	}
 
 	// Opening the file
-	err = os.MkdirAll(filepath.Dir(path), DefaultFileMask)
+	err = os.MkdirAll(path, DefaultFileMask)
 	if err != nil {
 		return err
 	}
 
-	file, err := os.OpenFile(path, os.O_CREATE|os.O_TRUNC|os.O_WRONLY, DefaultFileMask)
+	file, err := os.OpenFile(filepath.Join(path, indexFilename), os.O_CREATE|os.O_TRUNC|os.O_WRONLY, DefaultFileMask)
 	if err != nil {
 		return err
 	}
@@ -100,7 +108,7 @@ func GenerateHtml(index *tldr.Index, path string) error {
 		return err
 	}
 
-	err = copyStyle(filepath.Join(filepath.Dir(path), styleFilename))
+	err = copyStyle(filepath.Join(path, styleFilename))
 	if err != nil {
 		return err
 	}
@@ -108,14 +116,7 @@ func GenerateHtml(index *tldr.Index, path string) error {
 	return nil
 }
 
+// Copies the style file, which is stored internally, to an external file at the given path
 func copyStyle(path string) error {
 	return ioutil.WriteFile(path, []byte(styleFromAssets()), DefaultFileMask)
-}
-
-func styleName() string {
-	return styleFilename
-}
-
-func currentDateTime() string {
-	return time.Now().Format(time.RFC850)
 }

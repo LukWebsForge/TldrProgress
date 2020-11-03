@@ -18,6 +18,9 @@ const (
 	inputFile  = "../../resources/output.css"
 )
 
+// Generates the Go source file (outputFile), which contains the content of input file (inputFile)
+// wrapped inside a single method (styleFromAssets) used to access the content of the input file.
+// The file at the path inputFile should be a text file.
 func main() {
 	stat, err := os.Stat(inputFile)
 	if os.IsNotExist(err) {

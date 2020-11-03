@@ -1,6 +1,7 @@
 package git
 
 import (
+	"fmt"
 	"github.com/go-git/go-git/v5"
 	"github.com/go-git/go-git/v5/config"
 	"github.com/go-git/go-git/v5/plumbing/object"
@@ -20,6 +21,7 @@ type TldrGit struct {
 	publicKey *ssh.PublicKeys
 }
 
+// Prepares git operations by loading the ssh key, checking the known_hosts file and settings the details of the author
 func NewTldrGit(name string, email string, sshKeyPath string, sshKeyPassword string) (*TldrGit, error) {
 	publicKey, err := ssh.NewPublicKeysFromFile("git", sshKeyPath, sshKeyPassword)
 	if err != nil {
@@ -44,12 +46,14 @@ func NewTldrGit(name string, email string, sshKeyPath string, sshKeyPassword str
 	}, nil
 }
 
+// If no git repository exists at the given path, the remote repository at the given url is cloned to the path.
+// Else the existing repository will be updated by pulling the latest changes from the remote repository.
 func (g *TldrGit) CloneOrUpdate(url string, path string) error {
 	_, err := os.Stat(path)
 	if os.IsNotExist(err) {
 		return g.Clone(url, path)
 	} else {
-		err = g.Pull(path)
+		err = g.Pull(url, path)
 		if err == git.ErrRepositoryNotExists {
 			err = os.RemoveAll(path)
 			if err != nil {
@@ -62,6 +66,7 @@ func (g *TldrGit) CloneOrUpdate(url string, path string) error {
 	}
 }
 
+// Clones a remote git repository at the url into the given path, which will be created if needed
 func (g *TldrGit) Clone(url string, path string) error {
 	// Creates the directory for the repository
 	err := os.MkdirAll(path, DefaultFileMask)
@@ -78,8 +83,14 @@ func (g *TldrGit) Clone(url string, path string) error {
 	return err
 }
 
-func (g *TldrGit) Pull(path string) error {
+// Pulls the latest changes of the remote repository into the git repository at the given path
+func (g *TldrGit) Pull(url string, path string) error {
 	repository, err := git.PlainOpen(path)
+	if err != nil {
+		return err
+	}
+
+	_, err = g.setupDefaultRemote(repository, url)
 	if err != nil {
 		return err
 	}
@@ -89,16 +100,38 @@ func (g *TldrGit) Pull(path string) error {
 		return err
 	}
 
-	err = worktree.Pull(&git.PullOptions{
+	pullOptions := &git.PullOptions{
 		Auth: g.publicKey,
-	})
+	}
+	err = worktree.Pull(pullOptions)
 	if git.NoErrAlreadyUpToDate == err {
 		return nil
-	} else {
-		return err
+	} else if err == git.ErrNonFastForwardUpdate {
+		// Trying to hard reset the repository to the HEAD & attempt to pull again
+		head, err := repository.Head()
+		if err != nil {
+			return err
+		}
+
+		err = worktree.Reset(&git.ResetOptions{
+			Commit: head.Hash(),
+			Mode:   git.HardReset,
+		})
+		if err != nil {
+			return err
+		}
+
+		err = worktree.Pull(pullOptions)
+		return fmt.Errorf("can't update the repository %v automatically, please try to fix it by hand: %v", path, err)
+	} else if err != nil {
+		return fmt.Errorf("can't update the repository %v automatically, please try to fix it by hand: %v", path, err)
 	}
+
+	return nil
 }
 
+// Commits all changed files in the git repository at the path with the given commit message.
+// Files ignored by a .gitignore won't be committed.
 func (g *TldrGit) CommitAll(path string, message string) error {
 	repository, err := git.PlainOpen(path)
 	if err != nil {
@@ -126,37 +159,67 @@ func (g *TldrGit) CommitAll(path string, message string) error {
 	return err
 }
 
+// Pushes all local changes of a git repository at the path to the remote repository at the given origin url.
+// If none remote exists, a remote with name DefaultRemoteName and the origin url will be created.
+// If a remote exists, but its first url isn't equal to the origin url, this url will be overwritten.
 func (g *TldrGit) Push(path string, origin string) error {
 	repository, err := git.PlainOpen(path)
 	if err != nil {
 		return err
 	}
 
-	_, err = repository.Remote(DefaultRemoteName)
-	if err == git.ErrRemoteNotFound {
-		_, err = repository.CreateRemote(&config.RemoteConfig{
-			Name: DefaultRemoteName,
-			URLs: []string{origin},
-		})
-		if err != nil {
-			return err
-		}
-	} else if err != nil {
+	remote, err := g.setupDefaultRemote(repository, origin)
+	if err != nil {
 		return err
 	}
 
-	err = repository.Fetch(&git.FetchOptions{Auth: g.publicKey})
+	err = remote.Fetch(&git.FetchOptions{Auth: g.publicKey})
 	if err != git.NoErrAlreadyUpToDate && err != nil {
 		return err
 	}
 
-	err = repository.Push(&git.PushOptions{
-		RemoteName: DefaultRemoteName,
-		Auth:       g.publicKey,
-	})
+	err = remote.Push(&git.PushOptions{Auth: g.publicKey})
 	if err != git.NoErrAlreadyUpToDate && err != nil {
 		return err
 	}
 
 	return nil
+}
+
+// Checks if remote with the name DefaultRemoteName exists and has the correct url.
+// If not, this method tries to fix these problems.
+func (g *TldrGit) setupDefaultRemote(repository *git.Repository, url string) (*git.Remote, error) {
+	resetRemote := false
+
+	// Checking if the remote exists, if not creating it
+	remote, err := repository.Remote(DefaultRemoteName)
+	if err == git.ErrRemoteNotFound {
+		resetRemote = true
+	} else if err != nil {
+		return nil, err
+	} else {
+		// Checking if the first url of the remote is correct
+		urls := remote.Config().URLs
+		if urls[0] != url {
+			resetRemote = true
+			// Sadly it isn't possible to change properties of a remote, so we have to delete it and recreate it
+			err := repository.DeleteRemote(DefaultRemoteName)
+			if err != nil {
+				return nil, err
+			}
+		}
+	}
+
+	// Creates a new default remote (if needed)
+	if resetRemote {
+		_, err = repository.CreateRemote(&config.RemoteConfig{
+			Name: DefaultRemoteName,
+			URLs: []string{url},
+		})
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	return remote, nil
 }

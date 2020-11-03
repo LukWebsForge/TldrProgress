@@ -39,6 +39,7 @@ const htmlTable = `
 {{- end }}
 `
 
+// Converts a status (of the type tldr.StatusEnum) into single html table cell.
 func statusToHtml(status tldr.StatusEnum) template.HTML {
 	class := ""
 	text := ""
@@ -63,6 +64,7 @@ func statusToHtml(status tldr.StatusEnum) template.HTML {
 	return template.HTML("<td class='" + class + "'>" + text + "</td>")
 }
 
+// Returns a string consisting of the percentage without the decimals and a percentage sign
 func printPercentage(p float64) string {
 	return fmt.Sprintf("%.0f%%", p*100)
 }

@@ -47,6 +47,7 @@ type Index struct {
 	Os        []Os
 }
 
+// Generates an index of the tldr git repository which contains information about the translations of every page
 func MapTldr(basePath string) (*Index, error) {
 	sep := string(os.PathSeparator)
 	matches, err := filepath.Glob(basePath + sep + "pages*" + sep + "*" + sep + "*.md")
@@ -88,6 +89,7 @@ func MapTldr(basePath string) (*Index, error) {
 	return generateIndex(pages), nil
 }
 
+// Extracts information about a single tldr page like name, os, language and the number of examples
 func mapFile(path string, basePath string) (*Page, error) {
 	rel, err := filepath.Rel(basePath, path)
 	if err != nil {
@@ -128,6 +130,7 @@ func mapFile(path string, basePath string) (*Page, error) {
 	}, nil
 }
 
+// Generates the index of tldr pages which are just passed as a slice
 func generateIndex(pages []Page) *Index {
 	languages := make([]Lang, 0, 10)
 	oses := make([]Os, 0, 10)
@@ -244,6 +247,8 @@ func generateIndex(pages []Page) *Index {
 	}
 }
 
+// Returns the translation status for a given page and a given language.
+// For comparison the number of examples at the page in the default language (DefaultFileMask) is also provided.
 func statusForLanguage(pageExists bool, page *Page, defaultExamples int) StatusEnum {
 	if !pageExists {
 		return StatusNoTranslation
@@ -260,6 +265,8 @@ func statusForLanguage(pageExists bool, page *Page, defaultExamples int) StatusE
 	}
 }
 
+// Increases the count stored in the map m for a given language by one.
+// If no count is set (no map entry), the counter starts at one.
 func incrementOrOne(m map[Lang]int, l Lang) {
 	count, ok := m[l]
 	if !ok {
@@ -269,6 +276,7 @@ func incrementOrOne(m map[Lang]int, l Lang) {
 	}
 }
 
+// Appends a Lang to the slice of Lang if it's missing
 func appendIfMissingLang(slice []Lang, elm Lang) []Lang {
 	for _, s := range slice {
 		if s == elm {
@@ -278,6 +286,7 @@ func appendIfMissingLang(slice []Lang, elm Lang) []Lang {
 	return append(slice, elm)
 }
 
+// Appends a Os to the slice of Os if it's missing
 func appendIfMissingOs(slice []Os, elm Os) []Os {
 	for _, s := range slice {
 		if s == elm {
@@ -287,18 +296,21 @@ func appendIfMissingOs(slice []Os, elm Os) []Os {
 	return append(slice, elm)
 }
 
+// Sorts a slice of Name by casting them to strings
 func sortNames(slices []Name) {
 	sort.Slice(slices, func(i, j int) bool {
 		return string(slices[i]) < string(slices[j])
 	})
 }
 
+// Sorts a slice of Os by casting them to strings
 func sortOs(slice []Os) {
 	sort.Slice(slice, func(i, j int) bool {
 		return string(slice[i]) < string(slice[j])
 	})
 }
 
+// Sorts a slice of Lang by casting them to strings
 func sortLang(slice []Lang) {
 	sort.Slice(slice, func(i, j int) bool {
 		return string(slice[i]) < string(slice[j])
