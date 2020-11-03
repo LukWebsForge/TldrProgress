@@ -64,7 +64,10 @@ If you want to use these files
 4. Finally, run
 ```shell script
 systemctl daemon-reload
+# Activating the timer permanently
 systemctl enable --now tldr-progress.timer
+# # Starting the program once to generate the SSH keys
+sudo systemctl start tldr-progress.service
 ```
 
 ## Contributing
