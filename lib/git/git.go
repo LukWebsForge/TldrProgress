@@ -106,7 +106,7 @@ func (g *TldrGit) Pull(url string, path string) error {
 	err = worktree.Pull(pullOptions)
 	if git.NoErrAlreadyUpToDate == err {
 		return nil
-	} else if err == git.ErrNonFastForwardUpdate {
+	} else if err == git.ErrNonFastForwardUpdate || err == git.ErrUnstagedChanges {
 		// Trying to hard reset the repository to the HEAD & attempt to pull again
 		head, err := repository.Head()
 		if err != nil {
@@ -122,7 +122,7 @@ func (g *TldrGit) Pull(url string, path string) error {
 		}
 
 		err = worktree.Pull(pullOptions)
-		if err != nil {
+		if err != git.NoErrAlreadyUpToDate && err != nil {
 			return fmt.Errorf("can't update the repository %v automatically, please try to fix it by hand: %v", path, err)
 		}
 	} else if err != nil {
