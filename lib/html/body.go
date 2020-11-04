@@ -18,6 +18,8 @@ const DefaultFileMask = 0740
 // ../../resources/tailwind.config.js, otherwise used css classes may not be available in the purged css file.
 const styleFilename = "style.css"
 const indexFilename = "index.html"
+
+// language=gohtml
 const htmlSite string = `
 {{- define "site" -}}
 <!DOCTYPE HTML>

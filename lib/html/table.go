@@ -6,6 +6,7 @@ import (
 	"tldr-translation-progress/lib/tldr"
 )
 
+// language=gohtml
 const htmlTable = `
 {{ define "table" -}}
 <table class="text-center border-opacity-50 mx-auto">
