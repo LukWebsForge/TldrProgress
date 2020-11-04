@@ -18,5 +18,5 @@ This the first release. If you spot any bugs, please let us know.
 - Configuration files for systemd
 - This Changelog  
 
-[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/olivierlacan/keep-a-changelog/releases/tag/v1.0.0
+[Unreleased]: https://github.com/LukWebsForge/TldrProgress/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.0.0
