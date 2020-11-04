@@ -32,7 +32,7 @@ const htmlSite string = `
 <body>
 <div class="container mx-auto text-center">
 	<h1 class="font-bold text-4xl m-10">tldr translation progress</h1>
-	<div class="mb-10 mt-2">
+	<div class="mt-2">
 		<h3 class="text-2xl p-5">Legend</h3>
 		<table class="border-collapse mx-auto">
 		  <tbody>
@@ -51,6 +51,7 @@ const htmlSite string = `
 		  </tbody>
 		</table>
 	</div>
+	{{- template "jumpList" . -}}
 	{{- template "table" . -}}
 	<div class="my-6 text-center text-gray-700">
 		Thanks for using this site • 
@@ -77,6 +78,9 @@ func GenerateHtml(index *tldr.Index, path string) error {
 	funcs["current_date_time"] = func() string {
 		return time.Now().Format(time.RFC850)
 	}
+	funcs["minus"] = func(a int, b int) int {
+		return a - b
+	}
 
 	tmpl := template.New("page")
 	tmpl.Funcs(funcs)
@@ -88,6 +92,11 @@ func GenerateHtml(index *tldr.Index, path string) error {
 	}
 
 	_, err = tmpl.Parse(htmlSite)
+	if err != nil {
+		return err
+	}
+
+	_, err = tmpl.Parse(htmlJumpList)
 	if err != nil {
 		return err
 	}

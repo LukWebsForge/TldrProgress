@@ -5,6 +5,7 @@ module.exports = {
         layers: ['base', 'components', 'utilities'],
         content: [
             '../lib/html/body.go',
+            '../lib/html/jumplist.go',
             '../lib/html/table.go'
         ]
     },
