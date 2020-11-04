@@ -122,7 +122,9 @@ func (g *TldrGit) Pull(url string, path string) error {
 		}
 
 		err = worktree.Pull(pullOptions)
-		return fmt.Errorf("can't update the repository %v automatically, please try to fix it by hand: %v", path, err)
+		if err != nil {
+			return fmt.Errorf("can't update the repository %v automatically, please try to fix it by hand: %v", path, err)
+		}
 	} else if err != nil {
 		return fmt.Errorf("can't update the repository %v automatically, please try to fix it by hand: %v", path, err)
 	}
