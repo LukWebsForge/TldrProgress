@@ -299,20 +299,20 @@ func appendIfMissingOs(slice []Os, elm Os) []Os {
 // Sorts a slice of Name by casting them to strings
 func sortNames(slices []Name) {
 	sort.Slice(slices, func(i, j int) bool {
-		return string(slices[i]) < string(slices[j])
+		return strings.ToLower(string(slices[i])) < strings.ToLower(string(slices[j]))
 	})
 }
 
 // Sorts a slice of Os by casting them to strings
 func sortOs(slice []Os) {
 	sort.Slice(slice, func(i, j int) bool {
-		return string(slice[i]) < string(slice[j])
+		return strings.ToLower(string(slice[i])) < strings.ToLower(string(slice[j]))
 	})
 }
 
 // Sorts a slice of Lang by casting them to strings
 func sortLang(slice []Lang) {
 	sort.Slice(slice, func(i, j int) bool {
-		return string(slice[i]) < string(slice[j])
+		return strings.ToLower(string(slice[i])) < strings.ToLower(string(slice[j]))
 	})
 }
