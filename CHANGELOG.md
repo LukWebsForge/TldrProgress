@@ -6,8 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 14th November 2020
+- Minify the HTML output by activating the environment variable `MINIFY_HTML`
+- While sorting strings their capitalization will be ignored 
+
 ## [1.0.0] - 04th November 2020
-This the first release. If you spot any bugs, please let us know.
+This is the first release. If you spot any bugs, please let us know.
 
 ### Added
 - A Website generator which creates a website displaying the progress of translating all tldr pages
@@ -18,5 +22,6 @@ This the first release. If you spot any bugs, please let us know.
 - Configuration files for systemd
 - This Changelog  
 
-[Unreleased]: https://github.com/LukWebsForge/TldrProgress/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/LukWebsForge/TldrProgress/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.0.1
 [1.0.0]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.0.0
