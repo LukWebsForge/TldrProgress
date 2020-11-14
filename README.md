@@ -49,7 +49,7 @@ Add the public key as a deploy key (with writing access) to the specified reposi
 
 If you specify the environment variable `MINIFY_HTML`, 
 the size of the html output file will be reduced by removing spaces and new line characters. 
-This is done by the library [tdewolff/minify](https://github.com/).
+This is done by the library [tdewolff/minify](https://github.com/tdewolff/minify).
 You can expect the file size to reduce by around 20 % (1.76 MB 🡒 1.38 MB).
 The css file is minified during the JavaScript build process. 
 
