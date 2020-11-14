@@ -37,6 +37,7 @@ You can configure certain details using environment variables.
 | SITE_REMOTE_URL      | The Git SSH url of the deployment repository | Yes      |
 | CHECK_KNOWN_HOSTS    | Checks the known_hosts file when connecting  | No       |
 | DONT_PUBLISH         | No changes will be committed & pushed        | No       |
+| MINIFY_HTML          | Minifies the output html file                | No       |
 | SSH_KEY_PASSWORD     | A password for the SSH key                   | No       |
 
 You can either let the program generate a new SSH key pair, or you can use your own even if a password is required.
@@ -45,6 +46,12 @@ This application doesn't support HTTP authentication.
 The program exits after its first run, if you don't use your own key pair.
 A new SSH key pair will be generated at the folder `keys`.
 Add the public key as a deploy key (with writing access) to the specified repository (`SITE_REMOTE_URL`).
+
+If you specify the environment variable `MINIFY_HTML`, 
+the size of the html output file will be reduced by removing spaces and new line characters. 
+This is done by the library [tdewolff/minify](https://github.com/).
+You can expect the file size to reduce by around 20 % (1.76 MB 🡒 1.38 MB).
+The css file is minified during the JavaScript build process. 
 
 In the next run the software will generate the status page in the `upstream` folder, commit the changes and push it. 
 

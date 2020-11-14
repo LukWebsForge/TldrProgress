@@ -5,6 +5,7 @@ package html
 
 import (
 	"html/template"
+	"io"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -67,7 +68,7 @@ const htmlSite string = `
 // Generates a html file path/index.html, which shows the progress of translating the tldr pages.
 // This information nis provided by the index.
 // A css file path/style.css used for styling the website also will be copied.
-func GenerateHtml(index *tldr.Index, path string) error {
+func GenerateHtml(index *tldr.Index, path string, minify bool) error {
 	// Adding custom function
 	funcs := make(template.FuncMap)
 	funcs["status2html"] = statusToHtml
@@ -113,8 +114,14 @@ func GenerateHtml(index *tldr.Index, path string) error {
 	}
 	defer file.Close()
 
-	// Executing the template
-	err = tmpl.ExecuteTemplate(file, "site", index)
+	// Executing the template & minifying the output if activated
+	if minify {
+		err = minifyWhileWriting(file, func(w io.Writer) error {
+			return tmpl.ExecuteTemplate(w, "site", index)
+		})
+	} else {
+		err = tmpl.ExecuteTemplate(file, "site", index)
+	}
 	if err != nil {
 		return err
 	}

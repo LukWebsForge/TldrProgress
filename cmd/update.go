@@ -22,6 +22,7 @@ func main() {
 	gitEmail := env("GIT_EMAIL", false)
 	siteUrl := env("SITE_REMOTE_URL", false)
 	_, dontPublish := os.LookupEnv("DONT_PUBLISH")
+	_, minifyHtml := os.LookupEnv("MINIFY_HTML")
 
 	if _, err := os.Stat(KeyPath); os.IsNotExist(err) {
 		err := git.CreateSSHKey(KeyPath, keyPassword)
@@ -57,11 +58,14 @@ func main() {
 	}
 	log.Println("Site repository updated")
 
-	err = html.GenerateHtml(index, UpstreamDir)
+	err = html.GenerateHtml(index, UpstreamDir, minifyHtml)
 	if err != nil {
 		log.Fatalln(err)
 	}
 	log.Println("Files for website created")
+	if minifyHtml {
+		log.Println("Minified the html file")
+	}
 
 	if dontPublish {
 		log.Println("Won't publish the changes, because DONT_PUBLISH is set")
