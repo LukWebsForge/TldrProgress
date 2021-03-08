@@ -73,7 +73,7 @@ func main() {
 	}
 
 	// Note: All files in the directory will be added and committed (except those ignored by a .gitignore)
-	date := time.Now().Format("2nd of Jan 2006")
+	date := time.Now().Format("2 January 2006")
 	err = tldrGit.CommitAll(UpstreamDir, "Daily update - "+date)
 	if err != nil {
 		log.Fatalln(err)
