@@ -3,7 +3,7 @@ Description=tldr translation progress website builder
 Documentation=https://github.com/LukWebsForge/TldrProgress
 
 [Service]
-Type=oneshot
+Type=simple
 ExecStart=/home/tldr/progress/update
 WorkingDirectory=/home/tldr/progress/
 User=tldr

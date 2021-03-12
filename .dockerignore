@@ -1,0 +1,8 @@
+./.github/
+./.idea/
+./out/
+./systemd/
+./test/
+**/*.task
+**/node_modules
+resources/output.css
