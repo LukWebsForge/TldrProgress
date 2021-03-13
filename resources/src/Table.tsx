@@ -27,13 +27,12 @@ const DataTableHeader = () => {
 
     // We're applying the sticky class to each <th>, because Chrome does not support sticky on <thead> and <tr>
     // https://bugs.chromium.org/p/chromium/issues/detail?id=702927
-    // If this bug is resolved we could consider adding the borders back
     const languageRows = data!.languages.map((lang) =>
-        <th className="px-2 py-4 sticky -top-0.5 bg-gradient-to-b from-white via-white" key={lang}>{lang}</th>);
+        <th className="px-2 py-4 sticky -top-1 bg-white bg-opacity-90 bg-clip-padding" key={lang}>{lang}</th>);
 
-    return <thead>
-    <tr className="border border-gray-200">
-        <th className="px-2 py-4">page</th>
+    return <thead className="border border-gray-200">
+    <tr>
+        <th className="px-2 py-4 bg-white">page</th>
         {languageRows}
     </tr>
     </thead>
