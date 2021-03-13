@@ -5,15 +5,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-- Uses React for the website
-- All progress information is stored in a `data.json` file
-- Every cell is clickable and links to ...
-  * the translation *if it exists*
-  * an editor to create the translation *otherwise*
-- Uses `go:embed` for embedding the static website assets in the binary application
+
+## [1.1.0] - 13th March 2021
+- Uses React + TypeScript for the website
+  - All progress information is stored in a `data.json` file
+  - Every cell is clickable and links to ...
+    * the translation *if it exists*
+    * an editor to create the translation *otherwise*
+  - Uses `go:embed` for embedding the static website assets in the binary application
 - The application now runs continuous and schedules updates by itself
-- Adds the `RUN_ONCE` environment variable to just do one update
-- Packages the application as a (Docker) container
+  - Adds the `RUN_ONCE` environment variable to execute a single update
+  - Packages the application as a Docker container
+- Improves the commit messages (#4 - thanks @bl-ue)
 
 ## [1.0.1] - 14th November 2020
 - Minify the HTML output by activating the environment variable `MINIFY_HTML`
@@ -31,6 +34,7 @@ This is the first release. If you spot any bugs, please let us know.
 - Configuration files for systemd
 - This Changelog  
 
-[Unreleased]: https://github.com/LukWebsForge/TldrProgress/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/LukWebsForge/TldrProgress/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.1.0
 [1.0.1]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.0.1
 [1.0.0]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.0.0
