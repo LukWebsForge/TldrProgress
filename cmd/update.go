@@ -26,10 +26,12 @@ var quit = make(chan struct{})
 func main() {
 	createSSHKey()
 
-	// If the environment variable START_NOW is set, the update function is executed immediately
-	if _, runNow := os.LookupEnv("START_NOW"); runNow {
-		log.Println("Because START_NOW is set, a update is executed now")
+	// If the environment variable RUN_ONCE is set, just the update function is being executed once
+	if _, runNow := os.LookupEnv("RUN_ONCE"); runNow {
+		log.Println("Because RUN_ONCE is set a update is executed now")
 		update()
+		log.Println("Because RUN_ONCE is set the application quits after the update has been finished")
+		return
 	}
 
 	// Creating a new cron scheduler with panic recovery
