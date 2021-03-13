@@ -88,7 +88,7 @@ func GenerateJson(index *tldr.Index, path string) error {
 	}
 
 	// We're indenting the json file to easily identify changes in Git commits
-	bytes, err := json.MarshalIndent(progress, "", "  ")
+	bytes, err := json.MarshalIndent(progress, "", "\t")
 	if err != nil {
 		return err
 	}
