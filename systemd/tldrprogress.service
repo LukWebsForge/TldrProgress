@@ -13,3 +13,6 @@ Group=tldr
 Environment=GIT_NAME=LukWebBuilder
 Environment=GIT_EMAIL=gitbuilder@lukweb.de
 Environment=SITE_REMOTE_URL=git@github.com:LukWebsForge/tldri18n.git
+
+[Install]
+WantedBy=multi-user.target
