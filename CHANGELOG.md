@@ -11,7 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   * the translation *if it exists*
   * an editor to create the translation *otherwise*
 - Uses `go:embed` for embedding the static website assets in the binary application
-- Adds the `RUN_ONCE` environment variable which can be used for testing
+- The application now runs continuous and schedules updates by itself
+- Adds the `RUN_ONCE` environment variable to just do one update
+- Packages the application as a (Docker) container
 
 ## [1.0.1] - 14th November 2020
 - Minify the HTML output by activating the environment variable `MINIFY_HTML`
