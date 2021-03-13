@@ -4,11 +4,6 @@
 # Testing
 /test/
 
-# Yarn
-/resources/node_modules/
-/resources/output.css
-/lib/html/style.go
-
 # Task
 **/.task/
 

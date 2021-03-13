@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- Uses React for the website
+- All progress information is stored in a `data.json` file
+- Every cell is clickable and links to ...
+  * the translation *if it exists*
+  * an editor to create the translation *otherwise*
+- Uses `go:embed` for embedding the static website assets in the binary application
+- Adds the `RUN_ONCE` environment variable which can be used for testing
 
 ## [1.0.1] - 14th November 2020
 - Minify the HTML output by activating the environment variable `MINIFY_HTML`

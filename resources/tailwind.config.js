@@ -1,15 +1,11 @@
 module.exports = {
-    // https://tailwindcss.com/docs/controlling-file-size
-    purge: {
-        mode: 'layers',
-        layers: ['base', 'components', 'utilities'],
-        content: [
-            '../lib/html/body.go',
-            '../lib/html/jumplist.go',
-            '../lib/html/table.go'
-        ]
+    purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+    darkMode: false, // or 'media' or 'class'
+    theme: {
+        extend: {},
     },
-    theme: {},
-    variants: {},
+    variants: {
+        extend: {},
+    },
     plugins: [],
 }

@@ -4,30 +4,37 @@ import (
 	"github.com/robfig/cron/v3"
 	"log"
 	"os"
+	"path/filepath"
 	"strings"
 	"time"
 	"tldr-translation-progress/lib/git"
-	"tldr-translation-progress/lib/html"
 	"tldr-translation-progress/lib/tldr"
+	"tldr-translation-progress/lib/www"
+	"tldr-translation-progress/resources"
 )
 
 const TldrDir = "tldr"
 const UpstreamDir = "upstream"
+const DataJsonFile = "data.json"
 
 const KeyPath = "keys/id_rsa"
 const TldrGitUrl = "git@github.com:tldr-pages/tldr.git"
 
 var quit = make(chan struct{})
 
+// Entry point for the application
 func main() {
 	createSSHKey()
 
-	// If the environment variable START_NOW is set, the update function is executed immediately
-	if _, runNow := os.LookupEnv("START_NOW"); runNow {
-		log.Println("Because START_NOW is set, a update is executed now")
+	// If the environment variable RUN_ONCE is set, just the update function is being executed once
+	if _, runNow := os.LookupEnv("RUN_ONCE"); runNow {
+		log.Println("Because RUN_ONCE is set a update is executed now")
 		update()
+		log.Println("Because RUN_ONCE is set the application quits after the update has been finished")
+		return
 	}
 
+	// Creating a new cron scheduler with panic recovery
 	c := cron.New(cron.WithChain(cron.Recover(cron.DefaultLogger)))
 
 	// Executing the update function every day at 2am (local time)
@@ -59,13 +66,13 @@ func createSSHKey() {
 	}
 }
 
+// The sequential update workflow
 func update() {
 	keyPassword := env("SSH_KEY_PASSWORD", true)
 	gitName := env("GIT_NAME", false)
 	gitEmail := env("GIT_EMAIL", false)
 	siteUrl := env("SITE_REMOTE_URL", false)
 	_, dontPublish := os.LookupEnv("DONT_PUBLISH")
-	_, minifyHtml := os.LookupEnv("MINIFY_HTML")
 
 	tldrGit, err := git.NewTldrGit(gitName, gitEmail, KeyPath, keyPassword)
 	if err != nil {
@@ -95,15 +102,19 @@ func update() {
 	}
 	log.Println("Site repository updated")
 
-	err = html.GenerateHtml(index, UpstreamDir, minifyHtml)
+	err = resources.WriteTo(UpstreamDir)
 	if err != nil {
 		log.Println(err)
 		return
 	}
-	log.Println("Files for website created")
-	if minifyHtml {
-		log.Println("Minified the html file")
+	log.Println("Files for website copied")
+
+	err = www.GenerateJson(index, filepath.Join(UpstreamDir, DataJsonFile))
+	if err != nil {
+		log.Println(err)
+		return
 	}
+	log.Printf("%v generated and written the folder", DataJsonFile)
 
 	if dontPublish {
 		log.Println("Won't publish the changes, because DONT_PUBLISH is set")

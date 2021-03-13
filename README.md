@@ -11,7 +11,7 @@ This project is inspired by
 
 ### Docker
 
-If you've got [Docker](https://www.docker.com/) on your system you need nothing else to build and run this project.
+If you've got [Docker](https://www.docker.com/) on your system, you need nothing else to build and run this project.
 
 ```shell script
 docker build -t lukwebsforge/tldrprogress:latest .
@@ -19,23 +19,13 @@ docker build -t lukwebsforge/tldrprogress:latest .
 
 ### Local installation
 
-To build this project without Docker, you'll need Task and a GO SDK.
+To build this project without Docker, you'll need the task runner Task and a Go SDK (>= 1.16).
 
 The build instructions are defined in the [`Taskfile.yml`](Taskfile.yml). 
 Install [Task](https://taskfile.dev/#/installation) and run
 ```shell script
 task build
 ```
-
-By default, the css file is minimized (from ~2MB to 6KB), so it just contains the used classes, 
-but if you want to tinker on this application, it might be useful to activate the development mode.
-In this mode the css file won't be minimized.
-```shell script
-task build DEV=true
-```
-
-If you've already built the project and then activate the development mode it may not work.
-Please append the `--force` switch to the task command to force a rebuild.
 
 ## Configuration
 
@@ -49,25 +39,23 @@ You can configure certain details using environment variables.
 | CHECK_KNOWN_HOSTS    | Checks the known_hosts file when connecting  | No       |
 | SSH_KEY_PASSWORD     | A password for the SSH key                   | No       |
 | DONT_PUBLISH         | No changes will be committed & pushed        | No       |
-| MINIFY_HTML          | Minifies the output html file                | No       |
-| START_NOW            | Executes the first update instantly          | No       |
+| RUN_ONCE             | Instantly updates & quits                    | No       |
 
 You can either let the program generate a new SSH key pair, or you can use your own even if a password is required.
 This application doesn't support HTTP authentication.
 
-The program exits after its first run, if you don't use your own key pair.
-A new SSH key pair will be generated at the folder `keys`.
-Add the public key as a deployment key (with writing access) to the specified repository (`SITE_REMOTE_URL`).
+The SSH key pair `id_rsa` and `id_rsa.pub` in the folder `keys` will be used to access the tldr repository and 
+publish changes to the deployment repository (`SITE_REMOTE_URL`). 
+If the key pair is missing, it'll be generated during the startup of the application.
+The generated public key `id_rsa.pub` will be printed to the console.
+I recommend adding the public key as a deployment key (with writing access) for the deployment repository.
 
-If you specify the environment variable `MINIFY_HTML`, 
-the size of the html output file will be reduced by removing spaces and new line characters. 
-This is done by the library [tdewolff/minify](https://github.com/tdewolff/minify).
-You can expect the file size to reduce by around 20 % (1.76 MB 🡒 1.38 MB).
-The css file is minified during the JavaScript build process. 
+Each day at 2am (local time) the program will execute the update.
+This includes the steps of cloning / updating the tldr repository in the folder `tldr` and 
+generating the static asset files and copying them to the `upstream` folder.
+Finally, changes in this folder will be committed and pushed to the upstream repository.
 
-In the next run the software will generate the status page in the `upstream` folder, commit the changes and push it. 
-
-If you want to test your changes, I recommend you set the environment variables `DONT_PUBLISH` and `START_NOW` 
+If you want to test your changes, I recommend you set the environment variables `DONT_PUBLISH` and `RUN_ONCE` 
 and view the updated website locally before deploying it.
 The value of this environment variable doesn't matter, it just has be set.
 
@@ -79,6 +67,7 @@ You can simply start a container which runs this program.
 The program will start the repository update at 2am (local time) each day.
 
 ```shell script
+# Create a docker container with name tldrprogress, which will always restart (system reboot, error)
 docker run -d --restart=always --name=tldrprogress \
  -e GIT_NAME=LukWebBuilder -e GIT_EMAIL=gitbuilder@lukweb.de \
  -e SITE_REMOTE_URL=git@github.com:LukWebsForge/tldri18n.git \
@@ -98,10 +87,11 @@ If you want to use the systemd unit file
 3. Copy the files from the [`systemd`](systemd) folder into `/etc/systemd/system/`
 4. Finally, run
 ```shell script
+# Load the new systemd unit file
 systemctl daemon-reload
-# Starting the program on system startup
+# Start the program on every system startup
 systemctl enable tldrprogress.service
-# Starting the program now
+# Start the program now
 sudo systemctl start tldrprogress.service
 # Optional: View generated the public SSH key
 cat /home/tldr/progress/keys/id_rsa.pub
@@ -109,4 +99,23 @@ cat /home/tldr/progress/keys/id_rsa.pub
 
 ## Contributing
 
-If you spot a bug or got an idea for an improvement, free welcome to open a new issue or create a pull request. 
+If you spot a bug or got an idea for an improvement, free welcome to open a new issue or create a pull request.
+
+### Development tips
+
+#### Working on the Go application
+
+It's useful to set the environment variables `DONT_PUBLISH` and `RUN_ONCE` to any value (e.g. `true`).
+
+Even, if you don't want to push anything, don't forget to add the public SSH key to a GitHub account or as a deployment key.
+Otherwise, GitHub repositories can't be cloned or updated.
+
+#### Working on the React website
+
+Run the Go application once to generate a `data.json` file.
+Copy this file to the `resources/public` folder.
+Now you can use HMR by starting the development web server with `yarn run start`.
+
+#### Testing the application as a whole
+
+Run the compiled artifact and start a local webserver by using `npx serve upstream` to inspect the generated website.
