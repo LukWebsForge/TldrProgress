@@ -10,6 +10,11 @@ import (
 
 const defaultFileMask = 0740
 
+const (
+	jsonStatusOutdated   = 1
+	jsonStatusTranslated = 2
+)
+
 // Root of the json file
 type ProgressJson struct {
 	// human readable timestamp of the last update
@@ -30,8 +35,8 @@ type OperatingSystemJson struct {
 
 // The translation status in different languages of a given page
 type PageProgressJson struct {
-	// map[language]{ok,outdated}
-	Status map[string]string `json:"status"`
+	// map[language]{1 = outdated, 2 = translated}
+	Status map[string]int `json:"status"`
 }
 
 // Writes a json file containing the progress information given by the index to the given path
@@ -55,15 +60,15 @@ func GenerateJson(index *tldr.Index, path string) error {
 		// Mapping the data for every page into PageProgressJson structs
 		pages := orderedmap.New()
 		for _, name := range index.Names[oss] {
-			status := make(map[string]string)
+			status := make(map[string]int)
 
 			for _, language := range index.Languages {
 				// We don't create an entry for the StatusNotTranslated
 				switch index.Status[oss][name][language] {
 				case tldr.StatusOutdated:
-					status[string(language)] = "outdated"
+					status[string(language)] = jsonStatusOutdated
 				case tldr.StatusTranslated:
-					status[string(language)] = "ok"
+					status[string(language)] = jsonStatusTranslated
 				}
 			}
 

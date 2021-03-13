@@ -6,6 +6,11 @@ import React, {useEffect, useState} from "react";
 const DataContext = React.createContext(null);
 const ErrorMessageContext = React.createContext(null);
 
+const TranslationStatus = {
+    Outdated: 1,
+    Translated: 2
+}
+
 function DataFetcher(props) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -45,4 +50,4 @@ function DataFetcher(props) {
     }
 }
 
-export {DataContext, ErrorMessageContext, DataFetcher};
+export {DataFetcher, DataContext, TranslationStatus, ErrorMessageContext};

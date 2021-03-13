@@ -1,4 +1,4 @@
-import {DataContext} from "./Data";
+import {DataContext, TranslationStatus} from "./Data";
 import {useContext} from "react";
 
 function JumpList() {
@@ -89,10 +89,10 @@ function DataTableOSPageRow(props) {
         if (lang in pageData.status) {
             const status = pageData.status[lang];
             switch (status) {
-                case "ok":
+                case TranslationStatus.Translated:
                     return <td className="bg-green-200 cursor-pointer"
                                onClick={() => handleClick(GithubFileAction.view, lang)}>✔</td>
-                case "outdated":
+                case TranslationStatus.Outdated:
                     return <td className="bg-yellow-200 cursor-pointer"
                                onClick={() => handleClick(GithubFileAction.view, lang)}>⚠</td>
                 default:
