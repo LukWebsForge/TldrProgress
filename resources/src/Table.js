@@ -27,14 +27,14 @@ function DataTable() {
 function DataTableHeader() {
     const data = useContext(DataContext);
 
-    const languageRows = Object.keys(data.languages)
-        .map((lang) => <th className="px-2 py-4 border border-gray-400">{lang}</th>);
+    const languageRows = data.languages
+        .map((lang) => <th className="px-2 py-4 border border-gray-200">{lang}</th>);
 
     return <thead className="sticky top-0 bg-gradient-to-b from-white via-white">
     <tr>
-        <th className="px-2 py-4 border border-gray-400">page</th>
+        <th className="px-2 py-4 border border-gray-200">page</th>
+        {languageRows}
     </tr>
-    {languageRows}
     </thead>
 }
 
@@ -55,10 +55,10 @@ function DataTableOSHeader(props) {
     const data = useContext(DataContext);
     const osProgress = data.entries[props.os].progress;
 
-    const percentages = Object.keys(data.languages)
+    const percentages = data.languages
         .map((lang) => <td className="px-1 py-2">{osProgress[lang]}%</td>);
 
-    return <tr className="border border-gray-400 bg-teal-200 p-4">
+    return <tr className="border border-gray-200 bg-indigo-300 p-4">
         <th className="text-base px-1 py-2" id={props.os}>{props.os}</th>
         {percentages}
     </tr>
@@ -85,26 +85,26 @@ function DataTableOSPageRow(props) {
         win.focus();
     }
 
-    const cells = Object.keys(data.languages).map((lang) => {
+    const cells = data.languages.map((lang) => {
         if (lang in pageData.status) {
             const status = pageData.status[lang];
             switch (status) {
                 case "ok":
-                    return <tr className="bg-green-200 cursor-pointer"
-                               onClick={() => handleClick(GithubFileAction.view, lang)}>✔</tr>
+                    return <td className="bg-green-200 cursor-pointer"
+                               onClick={() => handleClick(GithubFileAction.view, lang)}>✔</td>
                 case "outdated":
-                    return <tr className="bg-orange-200 cursor-pointer"
-                               onClick={() => handleClick(GithubFileAction.view, lang)}>⚠</tr>
+                    return <td className="bg-yellow-200 cursor-pointer"
+                               onClick={() => handleClick(GithubFileAction.view, lang)}>⚠</td>
                 default:
-                    return <tr>?</tr>
+                    return <td>?</td>
             }
         } else {
-            return <tr className="bg-red-200 cursor-pointer"
-                       onClick={() => handleClick(GithubFileAction.create, lang)}>✖</tr>
+            return <td className="bg-red-200 cursor-pointer"
+                       onClick={() => handleClick(GithubFileAction.create, lang)}>✖</td>
         }
     });
 
-    return <tr className="border border-gray-400">
+    return <tr className="border border-gray-200">
         <td className="text-left text-base p-1">{pageName}</td>
         {cells}
     </tr>
@@ -116,8 +116,10 @@ const GithubFileAction = {
 }
 
 function getGitHubPageUrl(action, os, page, language) {
+    const languageSuffix = language === 'en' ? '' : '.' + language
+
     const baseUrl = "https://github.com/tldr-pages/tldr";
-    const filePath = `/master/pages.${language}/${os}/${page}.md`
+    const filePath = `/master/pages${languageSuffix}/${os}/${page}.md`
 
     if (action === GithubFileAction.create) {
         return baseUrl + "/new" + filePath + `?filename=${page}.md`;
