@@ -2,29 +2,18 @@ version: '3'
 
 tasks:
   build:
-    desc: Builds the executable application
-    deps: [ pack ]
+    desc: Builds the executable application for the current platform
+    deps: [ assets ]
     cmds:
       - go build -v -o out/ cmd/update.go
 
   release:
     desc: Builds executables for Windows (amd64) and Linux (amd64, armhf)
-    deps: [ pack ]
+    deps: [ assets ]
     cmds:
       - GOOS=windows GOARCH=amd64 go build -v -o out/update_windows_amd64.exe cmd/update.go
       - GOOS=linux GOARCH=amd64 go build -v -o out/update_linux_amd64 cmd/update.go
       - GOOS=linux GOARCH=arm go build -v -o out/update_linux_arm cmd/update.go
-
-  pack:
-    desc: Packs the assets into a .go file
-    deps: [ assets ]
-    dir: lib/html
-    cmds:
-      - go generate -v
-    sources:
-      - ../../resources/output.css
-    generates:
-      - style.go
 
   assets:
     desc: Creates the assets using yarn
@@ -32,10 +21,3 @@ tasks:
     cmds:
       - yarn
       - yarn run build
-    sources:
-      - styles.css
-    generates:
-      - output.css
-    env:
-      NODE_ENV:
-        sh: echo {{if .DEV}} development {{else}} production {{end}}

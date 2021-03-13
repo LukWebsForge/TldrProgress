@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 	"tldr-translation-progress/lib/git"
-	"tldr-translation-progress/lib/html"
 	"tldr-translation-progress/lib/tldr"
+	"tldr-translation-progress/resources"
 )
 
 const TldrDir = "tldr"
@@ -65,7 +65,6 @@ func update() {
 	gitEmail := env("GIT_EMAIL", false)
 	siteUrl := env("SITE_REMOTE_URL", false)
 	_, dontPublish := os.LookupEnv("DONT_PUBLISH")
-	_, minifyHtml := os.LookupEnv("MINIFY_HTML")
 
 	tldrGit, err := git.NewTldrGit(gitName, gitEmail, KeyPath, keyPassword)
 	if err != nil {
@@ -95,15 +94,12 @@ func update() {
 	}
 	log.Println("Site repository updated")
 
-	err = html.GenerateHtml(index, UpstreamDir, minifyHtml)
+	err = resources.WriteTo(UpstreamDir)
 	if err != nil {
 		log.Println(err)
 		return
 	}
-	log.Println("Files for website created")
-	if minifyHtml {
-		log.Println("Minified the html file")
-	}
+	log.Println("Files for website copied")
 
 	if dontPublish {
 		log.Println("Won't publish the changes, because DONT_PUBLISH is set")
