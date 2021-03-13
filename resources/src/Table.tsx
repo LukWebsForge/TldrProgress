@@ -1,10 +1,10 @@
-import {DataContext, TranslationStatus} from "./Data";
-import {useContext} from "react";
+import {DataContext, OperatingSystem, TranslationStatus} from "./Data";
+import * as React from "react";
 
-function JumpList() {
-    const data = useContext(DataContext);
+const JumpList = () => {
+    const data = React.useContext(DataContext);
 
-    const listItems = Object.keys(data.entries).map((value, index, array) => {
+    const listItems = Object.keys(data!.entries).map((value, index, array) => {
         if (index < array.length - 1)
             return <a href={'#' + value} className="hover:text-blue-500">{value} - </a>
         else
@@ -17,17 +17,16 @@ function JumpList() {
     </div>
 }
 
-function DataTable() {
-    return <table className="text-center border-opacity-50 mx-auto">
+const DataTable = () =>
+    <table className="text-center border-opacity-50 mx-auto">
         <DataTableHeader/>
         <DataTableBody/>
-    </table>
-}
+    </table>;
 
-function DataTableHeader() {
-    const data = useContext(DataContext);
+const DataTableHeader = () => {
+    const data = React.useContext(DataContext);
 
-    const languageRows = data.languages
+    const languageRows = data!.languages
         .map((lang) => <th className="px-2 py-4 border border-gray-200">{lang}</th>);
 
     return <thead className="sticky top-0 bg-gradient-to-b from-white via-white">
@@ -38,10 +37,10 @@ function DataTableHeader() {
     </thead>
 }
 
-function DataTableBody() {
-    const data = useContext(DataContext);
+const DataTableBody = () => {
+    const data = React.useContext(DataContext);
 
-    const osSections = Object.keys(data.entries).map((os) =>
+    const osSections = Object.keys(data!.entries).map((os) =>
         <>
             <DataTableOSHeader os={os}/>
             <DataTableOSPages os={os}/>
@@ -51,56 +50,68 @@ function DataTableBody() {
     return <tbody className="text-sm">{osSections}</tbody>
 }
 
-function DataTableOSHeader(props) {
-    const data = useContext(DataContext);
-    const osProgress = data.entries[props.os].progress;
+interface OsProps {
+    os: OperatingSystem,
+}
 
-    const percentages = data.languages
+interface OsPageProps extends OsProps {
+    pageName: string,
+}
+
+const DataTableOSHeader = ({os}: OsProps) => {
+    const data = React.useContext(DataContext);
+    const osProgress = data!.entries[os].progress;
+
+    const percentages = data!.languages
         .map((lang) => <td className="px-1 py-2">{osProgress[lang]}%</td>);
 
     return <tr className="border border-gray-200 bg-indigo-300 p-4">
-        <th className="text-base px-1 py-2" id={props.os}>{props.os}</th>
+        <th className="text-base px-1 py-2" id={os}>{os}</th>
         {percentages}
     </tr>
 }
 
-function DataTableOSPages(props) {
-    const data = useContext(DataContext);
-    const osPages = data.entries[props.os].pages;
+const DataTableOSPages = ({os}: OsProps) => {
+    const data = React.useContext(DataContext);
+    const osPages = data!.entries[os].pages;
 
     const pages = Object.keys(osPages)
-        .map((page) => <DataTableOSPageRow os={props.os} page={page}/>);
+        .map((page) => <DataTableOSPageRow os={os} pageName={page}/>);
 
     return <>{pages}</>;
 }
 
-function DataTableOSPageRow(props) {
-    const data = useContext(DataContext);
-    const os = props.os;
-    const pageName = props.page;
-    const pageData = data.entries[os].pages[pageName];
+enum GitHubFileAction {
+    view,
+    create
+}
 
-    function handleClick(action, language) {
+const DataTableOSPageRow = ({os, pageName}: OsPageProps) => {
+    const data = React.useContext(DataContext);
+    const pageData = data!.entries[os].pages[pageName];
+
+    function handleClick(action: GitHubFileAction, language: string) {
         const win = window.open(getGitHubPageUrl(action, os, pageName, language));
-        win.focus();
+        if (win != null)
+            win.focus();
     }
 
-    const cells = data.languages.map((lang) => {
+    const cells = data!.languages.map((lang) => {
         if (lang in pageData.status) {
             const status = pageData.status[lang];
             switch (status) {
                 case TranslationStatus.Translated:
                     return <td className="bg-green-200 cursor-pointer"
-                               onClick={() => handleClick(GithubFileAction.view, lang)}>✔</td>
+                               onClick={() => handleClick(GitHubFileAction.view, lang)}>✔</td>
                 case TranslationStatus.Outdated:
                     return <td className="bg-yellow-200 cursor-pointer"
-                               onClick={() => handleClick(GithubFileAction.view, lang)}>⚠</td>
+                               onClick={() => handleClick(GitHubFileAction.view, lang)}>⚠</td>
                 default:
                     return <td>?</td>
             }
         } else {
             return <td className="bg-red-200 cursor-pointer"
-                       onClick={() => handleClick(GithubFileAction.create, lang)}>✖</td>
+                       onClick={() => handleClick(GitHubFileAction.create, lang)}>✖</td>
         }
     });
 
@@ -110,34 +121,29 @@ function DataTableOSPageRow(props) {
     </tr>
 }
 
-const GithubFileAction = {
-    create: 'create',
-    view: 'view'
-}
-
-function getGitHubPageUrl(action, os, page, language) {
+const getGitHubPageUrl = (action: GitHubFileAction, os: string, page: string, language: string) => {
     const languageSuffix = language === 'en' ? '' : '.' + language
 
     const baseUrl = "https://github.com/tldr-pages/tldr";
     const filePath = `/master/pages${languageSuffix}/${os}/${page}.md`
 
-    if (action === GithubFileAction.create) {
+    if (action === GitHubFileAction.create) {
         return baseUrl + "/new" + filePath + `?filename=${page}.md`;
-    } else if (action === GithubFileAction.view) {
+    } else if (action === GitHubFileAction.view) {
         return baseUrl + "/blob" + filePath;
     } else {
         throw new Error('Unknown GitHubFileAction: ' + action);
     }
 }
 
-function Footer() {
-    const data = useContext(DataContext);
+const Footer = () => {
+    const data = React.useContext(DataContext);
 
     return (
         <div className="my-6 text-center text-gray-700">
             Thanks for using this site •
             Generated by <a href="https://github.com/LukWebsForge/TldrProgress">tldr-translation-progress</a> •
-            Last updated {data.last_update}
+            Last updated {data!.last_update}
         </div>
     )
 }
