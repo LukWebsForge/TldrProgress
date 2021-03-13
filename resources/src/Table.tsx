@@ -25,12 +25,15 @@ const DataTable = () =>
 const DataTableHeader = () => {
     const data = React.useContext(DataContext);
 
-    const languageRows = data!.languages
-        .map((lang) => <th className="px-2 py-4 border border-gray-200" key={lang}>{lang}</th>);
+    // We're applying the sticky class to each <th>, because Chrome does not support sticky on <thead> and <tr>
+    // https://bugs.chromium.org/p/chromium/issues/detail?id=702927
+    // If this bug is resolved we could consider adding the borders back
+    const languageRows = data!.languages.map((lang) =>
+        <th className="px-2 py-4 sticky -top-0.5 bg-gradient-to-b from-white via-white" key={lang}>{lang}</th>);
 
-    return <thead className="sticky top-0 bg-gradient-to-b from-white via-white">
-    <tr>
-        <th className="px-2 py-4 border border-gray-200">page</th>
+    return <thead>
+    <tr className="border border-gray-200">
+        <th className="px-2 py-4">page</th>
         {languageRows}
     </tr>
     </thead>
