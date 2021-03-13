@@ -34,15 +34,15 @@ func main() {
 		return
 	}
 
-	// Creating a new cron scheduler with panic recovery
-	c := cron.New(cron.WithChain(cron.Recover(cron.DefaultLogger)))
+	// Creating a new cron scheduler with panic recovery & UTC time
+	c := cron.New(cron.WithChain(cron.Recover(cron.DefaultLogger)), cron.WithLocation(time.UTC))
 
-	// Executing the update function every day at 2am (local time)
-	_, err := c.AddFunc("0 2 * * *", update)
+	// Executing the update function every day at midnight (UTC)
+	_, err := c.AddFunc("0 0 * * *", update)
 	if err != nil {
 		log.Printf("Failed to add the cron task: %v", err)
 	} else {
-		log.Println("Added the cron task for each day at 02am")
+		log.Println("Added the cron task for each day at midnight (UTC)")
 	}
 	c.Start()
 

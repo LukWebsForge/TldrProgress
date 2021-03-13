@@ -50,7 +50,7 @@ If the key pair is missing, it'll be generated during the startup of the applica
 The generated public key `id_rsa.pub` will be printed to the console.
 I recommend adding the public key as a deployment key (with writing access) for the deployment repository.
 
-Each day at 2am (local time) the program will execute the update.
+Each day at midnight (UTC) the program will execute the update.
 This includes the steps of cloning / updating the tldr repository in the folder `tldr` and 
 generating the static asset files and copying them to the `upstream` folder.
 Finally, changes in this folder will be committed and pushed to the upstream repository.
@@ -64,7 +64,7 @@ The value of this environment variable doesn't matter, it just has be set.
 ### Docker
 
 You can simply start a container which runs this program.
-The program will start the repository update at 2am (local time) each day.
+The program will start the repository update at midnight (UTC) each day.
 
 ```shell script
 # Create a docker container with name tldrprogress, which will always restart (system reboot, error)
@@ -78,7 +78,7 @@ docker logs tldrprogress
 
 ### systemd
 
-The program runs permanently, and start the repository update at 2am (local time) each day.
+The program runs permanently, and start the repository update at midnight (UTC) each day.
 This repository contains a systemd configuration file, which can be used to keep it running.
 
 If you want to use the systemd unit file
