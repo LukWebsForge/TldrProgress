@@ -4,21 +4,25 @@ import (
 	"github.com/robfig/cron/v3"
 	"log"
 	"os"
+	"path/filepath"
 	"strings"
 	"time"
 	"tldr-translation-progress/lib/git"
 	"tldr-translation-progress/lib/tldr"
+	"tldr-translation-progress/lib/www"
 	"tldr-translation-progress/resources"
 )
 
 const TldrDir = "tldr"
 const UpstreamDir = "upstream"
+const DataJsonFile = "data.json"
 
 const KeyPath = "keys/id_rsa"
 const TldrGitUrl = "git@github.com:tldr-pages/tldr.git"
 
 var quit = make(chan struct{})
 
+// Entry point for the application
 func main() {
 	createSSHKey()
 
@@ -28,6 +32,7 @@ func main() {
 		update()
 	}
 
+	// Creating a new cron scheduler with panic recovery
 	c := cron.New(cron.WithChain(cron.Recover(cron.DefaultLogger)))
 
 	// Executing the update function every day at 2am (local time)
@@ -59,6 +64,7 @@ func createSSHKey() {
 	}
 }
 
+// The sequential update workflow
 func update() {
 	keyPassword := env("SSH_KEY_PASSWORD", true)
 	gitName := env("GIT_NAME", false)
@@ -100,6 +106,13 @@ func update() {
 		return
 	}
 	log.Println("Files for website copied")
+
+	err = www.GenerateJson(index, filepath.Join(UpstreamDir, DataJsonFile))
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	log.Printf("%v generated and written the folder", DataJsonFile)
 
 	if dontPublish {
 		log.Println("Won't publish the changes, because DONT_PUBLISH is set")
