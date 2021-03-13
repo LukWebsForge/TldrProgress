@@ -4,12 +4,11 @@ import * as React from "react";
 const JumpList = () => {
     const data = React.useContext(DataContext);
 
-    const listItems = Object.keys(data!.entries).map((value, index, array) => {
-        if (index < array.length - 1)
-            return <a href={'#' + value} className="hover:text-blue-500">{value} - </a>
-        else
-            return <a href={'#' + value} className="hover:text-blue-500">{value}</a>
-    });
+    const listItems = Object.keys(data!.entries).map((value, index, array) =>
+        <a href={'#' + value} className="hover:text-blue-500" key={value}>
+            {value}{index < array.length - 1 ? ' - ' : ''}
+        </a>
+    );
 
     return <div className="my-10">
         <h3 className="text-2xl p-5">Quick Jump List</h3>
@@ -27,7 +26,7 @@ const DataTableHeader = () => {
     const data = React.useContext(DataContext);
 
     const languageRows = data!.languages
-        .map((lang) => <th className="px-2 py-4 border border-gray-200">{lang}</th>);
+        .map((lang) => <th className="px-2 py-4 border border-gray-200" key={lang}>{lang}</th>);
 
     return <thead className="sticky top-0 bg-gradient-to-b from-white via-white">
     <tr>
@@ -41,10 +40,10 @@ const DataTableBody = () => {
     const data = React.useContext(DataContext);
 
     const osSections = Object.keys(data!.entries).map((os) =>
-        <>
+        <React.Fragment key={os}>
             <DataTableOSHeader os={os}/>
             <DataTableOSPages os={os}/>
-        </>
+        </React.Fragment>
     );
 
     return <tbody className="text-sm">{osSections}</tbody>
@@ -63,7 +62,7 @@ const DataTableOSHeader = ({os}: OsProps) => {
     const osProgress = data!.entries[os].progress;
 
     const percentages = data!.languages
-        .map((lang) => <td className="px-1 py-2">{osProgress[lang]}%</td>);
+        .map((lang) => <td className="px-1 py-2" key={lang}>{osProgress[lang]}%</td>);
 
     return <tr className="border border-gray-200 bg-indigo-300 p-4">
         <th className="text-base px-1 py-2" id={os}>{os}</th>
@@ -76,7 +75,7 @@ const DataTableOSPages = ({os}: OsProps) => {
     const osPages = data!.entries[os].pages;
 
     const pages = Object.keys(osPages)
-        .map((page) => <DataTableOSPageRow os={os} pageName={page}/>);
+        .map((page) => <DataTableOSPageRow os={os} pageName={page} key={page}/>);
 
     return <>{pages}</>;
 }
@@ -101,16 +100,16 @@ const DataTableOSPageRow = ({os, pageName}: OsPageProps) => {
             const status = pageData.status[lang];
             switch (status) {
                 case TranslationStatus.Translated:
-                    return <td className="bg-green-200 cursor-pointer"
+                    return <td className="bg-green-200 cursor-pointer" key={lang}
                                onClick={() => handleClick(GitHubFileAction.view, lang)}>✔</td>
                 case TranslationStatus.Outdated:
-                    return <td className="bg-yellow-200 cursor-pointer"
+                    return <td className="bg-yellow-200 cursor-pointer" key={lang}
                                onClick={() => handleClick(GitHubFileAction.view, lang)}>⚠</td>
                 default:
                     return <td>?</td>
             }
         } else {
-            return <td className="bg-red-200 cursor-pointer"
+            return <td className="bg-red-200 cursor-pointer" key={lang}
                        onClick={() => handleClick(GitHubFileAction.create, lang)}>✖</td>
         }
     });
