@@ -116,7 +116,7 @@ const DataTableOSPageRow = ({os, pageName}: OsPageProps) => {
         }
     });
 
-    return <tr className="border border-gray-200">
+    return <tr className="border border-gray-200 hover:bg-gray-100">
         <td className="text-left text-base p-1">{pageName}</td>
         {cells}
     </tr>
