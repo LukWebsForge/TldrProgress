@@ -145,12 +145,15 @@ func (g *TldrGit) CommitAll(path string, message string) error {
 		return err
 	}
 
+	// Doesn't detect deleted files, just new ones: https://github.com/go-git/go-git/issues/113
 	err = worktree.AddGlob(".")
 	if err != nil {
 		return err
 	}
 
 	_, err = worktree.Commit(message, &git.CommitOptions{
+		// That's why we're requiring that the commit includes all (new, changed, deleted) files
+		All: true,
 		Author: &object.Signature{
 			Name:  g.name,
 			Email: g.email,
