@@ -20,14 +20,14 @@ const Legend = () =>
             <tbody>
             <tr>
                 <td className="border-b border-gray-400 px-4 py-2">✔</td>
-                <td className="border-b border-gray-400 px-4 py-2">translated & same number of entries as the
-                    english version
+                <td className="border-b border-gray-400 px-4 py-2">
+                    translated & same number of entries as the english version
                 </td>
             </tr>
             <tr>
                 <td className="border-b border-gray-400 px-4 py-2">⚠</td>
-                <td className="border-b border-gray-400 px-4 py-2">not up-to-date (different number of entries than
-                    the english version)
+                <td className="border-b border-gray-400 px-4 py-2">
+                    not up-to-date (different number of entries than the english version)
                 </td>
             </tr>
             <tr>
