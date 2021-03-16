@@ -11,6 +11,7 @@ RUN /bin/task build
 FROM alpine:latest
 
 WORKDIR /tldrprogress/
+VOLUME /tldrprogress/keys/
 
 COPY --from=0 /go/src/tldrprogress/out/update /bin/tldrprogress
 CMD ["/bin/tldrprogress"]
