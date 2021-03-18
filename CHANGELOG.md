@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.3] - 18th Match 2021
+- Stores the SSH keys using a Docker volume
+
 ## [1.1.2] - 14th March 2021
 - Highlights a row if the pointer hovers over it
 
@@ -41,7 +44,8 @@ This is the first release. If you spot any bugs, please let us know.
 - Configuration files for systemd
 - This Changelog  
 
-[Unreleased]: https://github.com/LukWebsForge/TldrProgress/compare/v1.1.2...HEAD
+[Unreleased]: https://github.com/LukWebsForge/TldrProgress/compare/v1.1.3...HEAD
+[1.1.3]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.1.3
 [1.1.2]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.1.2
 [1.1.1]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.1.1
 [1.1.0]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.1.0
