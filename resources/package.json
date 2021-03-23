@@ -20,10 +20,13 @@
     "web-vitals": "^1.0.1"
   },
   "devDependencies": {
-    "@tailwindcss/postcss7-compat": "^2.0.3",
-    "autoprefixer": "9",
-    "postcss": "7",
+    "@tailwindcss/postcss7-compat": "npm:@tailwindcss/postcss7-compat",
+    "autoprefixer": "^9",
+    "postcss": "^7",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
+  },
+  "resolutions": {
+    "is-svg": "^4.2.2"
   },
   "scripts": {
     "start": "craco start",
