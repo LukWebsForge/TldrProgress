@@ -1,5 +1,6 @@
 import * as React from "react";
 import {DataContext, OperatingSystem, TranslationStatus} from "./Data";
+import {FileAction, tldrPageUrl} from "./GitHubPage";
 import './Table.css';
 
 const DataTable = () =>
@@ -64,17 +65,12 @@ const DataTableOSPages = (props: { os: OperatingSystem }) => {
     return <>{pages}</>;
 }
 
-enum GitHubFileAction {
-    view,
-    create
-}
-
 const DataTableOSPageRow = (props: { os: OperatingSystem, pageName: string }) => {
     const data = React.useContext(DataContext);
     const pageData = data!.entries[props.os].pages[props.pageName];
 
-    function handleClick(action: GitHubFileAction, language: string) {
-        const win = window.open(getGitHubPageUrl(action, props.os, props.pageName, language));
+    function handleClick(action: FileAction, language: string) {
+        const win = window.open(tldrPageUrl(action, props.os, props.pageName, language));
         if (win != null)
             win.focus();
     }
@@ -86,16 +82,16 @@ const DataTableOSPageRow = (props: { os: OperatingSystem, pageName: string }) =>
             switch (status) {
                 case TranslationStatus.Translated:
                     return <td className="background-green cursor-pointer" key={lang}
-                               onClick={() => handleClick(GitHubFileAction.view, lang)}>✓</td>
+                               onClick={() => handleClick(FileAction.VIEW, lang)}>✓</td>
                 case TranslationStatus.Outdated:
                     return <td className="background-yellow cursor-pointer" key={lang}
-                               onClick={() => handleClick(GitHubFileAction.view, lang)}>◇</td>
+                               onClick={() => handleClick(FileAction.VIEW, lang)}>◇</td>
                 default:
                     return <td>?</td>
             }
         } else {
             return <td className="background-red cursor-pointer" key={lang}
-                       onClick={() => handleClick(GitHubFileAction.create, lang)}>✗</td>
+                       onClick={() => handleClick(FileAction.CREATE, lang)}>✗</td>
         }
     });
 
@@ -103,21 +99,6 @@ const DataTableOSPageRow = (props: { os: OperatingSystem, pageName: string }) =>
         <td className="text-left">{props.pageName}</td>
         {cells}
     </tr>
-}
-
-const getGitHubPageUrl = (action: GitHubFileAction, os: string, page: string, language: string) => {
-    const languageSuffix = language === 'en' ? '' : '.' + language
-
-    const baseUrl = "https://github.com/tldr-pages/tldr";
-    const filePath = `/master/pages${languageSuffix}/${os}/${page}.md`
-
-    if (action === GitHubFileAction.create) {
-        return baseUrl + "/new" + filePath + `?filename=${page}.md`;
-    } else if (action === GitHubFileAction.view) {
-        return baseUrl + "/blob" + filePath;
-    } else {
-        throw new Error('Unknown GitHubFileAction: ' + action);
-    }
 }
 
 export {DataTable};
