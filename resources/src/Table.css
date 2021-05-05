@@ -1,0 +1,59 @@
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.small-font {
+    font-size: 80%;
+}
+
+.background-blue {
+    background: rgba(128, 187, 255, 0.25);
+}
+
+.background-green {
+    background: rgba(113, 186, 93, 0.25);
+}
+
+.background-yellow {
+    background: rgba(245, 198, 122, 0.25);
+}
+
+.background-red {
+    background: rgba(255, 128, 128, 0.25);
+}
+
+.vertical-padding {
+    padding: 5px 5px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 0.5px solid rgba(153, 153, 153, 0.5);
+    padding: 2px;
+}
+
+tr:hover {
+    background: rgba(179, 179, 179, 0.5);
+}
+
+.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.90);
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding;
+    background-clip: padding-box;
+}

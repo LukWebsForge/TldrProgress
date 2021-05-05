@@ -1,23 +1,9 @@
-import {DataContext, OperatingSystem, TranslationStatus} from "./Data";
 import * as React from "react";
-
-const JumpList = () => {
-    const data = React.useContext(DataContext);
-
-    const listItems = Object.keys(data!.entries).map((value, index, array) =>
-        <a href={'#' + value} className="hover:text-blue-500" key={value}>
-            {value}{index < array.length - 1 ? ' - ' : ''}
-        </a>
-    );
-
-    return <div className="my-10">
-        <h3 className="text-2xl p-5">Quick Jump List</h3>
-        {listItems}
-    </div>
-}
+import {DataContext, OperatingSystem, TranslationStatus} from "./Data";
+import './Table.css';
 
 const DataTable = () =>
-    <table className="text-center border-opacity-50 mx-auto">
+    <table className="text-center">
         <DataTableHeader/>
         <DataTableBody/>
     </table>;
@@ -27,12 +13,16 @@ const DataTableHeader = () => {
 
     // We're applying the sticky class to each <th>, because Chrome does not support sticky on <thead> and <tr>
     // https://bugs.chromium.org/p/chromium/issues/detail?id=702927
-    const languageRows = data!.languages.map((lang) =>
-        <th className="px-2 py-4 sticky -top-1 bg-white bg-opacity-90 bg-clip-padding" key={lang}>{lang}</th>);
+    const languageRows = data?.languages.map((lang) => {
+        let classNames = 'sticky vertical-padding';
+        if (lang.length > 3) classNames += ' small-font';
 
-    return <thead className="border border-gray-200">
+        return <th className={classNames} key={lang}>{lang}</th>
+    });
+
+    return <thead>
     <tr>
-        <th className="px-2 py-4 bg-white">page</th>
+        <th className="sticky vertical-padding">page</th>
         {languageRows}
     </tr>
     </thead>
@@ -48,36 +38,28 @@ const DataTableBody = () => {
         </React.Fragment>
     );
 
-    return <tbody className="text-sm">{osSections}</tbody>
+    return <tbody>{osSections}</tbody>
 }
 
-interface OsProps {
-    os: OperatingSystem,
-}
-
-interface OsPageProps extends OsProps {
-    pageName: string,
-}
-
-const DataTableOSHeader = ({os}: OsProps) => {
+const DataTableOSHeader = (props: { os: OperatingSystem }) => {
     const data = React.useContext(DataContext);
-    const osProgress = data!.entries[os].progress;
+    const osProgress = data!.entries[props.os].progress;
 
-    const percentages = data!.languages
-        .map((lang) => <td className="px-1 py-2" key={lang}>{osProgress[lang]}%</td>);
+    const percentages = data!.languages.map((lang) =>
+        <td className="vertical-padding small-font" key={lang}>{osProgress[lang]}%</td>);
 
-    return <tr className="border border-gray-200 bg-indigo-300 p-4">
-        <th className="text-base px-1 py-2" id={os}>{os}</th>
+    return <tr className="background-blue">
+        <th className="vertical-padding" id={props.os}>{props.os}</th>
         {percentages}
     </tr>
 }
 
-const DataTableOSPages = ({os}: OsProps) => {
+const DataTableOSPages = (props: { os: OperatingSystem }) => {
     const data = React.useContext(DataContext);
-    const osPages = data!.entries[os].pages;
+    const osPages = data!.entries[props.os].pages;
 
     const pages = Object.keys(osPages)
-        .map((page) => <DataTableOSPageRow os={os} pageName={page} key={page}/>);
+        .map((page) => <DataTableOSPageRow os={props.os} pageName={page} key={page}/>);
 
     return <>{pages}</>;
 }
@@ -87,37 +69,38 @@ enum GitHubFileAction {
     create
 }
 
-const DataTableOSPageRow = ({os, pageName}: OsPageProps) => {
+const DataTableOSPageRow = (props: { os: OperatingSystem, pageName: string }) => {
     const data = React.useContext(DataContext);
-    const pageData = data!.entries[os].pages[pageName];
+    const pageData = data!.entries[props.os].pages[props.pageName];
 
     function handleClick(action: GitHubFileAction, language: string) {
-        const win = window.open(getGitHubPageUrl(action, os, pageName, language));
+        const win = window.open(getGitHubPageUrl(action, props.os, props.pageName, language));
         if (win != null)
             win.focus();
     }
 
+    // Pick symbols from: https://rsms.me/inter/#charset
     const cells = data!.languages.map((lang) => {
         if (lang in pageData.status) {
             const status = pageData.status[lang];
             switch (status) {
                 case TranslationStatus.Translated:
-                    return <td className="bg-green-200 cursor-pointer" key={lang}
-                               onClick={() => handleClick(GitHubFileAction.view, lang)}>✔</td>
+                    return <td className="background-green cursor-pointer" key={lang}
+                               onClick={() => handleClick(GitHubFileAction.view, lang)}>✓</td>
                 case TranslationStatus.Outdated:
-                    return <td className="bg-yellow-200 cursor-pointer" key={lang}
-                               onClick={() => handleClick(GitHubFileAction.view, lang)}>⚠</td>
+                    return <td className="background-yellow cursor-pointer" key={lang}
+                               onClick={() => handleClick(GitHubFileAction.view, lang)}>◇</td>
                 default:
                     return <td>?</td>
             }
         } else {
-            return <td className="bg-red-200 cursor-pointer" key={lang}
-                       onClick={() => handleClick(GitHubFileAction.create, lang)}>✖</td>
+            return <td className="background-red cursor-pointer" key={lang}
+                       onClick={() => handleClick(GitHubFileAction.create, lang)}>✗</td>
         }
     });
 
-    return <tr className="border border-gray-200 hover:bg-gray-100">
-        <td className="text-left text-base p-1">{pageName}</td>
+    return <tr>
+        <td className="text-left">{props.pageName}</td>
         {cells}
     </tr>
 }
@@ -137,16 +120,4 @@ const getGitHubPageUrl = (action: GitHubFileAction, os: string, page: string, la
     }
 }
 
-const Footer = () => {
-    const data = React.useContext(DataContext);
-
-    return (
-        <div className="my-6 text-center text-gray-700">
-            Thanks for using this site •
-            Generated by <a href="https://github.com/LukWebsForge/TldrProgress">tldr-translation-progress</a> •
-            Last updated {data!.last_update}
-        </div>
-    )
-}
-
-export {JumpList, DataTable, Footer};
+export {DataTable};
