@@ -5,6 +5,7 @@ import {DataTable} from "./Table";
 import {AppLoader} from "./AppLoader";
 import {ErrorMessage} from "./ErrorMessage";
 import {AppFooter} from "./AppFooter";
+import {IconActions} from "./IconActions"
 import 'inter-ui/inter.css'
 import './App.css'
 
@@ -16,6 +17,7 @@ const App = () =>
             </Page.Header>
             <Page.Content>
                 <DataFetcher loading={<AppLoader/>} error={<ErrorMessage/>}>
+                    <IconActions/>
                     <DataTable/>
                 </DataFetcher>
             </Page.Content>
