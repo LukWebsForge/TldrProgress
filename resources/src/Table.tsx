@@ -10,7 +10,7 @@ const DataTable = () =>
     </table>;
 
 const DataTableHeader = () => {
-    const data = React.useContext(DataContext);
+    const {data} = React.useContext(DataContext);
 
     // We're applying the sticky class to each <th>, because Chrome does not support sticky on <thead> and <tr>
     // https://bugs.chromium.org/p/chromium/issues/detail?id=702927
@@ -30,7 +30,7 @@ const DataTableHeader = () => {
 }
 
 const DataTableBody = () => {
-    const data = React.useContext(DataContext);
+    const {data} = React.useContext(DataContext);
 
     const osSections = Object.keys(data!.entries).map((os) =>
         <React.Fragment key={os}>
@@ -43,7 +43,7 @@ const DataTableBody = () => {
 }
 
 const DataTableOSHeader = (props: { os: OperatingSystem }) => {
-    const data = React.useContext(DataContext);
+    const {data} = React.useContext(DataContext);
     const osProgress = data!.entries[props.os].progress;
 
     const percentages = data!.languages.map((lang) =>
@@ -56,7 +56,7 @@ const DataTableOSHeader = (props: { os: OperatingSystem }) => {
 }
 
 const DataTableOSPages = (props: { os: OperatingSystem }) => {
-    const data = React.useContext(DataContext);
+    const {data} = React.useContext(DataContext);
     const osPages = data!.entries[props.os].pages;
 
     const pages = Object.keys(osPages)
@@ -66,7 +66,7 @@ const DataTableOSPages = (props: { os: OperatingSystem }) => {
 }
 
 const DataTableOSPageRow = (props: { os: OperatingSystem, pageName: string }) => {
-    const data = React.useContext(DataContext);
+    const {data} = React.useContext(DataContext);
     const pageData = data!.entries[props.os].pages[props.pageName];
 
     function handleClick(action: FileAction, language: string) {

@@ -27,8 +27,8 @@ interface TranslationPage {
     status: Record<Language, TranslationStatus>,
 }
 
-const DataContext = React.createContext<TranslationData | null>(null);
-const ErrorMessageContext = React.createContext<string | null>(null);
+const DataContext = React.createContext<{ data: TranslationData | null, error: string | null }>(
+    {data: null, error: null});
 
 // We're using React.ReactElement & React.ReactNode instead of JSX.Element: https://stackoverflow.com/a/47899926/4106848
 type DataFetcherProps = { error: React.ReactElement, loading: React.ReactElement, children: React.ReactNode };
@@ -59,17 +59,17 @@ const DataFetcher = (props: DataFetcherProps) => {
     }, []);
 
     if (error) {
-        return <ErrorMessageContext.Provider value={error}>
+        return <DataContext.Provider value={{data: null, error: error}}>
             {props.error}
-        </ErrorMessageContext.Provider>
+        </DataContext.Provider>
     } else if (!isLoaded) {
         return props.loading
     } else {
-        return <DataContext.Provider value={data}>
+        return <DataContext.Provider value={{data: data, error: null}}>
             {props.children}
         </DataContext.Provider>
     }
 }
 
-export {DataFetcher, DataContext, TranslationStatus, ErrorMessageContext};
+export {DataFetcher, DataContext, TranslationStatus};
 export type {OperatingSystem, Language, PageName};
