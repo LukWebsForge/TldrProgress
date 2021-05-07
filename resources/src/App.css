@@ -5,3 +5,11 @@ body {
 .cursor-pointer {
     cursor: pointer;
 }
+
+.small-font {
+    font-size: 80%;
+}
+
+.vertical-algin-icons {
+    vertical-align: middle;
+}
