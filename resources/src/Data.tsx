@@ -72,4 +72,4 @@ const DataFetcher = (props: DataFetcherProps) => {
 }
 
 export {DataFetcher, DataContext, TranslationStatus};
-export type {OperatingSystem, Language, PageName};
+export type {TranslationData, OperatingSystem, Language, PageName};
