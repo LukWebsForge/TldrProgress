@@ -8,11 +8,11 @@ const IconActionJump = () => {
     const {data} = useContext(DataContext)
 
     const content = [];
-    content.push(<Popover.Item title>Jump to</Popover.Item>)
+    content.push(<Popover.Item title key='title'>Jump to</Popover.Item>)
 
     if (data?.entries) {
         content.push(Object.keys(data?.entries).map(os =>
-            <Popover.Item><Link href={'#' + os}>{os}</Link></Popover.Item>
+            <Popover.Item key={os}><Link href={'#' + os}>{os}</Link></Popover.Item>
         ))
     }
 
