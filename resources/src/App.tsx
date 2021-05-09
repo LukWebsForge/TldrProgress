@@ -1,9 +1,9 @@
-import {GeistProvider, Page, Text} from "@geist-ui/react";
-import {DataFetcher} from "./Data";
-import {DataTable} from "./Table";
-import {AppLoader} from "./AppLoader";
-import {ErrorMessage} from "./ErrorMessage";
-import {AppFooter} from "./AppFooter";
+import {GeistProvider, Page, Text} from "@geist-ui/react"
+import {DataFetcher} from "./Data"
+import {DataTable} from "./Table"
+import {AppLoader} from "./AppLoader"
+import {ErrorMessage} from "./ErrorMessage"
+import {AppFooter} from "./AppFooter"
 import {IconActions} from "./IconActions"
 import 'inter-ui/inter.css'
 import './App.css'
@@ -24,6 +24,6 @@ const App = () =>
                 <AppFooter/>
             </Page.Footer>
         </Page>
-    </GeistProvider>;
+    </GeistProvider>
 
 export {App}

@@ -11,6 +11,6 @@ const IconActionSearch = () => {
             onClick={() => setToast({text: 'Use your browsers search functionality (Strg + F) to search'})}
         />
     </Tooltip>
-};
+}
 
 export {IconActionSearch}

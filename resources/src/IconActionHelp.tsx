@@ -4,9 +4,9 @@ import {Link, Modal, Text, Tooltip, useModal} from "@geist-ui/react"
 import {DataContext} from "./Data"
 
 const UpdateTime = () => {
-    const {data} = useContext(DataContext);
+    const {data} = useContext(DataContext)
     return <span>{data?.last_update}</span>
-};
+}
 
 const HelpContent = () => <>
     <Text h3>the tldr-pages project</Text>
@@ -54,7 +54,7 @@ const HelpContent = () => <>
         the <Link icon href='https://github.com/LukWebsForge/TldrProgress' target='_blank'>tldr progress</Link>
         repository.
     </Text>
-</>;
+</>
 
 const IconActionHelp = () => {
     const {setVisible, bindings} = useModal()
@@ -71,6 +71,6 @@ const IconActionHelp = () => {
             </Modal.Content>
         </Modal>
     </>
-};
+}
 
 export {IconActionHelp}

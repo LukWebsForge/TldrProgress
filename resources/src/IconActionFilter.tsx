@@ -27,8 +27,8 @@ const FilterSelection = (props: { initial: FilterAttributes, onChange: (attribut
         Show
         <Spacer y={.25} inline={true}/>
         <Select initialValue={props.initial.type} size='small' onChange={(value: FilterType) => {
-            setType(value);
-            props.onChange({type: value, language: langauge});
+            setType(value)
+            props.onChange({type: value, language: langauge})
         }}>
             <Select.Option value='outdated' key='outdated'>◇ outdated</Select.Option>
             <Select.Option value='not-translated' key='not-translated'>✗ not translated</Select.Option>
@@ -37,8 +37,8 @@ const FilterSelection = (props: { initial: FilterAttributes, onChange: (attribut
         pages in the language
         <Spacer y={.25} inline={true}/>
         <Select initialValue={props.initial.language} size='small' onChange={(value: string) => {
-            setLanguage(value);
-            props.onChange({type: type, language: value});
+            setLanguage(value)
+            props.onChange({type: type, language: value})
         }}>
             {languageOptions}
         </Select>
@@ -52,7 +52,7 @@ function filterData(data: TranslationData, filter: FilterAttributes) {
         for (let [pageName, page] of Object.entries(osStatus.pages)) {
             const status = page.status[filter.language]
 
-            let add = false;
+            let add = false
             switch (filter.type) {
                 case FilterType.Outdated:
                     add = status === TranslationStatus.Outdated
@@ -130,7 +130,7 @@ const FilterUI = () => {
         {/* The key property is important to start the pagination for every selection at the first page */}
         <FilteredData attributes={attributes} key={attributes.type + '-' + attributes.language}/>
     </>
-};
+}
 
 const IconActionFilter = () => {
     const {setVisible, bindings} = useModal()
@@ -146,6 +146,6 @@ const IconActionFilter = () => {
             </Modal.Content>
         </Modal>
     </>
-};
+}
 
 export {IconActionFilter}

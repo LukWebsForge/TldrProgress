@@ -6,7 +6,7 @@ import {DataContext} from "./Data"
 const IconActionJump = () => {
     const {data} = useContext(DataContext)
 
-    const content = [];
+    const content = []
     content.push(<Popover.Item title key='title'>Jump to</Popover.Item>)
 
     if (data?.entries) {
@@ -18,6 +18,6 @@ const IconActionJump = () => {
     return <Popover content={content} trigger='hover'>
         <ArrowDownCircle className='cursor-pointer' size={28}/>
     </Popover>
-};
+}
 
 export {IconActionJump}

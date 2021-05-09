@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from "react"
 import {createContext, useEffect, useState} from "react"
 
 // https://reactjs.org/docs/faq-ajax.html
@@ -29,35 +29,35 @@ interface TranslationPage {
 }
 
 const DataContext = createContext<{ data: TranslationData | null, error: string | null }>(
-    {data: null, error: null});
+    {data: null, error: null})
 
 // We're using React.ReactElement & React.ReactNode instead of JSX.Element: https://stackoverflow.com/a/47899926/4106848
 type DataFetcherProps = { error: React.ReactElement, loading: React.ReactElement, children: React.ReactNode };
 const DataFetcher = (props: DataFetcherProps) => {
-    const [error, setError] = useState<string | null>(null);
-    const [isLoaded, setIsLoaded] = useState<boolean>(false);
-    const [data, setData] = useState<TranslationData | null>(null);
+    const [error, setError] = useState<string | null>(null)
+    const [isLoaded, setIsLoaded] = useState<boolean>(false)
+    const [data, setData] = useState<TranslationData | null>(null)
 
     // [] = only run on component mount
     useEffect(() => {
         fetch("data.json")
             .then(r => {
                 if (!r.ok)
-                    throw new Error(r.status + ': ' + r.statusText);
+                    throw new Error(r.status + ': ' + r.statusText)
 
-                return r.json();
+                return r.json()
             })
             .then(
                 (result) => {
-                    setData(result as TranslationData);
-                    setIsLoaded(true);
+                    setData(result as TranslationData)
+                    setIsLoaded(true)
                 },
 
                 (error) => {
-                    setError(error.toString());
-                    setIsLoaded(true);
-                });
-    }, []);
+                    setError(error.toString())
+                    setIsLoaded(true)
+                })
+    }, [])
 
     if (error) {
         return <DataContext.Provider value={{data: null, error: error}}>
@@ -72,5 +72,5 @@ const DataFetcher = (props: DataFetcherProps) => {
     }
 }
 
-export {DataFetcher, DataContext, TranslationStatus};
-export type {TranslationData, OperatingSystem, Language, PageName};
+export {DataFetcher, DataContext, TranslationStatus}
+export type {TranslationData, OperatingSystem, Language, PageName}

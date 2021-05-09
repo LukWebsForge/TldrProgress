@@ -1,11 +1,11 @@
 import {useContext} from "react"
-import {Code, Modal, Note, useModal} from "@geist-ui/react";
-import {Info} from "@geist-ui/react-icons";
-import {DataContext} from "./Data";
+import {Code, Modal, Note, useModal} from "@geist-ui/react"
+import {Info} from "@geist-ui/react-icons"
+import {DataContext} from "./Data"
 
 const ErrorMessage = () => {
-    const {error} = useContext(DataContext);
-    const {setVisible, bindings} = useModal();
+    const {error} = useContext(DataContext)
+    const {setVisible, bindings} = useModal()
 
     return <>
         <Note type='error'>
@@ -21,7 +21,7 @@ const ErrorMessage = () => {
                 <Code block width='100%'>{error}</Code>
             </Modal.Content>
         </Modal>
-    </>;
+    </>
 }
 
 export {ErrorMessage}
