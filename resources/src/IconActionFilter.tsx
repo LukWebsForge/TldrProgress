@@ -111,10 +111,10 @@ const FilteredData = (props: { attributes: FilterAttributes }) => {
     return <>
         <FilteredPageList
             attributes={props.attributes}
-            pages={filtered.slice(pageNumber * elementsPerPage, (pageNumber + 1) * elementsPerPage)}
+            pages={filtered.slice((pageNumber - 1) * elementsPerPage, pageNumber * elementsPerPage)}
         />
         <Pagination
-            count={Math.floor(filtered.length / elementsPerPage)}
+            count={Math.ceil(filtered.length / elementsPerPage)}
             initialPage={initialPage}
             onChange={(page: number) => setPageNumber(page)}
         />
