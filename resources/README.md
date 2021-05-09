@@ -8,6 +8,11 @@ In the project directory, you can run:
 
 ### `yarn start`
 
+**Note**: In order to test the main functionality, you'll have to grab the latest `data.json` file from 
+[GitHub](https://raw.githubusercontent.com/LukWebsForge/tldri18n/main/data.json) 
+or generate it yourself by running the Go application and put it into the `public` folder.
+I'll be ignored by Git.
+
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
