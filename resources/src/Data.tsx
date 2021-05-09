@@ -1,5 +1,4 @@
-import * as React from "react"
-import {createContext, useEffect, useState} from "react"
+import {ReactElement, ReactNode, createContext, useEffect, useState} from "react"
 
 // https://reactjs.org/docs/faq-ajax.html
 // https://reactjs.org/docs/hooks-reference.html#usecontext
@@ -32,7 +31,7 @@ const DataContext = createContext<{ data: TranslationData | null, error: string 
     {data: null, error: null})
 
 // We're using React.ReactElement & React.ReactNode instead of JSX.Element: https://stackoverflow.com/a/47899926/4106848
-type DataFetcherProps = { error: React.ReactElement, loading: React.ReactElement, children: React.ReactNode };
+type DataFetcherProps = { error: ReactElement, loading: ReactElement, children: ReactNode };
 const DataFetcher = (props: DataFetcherProps) => {
     const [error, setError] = useState<string | null>(null)
     const [isLoaded, setIsLoaded] = useState<boolean>(false)

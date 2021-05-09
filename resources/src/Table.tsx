@@ -1,5 +1,4 @@
-import * as React from "react"
-import {useContext} from "react"
+import {Fragment, useContext} from "react"
 import {DataContext, OperatingSystem, TranslationStatus} from "./Data"
 import {FileAction, tldrPageUrl} from "./GitHubPage"
 import './Table.css'
@@ -34,10 +33,10 @@ const DataTableBody = () => {
     const {data} = useContext(DataContext)
 
     const osSections = Object.keys(data!.entries).map((os) =>
-        <React.Fragment key={os}>
+        <Fragment key={os}>
             <DataTableOSHeader os={os}/>
             <DataTableOSPages os={os}/>
-        </React.Fragment>
+        </Fragment>
     )
 
     return <tbody>{osSections}</tbody>

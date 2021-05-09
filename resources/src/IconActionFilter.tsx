@@ -1,5 +1,4 @@
-import * as React from "react"
-import {useContext, useMemo, useState} from "react"
+import {Fragment, useContext, useMemo, useState} from "react"
 import {Link, Modal, Pagination, Select, Spacer, Text, Tooltip, useModal} from "@geist-ui/react"
 import {Filter} from "@geist-ui/react-icons"
 import {DataContext, TranslationData, TranslationStatus} from "./Data"
@@ -84,12 +83,12 @@ const FilteredPageList = (props: { attributes: FilterAttributes, pages: Filtered
     }
 
     const elements = props.pages.map(page =>
-        <React.Fragment key={page.os + '/' + page.page}>
+        <Fragment key={page.os + '/' + page.page}>
             <Link color href={tldrPageUrl(action, page.os, page.page, props.attributes.language)} target='_blank'>
                 {page.os}/{page.page}
             </Link>
             <br/>
-        </React.Fragment>
+        </Fragment>
     )
 
     return <Text p style={{minHeight: '25rem'}}>

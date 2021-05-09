@@ -1,4 +1,4 @@
-import * as React from 'react'
+import {StrictMode} from 'react'
 import * as ReactDOM from 'react-dom'
 import {App} from './App'
 
@@ -8,8 +8,8 @@ import {App} from './App'
 // https://create-react-app.dev/docs/adding-typescript/
 
 ReactDOM.render(
-    <React.StrictMode>
+    <StrictMode>
         <App/>
-    </React.StrictMode>,
+    </StrictMode>,
     document.getElementById('root')
 )
