@@ -22,8 +22,27 @@
     background: rgba(255, 128, 128, 0.25);
 }
 
+.bg-white-transparent {
+    background: rgba(255, 255, 255, 0.90);
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding;
+    background-clip: padding-box;
+}
+
+.bg-white-opaque {
+    background: rgba(255, 255, 255, 1);
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding;
+    background-clip: padding-box;
+}
+
+
 .vertical-padding {
     padding: 5px 5px;
+}
+
+.zero-padding {
+    padding: 0;
 }
 
 table {
@@ -44,8 +63,4 @@ tr:hover {
     position: sticky;
     top: 0;
     z-index: 2;
-    background: rgba(255, 255, 255, 0.90);
-    -moz-background-clip: padding;
-    -webkit-background-clip: padding;
-    background-clip: padding-box;
 }

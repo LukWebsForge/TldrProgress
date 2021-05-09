@@ -16,7 +16,7 @@ const DataTableHeader = () => {
     // We're applying the sticky class to each <th>, because Chrome does not support sticky on <thead> and <tr>
     // https://bugs.chromium.org/p/chromium/issues/detail?id=702927
     const languageRows = data?.languages.map((lang) => {
-        let classNames = 'sticky vertical-padding'
+        let classNames = 'vertical-padding sticky bg-white-transparent'
         if (lang.length > 3) classNames += ' small-font'
 
         return <th className={classNames} key={lang}>{lang}</th>
@@ -24,7 +24,7 @@ const DataTableHeader = () => {
 
     return <thead>
     <tr>
-        <th className="sticky vertical-padding">page</th>
+        <th className="vertical-padding bg-white-transparent">page</th>
         {languageRows}
     </tr>
     </thead>
@@ -51,7 +51,11 @@ const DataTableOSHeader = (props: { os: OperatingSystem }) => {
         <td className="vertical-padding small-font" key={lang}>{osProgress[lang]}%</td>)
 
     return <tr className="background-blue">
-        <th className="vertical-padding" id={props.os}>{props.os}</th>
+        <th className="sticky bg-white-opaque zero-padding" id={props.os}>
+            <div className="vertical-padding background-blue">
+                {props.os}
+            </div>
+        </th>
         {percentages}
     </tr>
 }
