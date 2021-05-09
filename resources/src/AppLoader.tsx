@@ -1,4 +1,3 @@
-import * as React from "react";
 import {Loading, Row} from "@geist-ui/react";
 
 const AppLoader = () =>

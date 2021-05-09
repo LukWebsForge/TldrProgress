@@ -1,4 +1,3 @@
-import * as React from "react"
 import {Grid} from "@geist-ui/react"
 import {IconActionHelp} from "./IconActionHelp"
 import {IconActionJump} from "./IconActionJump"

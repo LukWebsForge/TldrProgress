@@ -1,4 +1,3 @@
-import * as React from "react"
 import {Search} from "@geist-ui/react-icons"
 import {Tooltip, useToasts} from "@geist-ui/react"
 

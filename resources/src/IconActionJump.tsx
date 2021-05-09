@@ -1,4 +1,3 @@
-import * as React from "react"
 import {useContext} from "react"
 import {ArrowDownCircle} from "@geist-ui/react-icons"
 import {Link, Popover} from "@geist-ui/react"

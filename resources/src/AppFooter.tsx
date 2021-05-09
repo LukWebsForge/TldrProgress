@@ -1,4 +1,3 @@
-import * as React from "react";
 import {Link, Text} from "@geist-ui/react";
 
 const AppFooter = () => {

@@ -1,4 +1,3 @@
-import * as React from "react"
 import {useContext} from "react"
 import {ArrowDownCircle, Filter, HelpCircle, Search} from "@geist-ui/react-icons"
 import {Link, Modal, Text, Tooltip, useModal} from "@geist-ui/react"

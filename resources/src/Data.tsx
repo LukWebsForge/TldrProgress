@@ -1,4 +1,5 @@
 import * as React from "react";
+import {createContext, useEffect, useState} from "react"
 
 // https://reactjs.org/docs/faq-ajax.html
 // https://reactjs.org/docs/hooks-reference.html#usecontext
@@ -27,18 +28,18 @@ interface TranslationPage {
     status: Record<Language, TranslationStatus>,
 }
 
-const DataContext = React.createContext<{ data: TranslationData | null, error: string | null }>(
+const DataContext = createContext<{ data: TranslationData | null, error: string | null }>(
     {data: null, error: null});
 
 // We're using React.ReactElement & React.ReactNode instead of JSX.Element: https://stackoverflow.com/a/47899926/4106848
 type DataFetcherProps = { error: React.ReactElement, loading: React.ReactElement, children: React.ReactNode };
 const DataFetcher = (props: DataFetcherProps) => {
-    const [error, setError] = React.useState<string | null>(null);
-    const [isLoaded, setIsLoaded] = React.useState<boolean>(false);
-    const [data, setData] = React.useState<TranslationData | null>(null);
+    const [error, setError] = useState<string | null>(null);
+    const [isLoaded, setIsLoaded] = useState<boolean>(false);
+    const [data, setData] = useState<TranslationData | null>(null);
 
     // [] = only run on component mount
-    React.useEffect(() => {
+    useEffect(() => {
         fetch("data.json")
             .then(r => {
                 if (!r.ok)

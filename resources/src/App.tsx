@@ -1,4 +1,3 @@
-import * as React from "react";
 import {GeistProvider, Page, Text} from "@geist-ui/react";
 import {DataFetcher} from "./Data";
 import {DataTable} from "./Table";

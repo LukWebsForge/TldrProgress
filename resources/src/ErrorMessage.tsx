@@ -1,10 +1,10 @@
-import * as React from "react";
+import {useContext} from "react"
 import {Code, Modal, Note, useModal} from "@geist-ui/react";
 import {Info} from "@geist-ui/react-icons";
 import {DataContext} from "./Data";
 
 const ErrorMessage = () => {
-    const {error} = React.useContext(DataContext);
+    const {error} = useContext(DataContext);
     const {setVisible, bindings} = useModal();
 
     return <>
