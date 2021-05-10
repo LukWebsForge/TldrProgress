@@ -2,10 +2,12 @@ import {useContext} from "react"
 import {Code, Modal, Note, useModal} from "@geist-ui/react"
 import {Info} from "@geist-ui/react-icons"
 import {DataContext} from "./Data"
+import {useEscClose} from './useEscClose'
 
 const ErrorMessage = () => {
     const {error} = useContext(DataContext)
-    const {setVisible, bindings} = useModal()
+    const {visible, setVisible, bindings} = useModal()
+    useEscClose(visible, setVisible)
 
     return <>
         <Note type='error'>

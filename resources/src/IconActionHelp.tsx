@@ -2,6 +2,7 @@ import {useContext} from "react"
 import {ArrowDownCircle, Filter, HelpCircle, Search} from "@geist-ui/react-icons"
 import {Link, Modal, Text, Tooltip, useModal} from "@geist-ui/react"
 import {DataContext} from "./Data"
+import {useEscClose} from './useEscClose'
 
 const UpdateTime = () => {
     const {data} = useContext(DataContext)
@@ -57,7 +58,8 @@ const HelpContent = () => <>
 </>
 
 const IconActionHelp = () => {
-    const {setVisible, bindings} = useModal()
+    const {visible, setVisible, bindings} = useModal()
+    useEscClose(visible, setVisible)
 
     return <>
         <Tooltip text='Help'>

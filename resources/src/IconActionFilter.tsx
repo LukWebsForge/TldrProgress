@@ -3,6 +3,7 @@ import {Link, Modal, Pagination, Select, Spacer, Text, Tooltip, useModal} from "
 import {Filter} from "@geist-ui/react-icons"
 import {DataContext, TranslationData, TranslationStatus} from "./Data"
 import {FileAction, tldrPageUrl} from "./GitHubPage"
+import {useEscClose} from './useEscClose'
 
 enum FilterType {
     Outdated = 'outdated',
@@ -132,7 +133,8 @@ const FilterUI = () => {
 }
 
 const IconActionFilter = () => {
-    const {setVisible, bindings} = useModal()
+    const {visible, setVisible, bindings} = useModal()
+    useEscClose(visible, setVisible)
 
     return <>
         <Tooltip text='Filter'>
