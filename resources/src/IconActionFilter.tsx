@@ -139,7 +139,7 @@ const IconActionFilter = (props: {side?: boolean}) => {
     const placement = props.side ? 'left' : 'top'
 
     return <>
-        <Tooltip text='Filter' placement={placement}>
+        <Tooltip text='Filter' placement={placement} enterDelay={0}>
             <Filter className='cursor-pointer' size={28} onClick={() => setVisible(true)}/>
         </Tooltip>
         <Modal {...bindings} width='800px'>

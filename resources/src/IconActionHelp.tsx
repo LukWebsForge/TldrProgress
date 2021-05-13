@@ -62,7 +62,7 @@ const IconActionHelp = () => {
     useEscClose(visible, setVisible)
 
     return <>
-        <Tooltip text='Help'>
+        <Tooltip text='Help' enterDelay={0}>
             <HelpCircle className='cursor-pointer' size={28} onClick={() => setVisible(true)}/>
         </Tooltip>
         <Modal {...bindings} width='800px'>

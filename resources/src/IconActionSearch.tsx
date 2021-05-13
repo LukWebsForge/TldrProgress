@@ -6,7 +6,7 @@ const IconActionSearch = (props: {side?: boolean}) => {
 
     const placement = props.side ? 'left' : 'top'
 
-    return <Tooltip text='Search' placement={placement}>
+    return <Tooltip text='Search' placement={placement} enterDelay={0}>
         <Search
             className='cursor-pointer'
             size={28}

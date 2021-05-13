@@ -17,7 +17,7 @@ const IconActionJump = (props: {side?: boolean}) => {
 
     const placement = props.side ? 'left' : 'bottom'
 
-    return <Popover content={content} trigger='hover' placement={placement}>
+    return <Popover content={content} trigger='hover' placement={placement} enterDelay={0}>
         <ArrowDownCircle className='cursor-pointer' size={28}/>
     </Popover>
 }
