@@ -17,7 +17,7 @@ const HelpContent = () => <>
     </Text>
     <Text h3>this website</Text>
     <Text p>
-        The main feature of this website is a table which lists the status of translation for all tldr pages.
+        The main feature of this website is a table which lists the translation status for all tldr pages.
         You can click every status icon (legend) and you'll be taken to the respective page on GitHub or to a
         dialogue to create a new one.
     </Text>
@@ -29,18 +29,18 @@ const HelpContent = () => <>
     <Text p>
         The underlying dataset is based on
         the <Link icon href='https://github.com/tldr-pages/tldr/' target='_blank'>main</Link>
-        branch of tldr-pages repository and is scheduled to be updated every day at 0am UTC.
+        branch of tldr-pages/tldr repository and is scheduled to be updated every day at 0am UTC.
         The last update was performed on <UpdateTime/>.
     </Text>
     <Text h3>actions</Text>
     <Text p>
-        <HelpCircle size={20} className='vertical-algin-icons'/> -
+        <HelpCircle size={20} className='vertical-align-icons'/> -
         get help (this page) <br/>
-        <ArrowDownCircle size={20} className='vertical-algin-icons'/> -
+        <ArrowDownCircle size={20} className='vertical-align-icons'/> -
         jump to a section of an operating system <br/>
-        <Filter size={20} className='vertical-algin-icons'/> -
+        <Filter size={20} className='vertical-align-icons'/> -
         filter for not yet translated or outdated pages in a given language <br/>
-        <Search size={20} className='vertical-algin-icons'/> -
+        <Search size={20} className='vertical-align-icons'/> -
         information on how to search the table <br/>
     </Text>
     <Text h3>legend</Text>

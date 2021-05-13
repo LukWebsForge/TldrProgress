@@ -17,7 +17,7 @@ type FilteredPage = { os: string, page: string }
 const FilterSelection = (props: { initial: FilterAttributes, onChange: (attributes: FilterAttributes) => void }) => {
     const {data} = useContext(DataContext)
     const [type, setType] = useState(props.initial.type)
-    const [langauge, setLanguage] = useState(props.initial.language)
+    const [language, setLanguage] = useState(props.initial.language)
 
     const languageOptions = data?.languages.map(lang =>
         <Select.Option value={lang} key={lang}>{lang}</Select.Option>
@@ -28,7 +28,7 @@ const FilterSelection = (props: { initial: FilterAttributes, onChange: (attribut
         <Spacer y={.25} inline={true}/>
         <Select initialValue={props.initial.type} size='small' onChange={(value: FilterType) => {
             setType(value)
-            props.onChange({type: value, language: langauge})
+            props.onChange({type: value, language: language})
         }}>
             <Select.Option value='outdated' key='outdated'>◇ outdated</Select.Option>
             <Select.Option value='not-translated' key='not-translated'>✗ not translated</Select.Option>

@@ -8,7 +8,7 @@ const IconActionSearch = () => {
         <Search
             className='cursor-pointer'
             size={28}
-            onClick={() => setToast({text: 'Use your browsers search functionality (Strg + F) to search'})}
+            onClick={() => setToast({text: 'Use your browser\'s search functionality (Ctrl + F) to search'})}
         />
     </Tooltip>
 }
