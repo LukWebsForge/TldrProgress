@@ -1,6 +1,6 @@
 import {Fragment, useContext} from "react"
 import {DataContext, OperatingSystem, TranslationStatus} from "./Data"
-import {FileAction, tldrPageUrl} from "./GitHubPage"
+import {FileAction, tldrPageUrl} from "./tldrPageUrl"
 import './Table.css'
 
 const DataTable = () =>

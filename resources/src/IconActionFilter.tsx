@@ -2,7 +2,7 @@ import {Fragment, useContext, useMemo, useState} from "react"
 import {Link, Modal, Pagination, Select, Spacer, Text, Tooltip, useModal} from "@geist-ui/react"
 import {Filter} from "@geist-ui/react-icons"
 import {DataContext, TranslationData, TranslationStatus} from "./Data"
-import {FileAction, tldrPageUrl} from "./GitHubPage"
+import {FileAction, tldrPageUrl} from "./tldrPageUrl"
 import {useEscClose} from './useEscClose'
 
 enum FilterType {
