@@ -49,8 +49,8 @@ const DataTableOSHeader = (props: { os: OperatingSystem }) => {
     const percentages = data!.languages.map((lang) =>
         <td className="vertical-padding small-font" key={lang}>{osProgress[lang]}%</td>)
 
-    return <tr className="background-blue">
-        <th className="sticky bg-white-opaque zero-padding" id={props.os}>
+    return <tr className="background-blue" id={props.os}>
+        <th className="sticky bg-white-opaque zero-padding">
             <div className="vertical-padding background-blue">
                 {props.os}
             </div>
