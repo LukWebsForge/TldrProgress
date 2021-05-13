@@ -8,8 +8,8 @@ In the project directory, you can run:
 
 ### `yarn start`
 
-**Note**: In order to test the main functionality, you'll have to grab the latest `data.json` file from 
-[GitHub](https://raw.githubusercontent.com/LukWebsForge/tldri18n/main/data.json) 
+**Note**: In order to test the main functionality, you'll have to grab the latest `data.json` file from
+[GitHub](https://raw.githubusercontent.com/LukWebsForge/tldri18n/main/data.json)
 or generate it yourself by running the Go application and putting it into the `public` folder.
 It'll be ignored by Git.
 

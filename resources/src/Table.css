@@ -1,66 +1,66 @@
 .text-left {
-    text-align: left;
+  text-align: left;
 }
 
 .text-center {
-    text-align: center;
+  text-align: center;
 }
 
 .background-blue {
-    background: rgba(128, 187, 255, 0.25);
+  background: rgba(128, 187, 255, 0.25);
 }
 
 .background-green {
-    background: rgba(113, 186, 93, 0.25);
+  background: rgba(113, 186, 93, 0.25);
 }
 
 .background-yellow {
-    background: rgba(245, 198, 122, 0.25);
+  background: rgba(245, 198, 122, 0.25);
 }
 
 .background-red {
-    background: rgba(255, 128, 128, 0.25);
+  background: rgba(255, 128, 128, 0.25);
 }
 
 .bg-white-transparent {
-    background: rgba(255, 255, 255, 0.90);
-    -moz-background-clip: padding;
-    -webkit-background-clip: padding;
-    background-clip: padding-box;
+  background: rgba(255, 255, 255, 0.9);
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding;
+  background-clip: padding-box;
 }
 
 .bg-white-opaque {
-    background: rgba(255, 255, 255, 1);
-    -moz-background-clip: padding;
-    -webkit-background-clip: padding;
-    background-clip: padding-box;
+  background: rgba(255, 255, 255, 1);
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding;
+  background-clip: padding-box;
 }
 
-
 .vertical-padding {
-    padding: 5px 5px;
+  padding: 5px 5px;
 }
 
 .zero-padding {
-    padding: 0;
+  padding: 0;
 }
 
 table {
-    border-collapse: collapse;
+  border-collapse: collapse;
 }
 
-td, th {
-    border: 0.5px solid rgba(153, 153, 153, 0.5);
-    padding: 2px;
+td,
+th {
+  border: 0.5px solid rgba(153, 153, 153, 0.5);
+  padding: 2px;
 }
 
 tr:hover {
-    background: rgba(179, 179, 179, 0.5);
+  background: rgba(179, 179, 179, 0.5);
 }
 
 .sticky {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 2;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }

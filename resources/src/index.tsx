@@ -1,6 +1,6 @@
-import {StrictMode} from 'react'
+import { StrictMode } from 'react'
 import * as ReactDOM from 'react-dom'
-import {App} from './App'
+import { App } from './App'
 
 // Learn more about TypeScript + React:
 // https://2ality.com/2018/04/type-notation-typescript.html
@@ -8,8 +8,8 @@ import {App} from './App'
 // https://create-react-app.dev/docs/adding-typescript/
 
 ReactDOM.render(
-    <StrictMode>
-        <App/>
-    </StrictMode>,
-    document.getElementById('root')
+  <StrictMode>
+    <App />
+  </StrictMode>,
+  document.querySelector('#root')
 )
