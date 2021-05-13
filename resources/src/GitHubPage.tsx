@@ -7,7 +7,7 @@ function tldrPageUrl(action: FileAction, os: string, page: string, language: str
     const languageSuffix = language === 'en' ? '' : '.' + language
 
     const baseUrl = "https://github.com/tldr-pages/tldr"
-    const filePath = `/master/pages${languageSuffix}/${os}/${page}.md`
+    const filePath = `/main/pages${languageSuffix}/${os}/${page}.md`
 
     if (action === FileAction.CREATE) {
         return baseUrl + "/new" + filePath + `?filename=${page}.md`
