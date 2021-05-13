@@ -1,7 +1,8 @@
 # Building the application
 FROM golang:1.16-alpine
 
-RUN apk add curl yarn && sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /bin
+# Installing dependencies
+RUN apk add curl git yarn && sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /bin
 WORKDIR /go/src/tldrprogress
 
 COPY . .
