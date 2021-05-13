@@ -1,10 +1,12 @@
 import {Search} from "@geist-ui/react-icons"
 import {Tooltip, useToasts} from "@geist-ui/react"
 
-const IconActionSearch = () => {
+const IconActionSearch = (props: {side?: boolean}) => {
     const [, setToast] = useToasts()
 
-    return <Tooltip text='Search'>
+    const placement = props.side ? 'left' : 'top'
+
+    return <Tooltip text='Search' placement={placement}>
         <Search
             className='cursor-pointer'
             size={28}

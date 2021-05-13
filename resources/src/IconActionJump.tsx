@@ -3,7 +3,7 @@ import {ArrowDownCircle} from "@geist-ui/react-icons"
 import {Link, Popover} from "@geist-ui/react"
 import {DataContext} from "./Data"
 
-const IconActionJump = () => {
+const IconActionJump = (props: {side?: boolean}) => {
     const {data} = useContext(DataContext)
 
     const content = []
@@ -15,7 +15,9 @@ const IconActionJump = () => {
         ))
     }
 
-    return <Popover content={content} trigger='hover'>
+    const placement = props.side ? 'left' : 'bottom'
+
+    return <Popover content={content} trigger='hover' placement={placement}>
         <ArrowDownCircle className='cursor-pointer' size={28}/>
     </Popover>
 }

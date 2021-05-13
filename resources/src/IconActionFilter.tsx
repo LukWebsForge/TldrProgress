@@ -132,12 +132,14 @@ const FilterUI = () => {
     </>
 }
 
-const IconActionFilter = () => {
+const IconActionFilter = (props: {side?: boolean}) => {
     const {visible, setVisible, bindings} = useModal()
     useEscClose(visible, setVisible)
 
+    const placement = props.side ? 'left' : 'top'
+
     return <>
-        <Tooltip text='Filter'>
+        <Tooltip text='Filter' placement={placement}>
             <Filter className='cursor-pointer' size={28} onClick={() => setVisible(true)}/>
         </Tooltip>
         <Modal {...bindings} width='800px'>
