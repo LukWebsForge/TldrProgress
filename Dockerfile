@@ -5,6 +5,15 @@ FROM golang:1.16-alpine
 RUN apk add curl git yarn && sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /bin
 WORKDIR /go/src/tldrprogress
 
+# Caching go packages
+COPY go.mod go.sum ./
+RUN go mod download
+
+# Caching yarn packages
+COPY resources/package.json resources/yarn.lock resources/
+RUN (cd resources ; yarn)
+
+# Building the application
 COPY . .
 RUN /bin/task build
 
