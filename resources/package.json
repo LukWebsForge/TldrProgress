@@ -21,6 +21,9 @@
     "typescript": "^4.2.3",
     "web-vitals": "^1.0.1"
   },
+  "devDependencies": {
+    "react-git-info": "^2.0.0"
+  },
   "resolutions": {
     "is-svg": "^4.2.2"
   },
