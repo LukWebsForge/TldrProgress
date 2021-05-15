@@ -17,4 +17,6 @@ jobs:
         with:
           node-version: '14'
       - run: yarn
+        working-directory: resources
       - run: yarn lint
+        working-directory: resources
