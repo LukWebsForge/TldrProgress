@@ -35,7 +35,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src/App.tsx && prettier --check .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "data": "node grep-data.js"
   },
   "eslintConfig": {
     "extends": [
