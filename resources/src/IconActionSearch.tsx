@@ -1,10 +1,13 @@
 import { Search } from '@geist-ui/react-icons'
-import { Tooltip, useToasts } from '@geist-ui/react'
+import { Keyboard, Tooltip, useToasts } from '@geist-ui/react'
+import { isIOS, isMacOs } from 'react-device-detect'
 
 const IconActionSearch = (props: { side?: boolean }) => {
   const [, setToast] = useToasts()
 
   const placement = props.side ? 'left' : 'top'
+  const hotkey = isIOS || isMacOs ? <Keyboard command>f</Keyboard> : <>(ctrl + f)</>
+  const toastText = <div>Use your browser's search functionality {hotkey} to search</div>
 
   return (
     <Tooltip text="Search" placement={placement} enterDelay={0}>
@@ -12,9 +15,7 @@ const IconActionSearch = (props: { side?: boolean }) => {
         className="cursor-pointer"
         size={28}
         onClick={() => {
-          setToast({
-            text: "Use your browser's search functionality (Ctrl + F) to search",
-          })
+          setToast({ text: toastText })
         }}
       />
     </Tooltip>
