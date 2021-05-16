@@ -12,26 +12,18 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-
-      - name: Set up Go 1.x
-        uses: actions/setup-go@v2
+      - uses: actions/setup-go@v2
         with:
           go-version: ^1.16
-
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v2.1.2
-
-      - name: Check out code into the Go module directory
-        uses: actions/checkout@v2
-
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - uses: actions/checkout@v2
       - name: Setup Task
         run: curl -sL https://taskfile.dev/install.sh | sh
-
       - name: Build using Taskfile.yml
         run: ./bin/task build
-
-      - name: Archive production artifacts
-        uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v2
         with:
           name: compiled-application-amd64-ubuntu
           path: out/*

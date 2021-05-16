@@ -28,7 +28,7 @@ _Configuration files:
 ### `yarn lint`
 
 Lints the code using [Prettier](https://prettier.io/) and [ESLint](https://eslint.org/).
-This command is run as a part of the CI process.
+This command is run as part of the CI process.
 
 _Configuration files:
 [`.eslintrc`](.eslintrc),
