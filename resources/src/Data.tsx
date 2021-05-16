@@ -43,7 +43,6 @@ const DataFetcher = (props: DataFetcherProps) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
   const [data, setData] = useState<TranslationData | null>(null)
 
-  // [] = only run on component mount
   useEffect(() => {
     fetch('data.json')
       .then(async (r) => {
@@ -64,6 +63,7 @@ const DataFetcher = (props: DataFetcherProps) => {
         }
       )
   }, [])
+  // [] = only run on component mount
 
   if (error) {
     return <DataContext.Provider value={{ data: null, error }}>{props.error}</DataContext.Provider>

@@ -17,7 +17,7 @@ function tldrPageUrl(action: FileAction, os: string, page: string, language: str
     return baseUrl + '/blob' + filePath
   }
 
-  throw new Error('Unknown GitHubFileAction: ' + action)
+  throw new Error('Unknown FileAction: ' + action)
 }
 
 export { FileAction, tldrPageUrl }

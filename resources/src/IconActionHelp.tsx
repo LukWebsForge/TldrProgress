@@ -32,11 +32,11 @@ const HelpContent = () => (
     </Text>
     <Text p>
       The underlying dataset is based on the{' '}
-      <Link icon href="https://github.com/tldr-pages/tldr/" target="_blank">
+      <Link icon href="https://github.com/tldr-pages/tldr" target="_blank">
         main
       </Link>
-      branch of tldr-pages/tldr repository and is scheduled to be updated every day at 0am UTC. The
-      last update was performed on <UpdateTime />.
+      branch of the tldr-pages/tldr repository and is scheduled to be updated every day at midnight
+      (UTC). The last update was performed on <UpdateTime />.
     </Text>
     <Text h3>actions</Text>
     <Text p>
