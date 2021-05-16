@@ -7,19 +7,19 @@
 }
 
 .background-blue {
-  background: rgba(128, 187, 255, 0.25);
+  background: rgba(128, 187, 255, 0.4);
 }
 
 .background-green {
-  background: rgba(113, 186, 93, 0.25);
+  background: rgba(113, 186, 93, 0.4);
 }
 
 .background-yellow {
-  background: rgba(245, 198, 122, 0.25);
+  background: rgba(245, 198, 122, 0.4);
 }
 
 .background-red {
-  background: rgba(255, 128, 128, 0.25);
+  background: rgba(255, 128, 128, 0.4);
 }
 
 .bg-white-transparent {
