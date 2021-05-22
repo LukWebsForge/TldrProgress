@@ -3,6 +3,7 @@ import { useInView } from 'react-intersection-observer'
 import { IconActionHelp } from './IconActionHelp'
 import { IconActionJump } from './IconActionJump'
 import { IconActionFilter } from './IconActionFilter'
+import { IconActionHighlight } from './IconActionHighlight'
 import { IconActionSearch } from './IconActionSearch'
 import './IconActions.css'
 
@@ -24,6 +25,7 @@ const IconActions = () => {
           <Grid>
             <IconActionJump />
             <IconActionFilter />
+            <IconActionHighlight />
             <IconActionSearch />
           </Grid>
         </Grid.Container>
@@ -36,6 +38,9 @@ const IconActions = () => {
           </Grid>
           <Grid>
             <IconActionFilter side />
+          </Grid>
+          <Grid>
+            <IconActionHighlight side />
           </Grid>
           <Grid>
             <IconActionJump side />

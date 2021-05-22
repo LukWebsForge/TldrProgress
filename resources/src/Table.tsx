@@ -11,7 +11,7 @@ const DataTable = () => (
 )
 
 const DataTableHeader = () => {
-  const { data } = useContext(DataContext)
+  const { data, highlighted } = useContext(DataContext)
 
   // We're applying the sticky class to each <th>, because Chrome does not support sticky on <thead> and <tr>
   // https://bugs.chromium.org/p/chromium/issues/detail?id=702927
@@ -19,6 +19,9 @@ const DataTableHeader = () => {
     let classNames = 'vertical-padding sticky bg-white-transparent'
     if (lang.length > 3) {
       classNames += ' small-font'
+    }
+    if (highlighted.has(lang)) {
+      classNames += ' highlighted'
     }
 
     return (
@@ -52,14 +55,22 @@ const DataTableBody = () => {
 }
 
 const DataTableOSHeader = (props: { os: OperatingSystem }) => {
-  const { data } = useContext(DataContext)
+  const { data, highlighted } = useContext(DataContext)
   const osProgress = data!.entries[props.os].progress
 
-  const percentages = data!.languages.map((lang) => (
-    <td key={lang} className="vertical-padding small-font">
-      {osProgress[lang]}%
-    </td>
-  ))
+  const percentages = data!.languages.map((lang) => {
+    let classNames = 'vertical-padding small-font'
+
+    if (highlighted.has(lang)) {
+      classNames += ' highlighted'
+    }
+
+    return (
+      <td key={lang} className={classNames}>
+        {osProgress[lang]}%
+      </td>
+    )
+  })
 
   return (
     <tr className="background-blue" id={props.os}>
@@ -83,7 +94,7 @@ const DataTableOSPages = (props: { os: OperatingSystem }) => {
 }
 
 const DataTableOSPageRow = (props: { os: OperatingSystem; pageName: string }) => {
-  const { data } = useContext(DataContext)
+  const { data, highlighted } = useContext(DataContext)
   const pageData = data!.entries[props.os].pages[props.pageName]
 
   function handleClick(action: FileAction, language: string) {
@@ -95,49 +106,39 @@ const DataTableOSPageRow = (props: { os: OperatingSystem; pageName: string }) =>
 
   // Pick symbols from: https://rsms.me/inter/#charset
   const cells = data!.languages.map((lang) => {
+    let classNames = 'cursor-pointer'
+    let onClick = null
+    let symbol = '?'
+
     if (lang in pageData.status) {
       const status = pageData.status[lang]
       switch (status) {
         case TranslationStatus.Translated:
-          return (
-            <td
-              key={lang}
-              className="background-green cursor-pointer"
-              onClick={() => {
-                handleClick(FileAction.VIEW, lang)
-              }}
-            >
-              ✓
-            </td>
-          )
+          classNames += ' background-green'
+          onClick = () => handleClick(FileAction.VIEW, lang)
+          symbol = '✓'
+          break
         case TranslationStatus.Outdated:
-          return (
-            <td
-              key={lang}
-              className="background-yellow cursor-pointer"
-              onClick={() => {
-                handleClick(FileAction.VIEW, lang)
-              }}
-            >
-              ◇
-            </td>
-          )
-        default:
-          return <td>?</td>
+          classNames += ' background-yellow'
+          onClick = () => handleClick(FileAction.VIEW, lang)
+          symbol = '◇'
+          break
       }
     } else {
-      return (
-        <td
-          key={lang}
-          className="background-red cursor-pointer"
-          onClick={() => {
-            handleClick(FileAction.CREATE, lang)
-          }}
-        >
-          ✗
-        </td>
-      )
+      classNames += ' background-red'
+      onClick = () => handleClick(FileAction.CREATE, lang)
+      symbol = '✗'
     }
+
+    if (highlighted.has(lang)) {
+      classNames += ' highlighted'
+    }
+
+    return (
+      <td key={lang} className={classNames} onClick={onClick}>
+        {symbol}
+      </td>
+    )
   })
 
   return (

@@ -7,23 +7,51 @@
 }
 
 .background-blue {
-  background: rgba(128, 187, 255, 0.4);
+  background: rgba(128, 187, 255, 0.35);
 }
 
 .background-green {
-  background: rgba(113, 186, 93, 0.4);
+  background: rgba(113, 186, 93, 0.35);
 }
 
 .background-yellow {
-  background: rgba(245, 198, 122, 0.4);
+  background: rgba(245, 198, 122, 0.35);
 }
 
 .background-red {
-  background: rgba(255, 128, 128, 0.4);
+  background: rgba(255, 128, 128, 0.35);
+}
+
+/* An element has the class 'background-blue' and one of its child elements is 'highlighted'.  */
+.background-blue .highlighted {
+  background: rgba(128, 187, 255, 0.5);
+}
+
+/*
+ Notice the missing space between class names: https://stackoverflow.com/a/2554853/4106848
+ A single element has the class 'background-green' and is 'highlighted'.
+ */
+.background-green.highlighted {
+  background: rgba(113, 186, 93, 0.55);
+}
+
+.background-yellow.highlighted {
+  background: rgba(245, 198, 122, 0.55);
+}
+
+.background-red.highlighted {
+  background: rgba(255, 128, 128, 0.55);
 }
 
 .bg-white-transparent {
   background: rgba(255, 255, 255, 0.9);
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding;
+  background-clip: padding-box;
+}
+
+.bg-white-transparent.highlighted {
+  background: rgba(230, 241, 255, 0.9);
   -moz-background-clip: padding;
   -webkit-background-clip: padding;
   background-clip: padding-box;

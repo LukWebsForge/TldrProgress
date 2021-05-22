@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode, createContext, useEffect, useState } from 'react'
+import { ReactElement, createContext, useEffect, useState, PropsWithChildren } from 'react'
 
 // https://reactjs.org/docs/faq-ajax.html
 // https://reactjs.org/docs/hooks-reference.html#usecontext
@@ -30,19 +30,18 @@ interface TranslationPage {
 const DataContext = createContext<{
   data: TranslationData | null
   error: string | null
-}>({ data: null, error: null })
+  highlighted: Set<Language>
+  setHighlighted: (languages: Language[]) => void
+}>({ data: null, error: null, highlighted: new Set(), setHighlighted: () => {} })
 
-// We're using React.ReactElement & React.ReactNode instead of JSX.Element: https://stackoverflow.com/a/47899926/4106848
-type DataFetcherProps = {
-  error: ReactElement
-  loading: ReactElement
-  children: ReactNode
-}
-const DataFetcher = (props: DataFetcherProps) => {
+const DataFetcher = (props: PropsWithChildren<{ error: ReactElement; loading: ReactElement }>) => {
   const [error, setError] = useState<string | null>(null)
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
   const [data, setData] = useState<TranslationData | null>(null)
+  const [highlighted, setHighlighted] = useState<Set<Language>>(new Set())
+  const webStorageHighlightsKey = 'language-highlighted'
 
+  // Fetch the data.json file
   useEffect(() => {
     fetch('data.json')
       .then(async (r) => {
@@ -65,15 +64,43 @@ const DataFetcher = (props: DataFetcherProps) => {
   }, [])
   // [] = only run on component mount
 
+  // Fetch the user preferences using the Web Storage API
+  useEffect(() => {
+    const stored = localStorage.getItem(webStorageHighlightsKey)
+    if (stored) {
+      setHighlighted(new Set(JSON.parse(stored)))
+    }
+  }, [])
+
+  const setHighlightedExternal = (languages: Language[]) => {
+    // Convert the array to a set for better performance and broadcast the change
+    // See: https://stackoverflow.com/a/57277566/4106848
+    setHighlighted(new Set(languages))
+    // Persists the user selection of highlighted columns
+    localStorage.setItem(webStorageHighlightsKey, JSON.stringify(Array.from(languages)))
+  }
+
   if (error) {
-    return <DataContext.Provider value={{ data: null, error }}>{props.error}</DataContext.Provider>
+    const provided = {
+      data: null,
+      error: error,
+      highlighted: new Set<Language>(),
+      setHighlighted: () => {},
+    }
+    return <DataContext.Provider value={provided}>{props.error}</DataContext.Provider>
   }
 
   if (!isLoaded) {
     return props.loading
   }
 
-  return <DataContext.Provider value={{ data, error: null }}>{props.children}</DataContext.Provider>
+  const provided = {
+    data: data,
+    error: null,
+    highlighted: highlighted,
+    setHighlighted: setHighlightedExternal,
+  }
+  return <DataContext.Provider value={provided}>{props.children}</DataContext.Provider>
 }
 
 export { DataFetcher, DataContext, TranslationStatus }
