@@ -18,7 +18,9 @@ const HighlightCheckboxes = (props: {
 
   return (
     <Checkbox.Group value={props.highlighted} onChange={props.onChange}>
-      <Grid.Container justify="flex-start" gap={0.5}>{checkboxes}</Grid.Container>
+      <Grid.Container justify="flex-start" gap={0.5}>
+        {checkboxes}
+      </Grid.Container>
     </Checkbox.Group>
   )
 }
