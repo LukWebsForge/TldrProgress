@@ -1,5 +1,5 @@
-import { useContext, useState, Fragment, useEffect } from 'react'
-import { Checkbox, Modal, Tooltip, useModal } from '@geist-ui/react'
+import { useContext, useState, useEffect } from 'react'
+import { Checkbox, Grid, Modal, Tooltip, useModal } from '@geist-ui/react'
 import { Bookmark } from '@geist-ui/react-icons'
 import { useEscClose } from './useEscClose'
 import { DataContext, Language } from './Data'
@@ -11,15 +11,14 @@ const HighlightCheckboxes = (props: {
   const { data } = useContext(DataContext)
 
   const checkboxes = data!.languages.map((language) => (
-    <Fragment key={language}>
+    <Grid key={language} xs={6}>
       <Checkbox value={language}>{language}</Checkbox>
-      <br />
-    </Fragment>
+    </Grid>
   ))
 
   return (
     <Checkbox.Group value={props.highlighted} onChange={props.onChange}>
-      {checkboxes}
+      <Grid.Container justify="flex-start" gap={0.5}>{checkboxes}</Grid.Container>
     </Checkbox.Group>
   )
 }
