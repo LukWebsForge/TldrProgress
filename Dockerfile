@@ -11,7 +11,7 @@ RUN go mod download
 
 # Caching yarn packages
 COPY resources/package.json resources/yarn.lock resources/
-RUN (cd resources ; yarn)
+RUN cd resources && yarn
 
 # Building the application
 COPY . .
