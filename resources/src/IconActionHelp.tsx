@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { ArrowDownCircle, Filter, HelpCircle, Search } from '@geist-ui/react-icons'
+import { ArrowDownCircle, Bookmark, Filter, HelpCircle, Search } from '@geist-ui/react-icons'
 import { Link, Modal, Text, Tooltip, useModal } from '@geist-ui/react'
 import { DataContext } from './Data'
 import { useEscClose } from './useEscClose'
@@ -26,9 +26,9 @@ const HelpContent = () => (
       GitHub or to a dialogue to create a new one.
     </Text>
     <Text p>
-      The pages are grouped by operating system and are sorted in alphabetical order. The blue rows
-      mark a new group for an operating system and show the percentage of pages translated in this
-      group (an outdated page still counts as translated).
+      The pages are grouped by operating system and are sorted in alphabetical order. Each blue row
+      marks the start of the next group and shows its percentage of pages translated (an outdated
+      page counts as translated).
     </Text>
     <Text p>
       The underlying dataset is based on the{' '}
@@ -45,6 +45,8 @@ const HelpContent = () => (
       operating system <br />
       <Filter size={20} className="vertical-align-icons" /> - filter for not yet translated or
       outdated pages in a given language <br />
+      <Bookmark size={20} className="vertical-align-icons" /> - select preferred columns to be
+      highlighted <br />
       <Search size={20} className="vertical-align-icons" /> - information on how to search the table{' '}
       <br />
     </Text>
