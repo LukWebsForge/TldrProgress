@@ -8,11 +8,38 @@ In the project directory, you can run:
 
 ### `yarn start`
 
+**Note**: Please run `yarn data` once to set up your development environment.
+
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
+
+### `yarn format`
+
+Formats the code using [Prettier](https://prettier.io/).
+Please run this command before committing.
+
+_Configuration files:
+[`.prettierignore`](.prettierignore),
+[`.prettierrc.json`](.prettierrc.json)_
+
+### `yarn lint`
+
+Lints the code using [Prettier](https://prettier.io/) and [ESLint](https://eslint.org/).
+This command is run as part of the CI process.
+
+_Configuration files:
+[`.eslintrc`](.eslintrc),
+[`.prettierignore`](.prettierignore),
+[`.prettierrc.json`](.prettierrc.json)_
+
+### `yarn data`
+
+Downloads the latest `data.json` file from the [`tldri18n`](https://github.com/LukWebsForge/tldri18n) repository.
+It contains the information which is being displayed by this front end.
+The file will be ignored by Git.
 
 ### `yarn test`
 

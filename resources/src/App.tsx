@@ -1,57 +1,30 @@
-import {DataFetcher, ErrorMessageContext} from "./Data";
-import {DataTable, Footer, JumpList} from "./Table";
-import * as React from "react";
+import { GeistProvider, Page, Text } from '@geist-ui/react'
+import { DataFetcher } from './Data'
+import { DataTable } from './Table'
+import { AppLoader } from './AppLoader'
+import { ErrorMessage } from './ErrorMessage'
+import { AppFooter } from './AppFooter'
+import { IconActions } from './IconActions'
+import 'inter-ui/inter.css'
+import './App.css'
 
-const App = () =>
-    <div className="container mx-auto text-center">
-        <h1 className="font-bold text-4xl m-10">tldr translation progress</h1>
-        <DataFetcher loading={<Loading/>} error={<ErrorMessage/>}>
-            <Legend/>
-            <JumpList/>
-            <DataTable/>
-            <Footer/>
+const App = () => (
+  <GeistProvider>
+    <Page size="large" style={{ minHeight: '1px' }}>
+      <Page.Header>
+        <Text h1>tldr translation progress</Text>
+      </Page.Header>
+      <Page.Content>
+        <DataFetcher loading={<AppLoader />} error={<ErrorMessage />}>
+          <IconActions />
+          <DataTable />
         </DataFetcher>
-    </div>;
+      </Page.Content>
+      <Page.Footer style={{ position: 'static' }}>
+        <AppFooter />
+      </Page.Footer>
+    </Page>
+  </GeistProvider>
+)
 
-const Legend = () =>
-    <div className="mt-2">
-        <h3 className="text-2xl p-5">Legend</h3>
-        <table className="border-collapse mx-auto">
-            <tbody>
-            <tr>
-                <td className="border-b border-gray-400 px-4 py-2">✔</td>
-                <td className="border-b border-gray-400 px-4 py-2">
-                    translated & same number of entries as the english version
-                </td>
-            </tr>
-            <tr>
-                <td className="border-b border-gray-400 px-4 py-2">⚠</td>
-                <td className="border-b border-gray-400 px-4 py-2">
-                    not up-to-date (different number of entries than the english version)
-                </td>
-            </tr>
-            <tr>
-                <td className="px-4 py-2">✖</td>
-                <td className="px-4 py-2">not translated</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>;
-
-const Loading = () =>
-    <div className="text-3xl text-blue-400">
-        Loading ...
-    </div>;
-
-const ErrorMessage = () => {
-    const error = React.useContext(ErrorMessageContext);
-
-    return (
-        <div className="text-2xl text-red-400">
-            Unable to load the data ): <br/>
-            <div className="text-lg">{error}</div>
-        </div>
-    );
-}
-
-export {App}
+export { App }

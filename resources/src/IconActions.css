@@ -1,0 +1,14 @@
+.floating-right {
+  position: fixed;
+  top: 15%;
+  right: 0;
+
+  padding: 5px;
+  border-radius: 5px 0 0 5px;
+
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.hidden {
+  display: none;
+}

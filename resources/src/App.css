@@ -1,0 +1,15 @@
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.small-font {
+  font-size: 80%;
+}
+
+.vertical-align-icons {
+  vertical-align: middle;
+}

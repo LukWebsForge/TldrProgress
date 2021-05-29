@@ -1,75 +1,107 @@
-import * as React from "react";
+import { ReactElement, createContext, useEffect, useState, PropsWithChildren } from 'react'
 
 // https://reactjs.org/docs/faq-ajax.html
 // https://reactjs.org/docs/hooks-reference.html#usecontext
 
 enum TranslationStatus {
-    Outdated = 1,
-    Translated = 2,
+  Outdated = 1,
+  Translated = 2,
 }
 
-type OperatingSystem = string;
-type Language = string;
-type PageName = string;
+type OperatingSystem = string
+type Language = string
+type PageName = string
 
 interface TranslationData {
-    last_update: string,
-    languages: Language[],
-    entries: Record<OperatingSystem, TranslationOS>,
+  last_update: string
+  languages: Language[]
+  entries: Record<OperatingSystem, TranslationOS>
 }
 
 interface TranslationOS {
-    progress: Record<Language, number>,
-    pages: Record<PageName, TranslationPage>,
+  progress: Record<Language, number>
+  pages: Record<PageName, TranslationPage>
 }
 
 interface TranslationPage {
-    status: Record<Language, TranslationStatus>,
+  status: Record<Language, TranslationStatus>
 }
 
-const DataContext = React.createContext<TranslationData | null>(null);
-const ErrorMessageContext = React.createContext<string | null>(null);
+const DataContext = createContext<{
+  data: TranslationData | null
+  error: string | null
+  highlighted: Set<Language>
+  setHighlighted: (languages: Language[]) => void
+}>({ data: null, error: null, highlighted: new Set(), setHighlighted: () => {} })
 
-// We're using React.ReactElement & React.ReactNode instead of JSX.Element: https://stackoverflow.com/a/47899926/4106848
-type DataFetcherProps = { error: React.ReactElement, loading: React.ReactElement, children: React.ReactNode };
-const DataFetcher = (props: DataFetcherProps) => {
-    const [error, setError] = React.useState<string | null>(null);
-    const [isLoaded, setIsLoaded] = React.useState<boolean>(false);
-    const [data, setData] = React.useState<TranslationData | null>(null);
+const DataFetcher = (props: PropsWithChildren<{ error: ReactElement; loading: ReactElement }>) => {
+  const [error, setError] = useState<string | null>(null)
+  const [isLoaded, setIsLoaded] = useState<boolean>(false)
+  const [data, setData] = useState<TranslationData | null>(null)
+  const [highlighted, setHighlighted] = useState<Set<Language>>(new Set())
+  const webStorageHighlightedKey = 'language-highlighted'
 
-    // [] = only run on component mount
-    React.useEffect(() => {
-        fetch("data.json")
-            .then(r => {
-                if (!r.ok)
-                    throw new Error(r.status + ': ' + r.statusText);
+  // Fetch the data.json file
+  useEffect(() => {
+    fetch('data.json')
+      .then(async (r) => {
+        if (!r.ok) {
+          throw new Error(r.status + ': ' + r.statusText)
+        }
 
-                return r.json();
-            })
-            .then(
-                (result) => {
-                    setData(result as TranslationData);
-                    setIsLoaded(true);
-                },
+        return r.json()
+      })
+      .then(
+        (result) => {
+          setData(result as TranslationData)
+          setIsLoaded(true)
+        },
+        (error) => {
+          setError(error.toString())
+          setIsLoaded(true)
+        }
+      )
+  }, [])
+  // [] = only run on component mount
 
-                (error) => {
-                    setError(error.toString());
-                    setIsLoaded(true);
-                });
-    }, []);
-
-    if (error) {
-        return <ErrorMessageContext.Provider value={error}>
-            {props.error}
-        </ErrorMessageContext.Provider>
-    } else if (!isLoaded) {
-        return props.loading
-    } else {
-        return <DataContext.Provider value={data}>
-            {props.children}
-        </DataContext.Provider>
+  // Fetch the user preferences using the Web Storage API
+  useEffect(() => {
+    const stored = localStorage.getItem(webStorageHighlightedKey)
+    if (stored) {
+      setHighlighted(new Set(JSON.parse(stored)))
     }
+  }, [])
+
+  const setHighlightedExternal = (languages: Language[]) => {
+    // Convert the array to a set for better performance and broadcast the change
+    // See: https://stackoverflow.com/a/57277566/4106848
+    setHighlighted(new Set(languages))
+    // Persist the user selection of highlighted columns
+    localStorage.setItem(webStorageHighlightedKey, JSON.stringify(Array.from(languages)))
+  }
+
+  if (error) {
+    const provided = {
+      data: null,
+      error: error,
+      highlighted: new Set<Language>(),
+      setHighlighted: () => {},
+    }
+    return <DataContext.Provider value={provided}>{props.error}</DataContext.Provider>
+  }
+
+  if (!isLoaded) {
+    return props.loading
+  }
+
+  const provided = {
+    data: data,
+    error: null,
+    highlighted: highlighted,
+    setHighlighted: setHighlightedExternal,
+  }
+  return <DataContext.Provider value={provided}>{props.children}</DataContext.Provider>
 }
 
-export {DataFetcher, DataContext, TranslationStatus, ErrorMessageContext};
-export type {OperatingSystem, Language, PageName};
+export { DataFetcher, DataContext, TranslationStatus }
+export type { TranslationData, OperatingSystem, Language, PageName }

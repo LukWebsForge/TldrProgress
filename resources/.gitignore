@@ -24,3 +24,6 @@ yarn-error.log*
 
 # Custom data.json file for testing
 public/data.json
+
+# Vercel
+.vercel
