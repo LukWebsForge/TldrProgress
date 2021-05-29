@@ -1,6 +1,6 @@
 enum FileAction {
-  VIEW,
-  CREATE,
+  View,
+  Create,
 }
 
 function tldrPageUrl(action: FileAction, os: string, page: string, language: string) {
@@ -9,11 +9,11 @@ function tldrPageUrl(action: FileAction, os: string, page: string, language: str
   const baseUrl = 'https://github.com/tldr-pages/tldr'
   const filePath = `/main/pages${languageSuffix}/${os}/${page}.md`
 
-  if (action === FileAction.CREATE) {
+  if (action === FileAction.Create) {
     return baseUrl + '/new' + filePath + `?filename=${page}.md`
   }
 
-  if (action === FileAction.VIEW) {
+  if (action === FileAction.View) {
     return baseUrl + '/blob' + filePath
   }
 

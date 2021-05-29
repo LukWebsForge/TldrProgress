@@ -96,11 +96,11 @@ const FilteredPageList = (props: { attributes: FilterAttributes; pages: Filtered
   let empty: string
   switch (props.attributes.type) {
     case FilterType.NotTranslated:
-      action = FileAction.CREATE
+      action = FileAction.Create
       empty = '✓ all pages are translated'
       break
     case FilterType.Outdated:
-      action = FileAction.VIEW
+      action = FileAction.View
       empty = '✓ all translated pages are up-to-date'
       break
   }

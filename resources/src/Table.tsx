@@ -115,18 +115,18 @@ const DataTableOSPageRow = (props: { os: OperatingSystem; pageName: string }) =>
       switch (status) {
         case TranslationStatus.Translated:
           classNames += ' background-green'
-          onClick = () => handleClick(FileAction.VIEW, lang)
+          onClick = () => handleClick(FileAction.View, lang)
           symbol = '✓'
           break
         case TranslationStatus.Outdated:
           classNames += ' background-yellow'
-          onClick = () => handleClick(FileAction.VIEW, lang)
+          onClick = () => handleClick(FileAction.View, lang)
           symbol = '◇'
           break
       }
     } else {
       classNames += ' background-red'
-      onClick = () => handleClick(FileAction.CREATE, lang)
+      onClick = () => handleClick(FileAction.Create, lang)
       symbol = '✗'
     }
 
