@@ -6,7 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.1.3] - 18th Match 2021
+## [1.2.0] - 29th May 2021
+- Brand-new web interface built using Geist UI (#11)
+  - Filter for not translated or outdated pages
+  - Select columns to be highlighted
+  - Help dialogue with more information
+  - Thanks to @navarroaxel, @marchersimon, @bl-ue, @patricedenis and @waldyrious for testing and reviewing
+
+## [1.1.3] - 18th March 2021
 - Stores the SSH keys using a Docker volume
 
 ## [1.1.2] - 14th March 2021
@@ -44,7 +51,8 @@ This is the first release. If you spot any bugs, please let us know.
 - Configuration files for systemd
 - This Changelog  
 
-[Unreleased]: https://github.com/LukWebsForge/TldrProgress/compare/v1.1.3...HEAD
+[Unreleased]: https://github.com/LukWebsForge/TldrProgress/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.2.0
 [1.1.3]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.1.3
 [1.1.2]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.1.2
 [1.1.1]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.1.1
