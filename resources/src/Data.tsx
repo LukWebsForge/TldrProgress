@@ -39,7 +39,7 @@ const DataFetcher = (props: PropsWithChildren<{ error: ReactElement; loading: Re
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
   const [data, setData] = useState<TranslationData | null>(null)
   const [highlighted, setHighlighted] = useState<Set<Language>>(new Set())
-  const webStorageHighlightsKey = 'language-highlighted'
+  const webStorageHighlightedKey = 'language-highlighted'
 
   // Fetch the data.json file
   useEffect(() => {
@@ -66,7 +66,7 @@ const DataFetcher = (props: PropsWithChildren<{ error: ReactElement; loading: Re
 
   // Fetch the user preferences using the Web Storage API
   useEffect(() => {
-    const stored = localStorage.getItem(webStorageHighlightsKey)
+    const stored = localStorage.getItem(webStorageHighlightedKey)
     if (stored) {
       setHighlighted(new Set(JSON.parse(stored)))
     }
@@ -76,8 +76,8 @@ const DataFetcher = (props: PropsWithChildren<{ error: ReactElement; loading: Re
     // Convert the array to a set for better performance and broadcast the change
     // See: https://stackoverflow.com/a/57277566/4106848
     setHighlighted(new Set(languages))
-    // Persists the user selection of highlighted columns
-    localStorage.setItem(webStorageHighlightsKey, JSON.stringify(Array.from(languages)))
+    // Persist the user selection of highlighted columns
+    localStorage.setItem(webStorageHighlightedKey, JSON.stringify(Array.from(languages)))
   }
 
   if (error) {
