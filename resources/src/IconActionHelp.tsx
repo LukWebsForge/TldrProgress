@@ -1,5 +1,13 @@
 import { useContext } from 'react'
-import { ArrowDownCircle, Bookmark, Filter, HelpCircle, Search } from '@geist-ui/react-icons'
+import {
+  ArrowDownCircle,
+  Bookmark,
+  Filter,
+  HelpCircle,
+  Moon,
+  Search,
+  Sun,
+} from '@geist-ui/react-icons'
 import { Link, Modal, Text, Tooltip, useModal } from '@geist-ui/react'
 import { DataContext } from './Data'
 import { useEscClose } from './useEscClose'
@@ -41,6 +49,8 @@ const HelpContent = () => (
     <Text h3>actions</Text>
     <Text p>
       <HelpCircle size={20} className="vertical-align-icons" /> - get help (this page) <br />
+      <Moon size={20} className="vertical-align-icons" /> - switch to the dark mode <br />
+      <Sun size={20} className="vertical-align-icons" /> - switch to the light mode <br />
       <ArrowDownCircle size={20} className="vertical-align-icons" /> - jump to a section of an
       operating system <br />
       <Filter size={20} className="vertical-align-icons" /> - filter for not yet translated or
@@ -82,7 +92,7 @@ const IconActionHelp = () => {
           }}
         />
       </Tooltip>
-      <Modal {...bindings} width="800px">
+      <Modal {...bindings} width="1000px">
         <Modal.Title>Information</Modal.Title>
         <Modal.Subtitle>about this project</Modal.Subtitle>
         <Modal.Content>
