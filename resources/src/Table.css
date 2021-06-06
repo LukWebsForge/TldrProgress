@@ -10,21 +10,41 @@
   background: rgba(128, 187, 255, 0.35);
 }
 
+.dark .background-blue {
+  background: rgba(22, 27, 32, 0.8);
+}
+
 .background-green {
   background: rgba(113, 186, 93, 0.35);
+}
+
+.dark .background-green {
+  background: rgba(28, 81, 44, 0.8);
 }
 
 .background-yellow {
   background: rgba(245, 198, 122, 0.35);
 }
 
+.dark .background-yellow {
+  background: rgba(121, 103, 19, 0.8);
+}
+
 .background-red {
   background: rgba(255, 128, 128, 0.35);
+}
+
+.dark .background-red {
+  background: rgba(89, 37, 38, 0.8);
 }
 
 /* An element has the class 'background-blue' and one of its child elements is 'highlighted'.  */
 .background-blue .highlighted {
   background: rgba(128, 187, 255, 0.55);
+}
+
+.dark .background-blue .highlighted {
+  background: rgba(22, 27, 32, 1);
 }
 
 /*
@@ -35,16 +55,35 @@
   background: rgba(113, 186, 93, 0.55);
 }
 
+.dark .background-green.highlighted {
+  background: rgba(28, 81, 44, 1);
+}
+
 .background-yellow.highlighted {
   background: rgba(245, 198, 122, 0.55);
+}
+
+.dark .background-yellow.highlighted {
+  background: rgba(121, 103, 19, 1);
 }
 
 .background-red.highlighted {
   background: rgba(255, 128, 128, 0.55);
 }
 
+.dark .background-red.highlighted {
+  background: rgba(89, 37, 38, 1);
+}
+
 .bg-white-transparent {
   background: rgba(255, 255, 255, 0.9);
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding;
+  background-clip: padding-box;
+}
+
+.dark .bg-white-transparent {
+  background: rgba(0, 0, 0, 0.9);
   -moz-background-clip: padding;
   -webkit-background-clip: padding;
   background-clip: padding-box;
@@ -57,8 +96,22 @@
   background-clip: padding-box;
 }
 
+.dark .bg-white-transparent.highlighted {
+  background: rgba(22, 27, 32, 0.9);
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding;
+  background-clip: padding-box;
+}
+
 .bg-white-opaque {
   background: rgba(255, 255, 255, 1);
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding;
+  background-clip: padding-box;
+}
+
+.dark .bg-white-opaque {
+  background: rgba(0, 0, 0, 1);
   -moz-background-clip: padding;
   -webkit-background-clip: padding;
   background-clip: padding-box;
@@ -82,8 +135,17 @@ th {
   padding: 2px;
 }
 
+.dark td,
+.dark th {
+  border: 0.5px solid rgba(33, 38, 45, 1);
+}
+
 tr:hover {
   background: rgba(179, 179, 179, 0.5);
+}
+
+.dark tr:hover {
+  background: rgba(102, 102, 102, 0.4);
 }
 
 .sticky {
