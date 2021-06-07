@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.3.0] - 07th June 2021
 - Dark mode (#12)
 
 ## [1.2.0] - 29th May 2021
@@ -52,7 +52,8 @@ This is the first release. If you spot any bugs, please let us know.
 - Configuration files for systemd
 - This Changelog  
 
-[Unreleased]: https://github.com/LukWebsForge/TldrProgress/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/LukWebsForge/TldrProgress/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.3.0
 [1.2.0]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.2.0
 [1.1.3]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.1.3
 [1.1.2]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.1.2
