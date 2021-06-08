@@ -14,7 +14,7 @@ This project is inspired by
 If you've got [Docker](https://www.docker.com/) on your system, you need nothing else to build and run this project.
 
 ```shell script
-docker build -t ghcr.io/lukwebsforge/tldrprogress:1 .
+docker build -t ghcr.io/lukwebsforge/tldrprogress:latest .
 ```
 
 ### Local installation
@@ -71,7 +71,7 @@ The program will start the repository update at midnight (UTC) each day.
 docker run -d --restart=always --name=tldrprogress \
  -e GIT_NAME=LukWebBuilder -e GIT_EMAIL=gitbuilder@lukweb.de \
  -e SITE_REMOTE_URL=git@github.com:LukWebsForge/tldri18n.git \
- lukwebsforge/tldrprogress:latest
+ ghcr.io/lukwebsforge/tldrprogress:latest
 # Optional: Take a look at the logs to view the new public SSH key
 docker logs tldrprogress
 ```
