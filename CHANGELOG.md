@@ -4,11 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.1] - 08th June 2021
+- Publish container images using the 
+  [GitHub Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry) 
+  ([#15](https://github.com/LukWebsForge/TldrProgress/pull/15))
+- Link pull request in the README
+
 ## [1.3.0] - 07th June 2021
-- Dark mode (#14)
+- Dark mode ([#14](https://github.com/LukWebsForge/TldrProgress/pull/14))
 
 ## [1.2.0] - 29th May 2021
-- Brand-new web interface built using Geist UI (#11)
+- Brand-new web interface built using Geist UI ([#11](https://github.com/LukWebsForge/TldrProgress/pull/11))
   - Filter for not translated or outdated pages
   - Select columns to be highlighted
   - Help dialogue with more information
@@ -34,7 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The application now runs continuous and schedules updates by itself
   - Adds the `RUN_ONCE` environment variable to execute a single update
   - Packages the application as a Docker container
-- Improves the commit messages (#4 - thanks @bl-ue)
+- Improves the commit messages ([#4](https://github.com/LukWebsForge/TldrProgress/pull/4) - thanks @bl-ue)
 
 ## [1.0.1] - 14th November 2020
 - Minify the HTML output by activating the environment variable `MINIFY_HTML`
@@ -52,7 +58,8 @@ This is the first release. If you spot any bugs, please let us know.
 - Configuration files for systemd
 - This Changelog  
 
-[Unreleased]: https://github.com/LukWebsForge/TldrProgress/compare/v1.3.0...HEAD
+[Unreleased]: https://github.com/LukWebsForge/TldrProgress/compare/v1.3.1...HEAD
+[1.3.1]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.3.0
 [1.3.0]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.3.0
 [1.2.0]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.2.0
 [1.1.3]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.1.3
