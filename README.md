@@ -14,7 +14,7 @@ This project is inspired by
 If you've got [Docker](https://www.docker.com/) on your system, you need nothing else to build and run this project.
 
 ```shell script
-docker build -t lukwebsforge/tldrprogress:latest .
+docker build -t ghcr.io/lukwebsforge/tldrprogress:1 .
 ```
 
 ### Local installation
