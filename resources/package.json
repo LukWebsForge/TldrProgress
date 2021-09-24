@@ -31,7 +31,8 @@
   "resolutions": {
     "is-svg": "^4.2.2",
     "normalize-url": "^6.0.1",
-    "glob-parent": "^6.0.0"
+    "glob-parent": "^6.0.0",
+    "nth-check": "^2.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
