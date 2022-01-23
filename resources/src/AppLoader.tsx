@@ -1,9 +1,7 @@
-import { Loading, Row } from '@geist-ui/react'
+import { Loading } from '@geist-ui/react'
 
 const AppLoader = () => (
-  <Row style={{ padding: '10px 0' }}>
-    <Loading>Loading</Loading>
-  </Row>
+  <Loading padding='10px'>Loading</Loading>
 )
 
 export { AppLoader }
