@@ -35,11 +35,11 @@ const FilterSelection = (props: {
       <Spacer inline y={0.25} />
       <Select
         initialValue={props.initial.type}
-        size="small"
         onChange={(value: FilterType) => {
           setType(value)
           props.onChange({ type: value, language })
         }}
+        scale={0.5}
       >
         <Select.Option key="outdated" value="outdated">
           ◇ outdated
@@ -53,11 +53,11 @@ const FilterSelection = (props: {
       <Spacer inline y={0.25} />
       <Select
         initialValue={props.initial.language}
-        size="small"
         onChange={(value: string) => {
           setLanguage(value)
           props.onChange({ type, language: value })
         }}
+        scale={0.5}
       >
         {languageOptions}
       </Select>

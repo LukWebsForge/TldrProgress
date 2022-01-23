@@ -21,7 +21,7 @@ const GeistApp = () => {
   return (
     <GeistProvider themeType={themeType}>
       <CssBaseline />
-      <Page size="large" style={{ minHeight: '1px' }} className={themeType}>
+      <Page style={{ minHeight: '1px' }} className={themeType}>
         <Page.Header>
           <Text h1>tldr translation progress</Text>
         </Page.Header>
