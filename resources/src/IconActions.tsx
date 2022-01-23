@@ -42,7 +42,7 @@ const IconActions = () => {
       </div>
 
       <div className={floatingClasses}>
-        <Grid.Container direction='column' gap={0.5}>
+        <Grid.Container direction="column" gap={0.5}>
           <Grid>
             <IconActionTheme side />
           </Grid>
