@@ -1,6 +1,6 @@
 import { useContext } from 'react'
-import { Code, Modal, Note, useModal } from '@geist-ui/react'
-import { Info } from '@geist-ui/react-icons'
+import { Code, Modal, Note, useModal } from '@geist-ui/core'
+import { Info } from '@geist-ui/icons'
 import { DataContext } from './Data'
 import { useEscClose } from './useEscClose'
 

@@ -1,6 +1,6 @@
 import { useContext } from 'react'
-import { ArrowDownCircle } from '@geist-ui/react-icons'
-import { Link, Popover } from '@geist-ui/react'
+import { ArrowDownCircle } from '@geist-ui/icons'
+import { Link, Popover } from '@geist-ui/core'
 import { DataContext } from './Data'
 
 const IconActionJump = (props: { side?: boolean }) => {

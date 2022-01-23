@@ -1,4 +1,4 @@
-import { Grid } from '@geist-ui/react'
+import { Grid } from '@geist-ui/core'
 import { useInView } from 'react-intersection-observer'
 import { IconActionHelp } from './IconActionHelp'
 import { IconActionTheme } from './IconActionTheme'

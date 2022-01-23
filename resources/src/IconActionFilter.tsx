@@ -1,6 +1,6 @@
 import { Fragment, useContext, useMemo, useState } from 'react'
-import { Link, Modal, Pagination, Select, Spacer, Text, Tooltip, useModal } from '@geist-ui/react'
-import { Filter } from '@geist-ui/react-icons'
+import { Link, Modal, Pagination, Select, Spacer, Text, Tooltip, useModal } from '@geist-ui/core'
+import { Filter } from '@geist-ui/icons'
 import { DataContext, TranslationData, TranslationStatus } from './Data'
 import { FileAction, tldrPageUrl } from './tldrPageUrl'
 import { useEscClose } from './useEscClose'

@@ -7,8 +7,8 @@ import {
   Moon,
   Search,
   Sun,
-} from '@geist-ui/react-icons'
-import { Link, Modal, Text, Tooltip, useModal } from '@geist-ui/react'
+} from '@geist-ui/icons'
+import { Link, Modal, Text, Tooltip, useModal } from '@geist-ui/core'
 import { DataContext } from './Data'
 import { useEscClose } from './useEscClose'
 

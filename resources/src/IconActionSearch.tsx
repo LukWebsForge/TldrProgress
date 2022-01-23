@@ -1,5 +1,5 @@
-import { Search } from '@geist-ui/react-icons'
-import { Keyboard, Tooltip, useToasts } from '@geist-ui/react'
+import { Search } from '@geist-ui/icons'
+import { Keyboard, Tooltip, useToasts } from '@geist-ui/core'
 import { isIOS, isMacOs } from 'react-device-detect'
 
 const IconActionSearch = (props: { side?: boolean }) => {

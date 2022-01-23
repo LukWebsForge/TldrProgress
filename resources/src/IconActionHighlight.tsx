@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from 'react'
-import { Checkbox, Grid, Modal, Tooltip, useModal } from '@geist-ui/react'
-import { Bookmark } from '@geist-ui/react-icons'
+import { Checkbox, Grid, Modal, Tooltip, useModal } from '@geist-ui/core'
+import { Bookmark } from '@geist-ui/icons'
 import { useEscClose } from './useEscClose'
 import { DataContext, Language } from './Data'
 

@@ -1,4 +1,4 @@
-import { CssBaseline, GeistProvider, Page, Text } from '@geist-ui/react'
+import { CssBaseline, GeistProvider, Page, Text } from '@geist-ui/core'
 import { ThemeTypeProvider, useThemeType } from './ThemeType'
 import { DataFetcher } from './Data'
 import { DataTable } from './Table'
