@@ -1,4 +1,4 @@
-import { Link, Text } from '@geist-ui/react'
+import { Link, Text } from '@geist-ui/core'
 import GitInfo from 'react-git-info/macro'
 
 const AppFooter = () => {

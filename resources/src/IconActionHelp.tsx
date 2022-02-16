@@ -1,14 +1,6 @@
 import { useContext } from 'react'
-import {
-  ArrowDownCircle,
-  Bookmark,
-  Filter,
-  HelpCircle,
-  Moon,
-  Search,
-  Sun,
-} from '@geist-ui/react-icons'
-import { Link, Modal, Text, Tooltip, useModal } from '@geist-ui/react'
+import { ArrowDownCircle, Bookmark, Filter, HelpCircle, Moon, Search, Sun } from '@geist-ui/icons'
+import { Link, Modal, Text, Tooltip, useModal } from '@geist-ui/core'
 import { DataContext } from './Data'
 import { useEscClose } from './useEscClose'
 

@@ -1,4 +1,4 @@
-import { Col, Grid, Row } from '@geist-ui/react'
+import { Grid } from '@geist-ui/core'
 import { useInView } from 'react-intersection-observer'
 import { IconActionHelp } from './IconActionHelp'
 import { IconActionTheme } from './IconActionTheme'
@@ -19,28 +19,24 @@ const IconActions = () => {
   return (
     <>
       <div ref={ref}>
-        <Grid.Container gap={2} justify="space-between">
+        <Grid.Container gap={1}>
           <Grid>
             <IconActionHelp />
           </Grid>
           <Grid>
-            <Row gap={0.5}>
-              <Col>
-                <IconActionTheme />
-              </Col>
-              <Col>
-                <IconActionJump />
-              </Col>
-              <Col>
-                <IconActionFilter />
-              </Col>
-              <Col>
-                <IconActionHighlight />
-              </Col>
-              <Col>
-                <IconActionSearch />
-              </Col>
-            </Row>
+            <IconActionTheme />
+          </Grid>
+          <Grid>
+            <IconActionJump />
+          </Grid>
+          <Grid>
+            <IconActionFilter />
+          </Grid>
+          <Grid>
+            <IconActionHighlight />
+          </Grid>
+          <Grid>
+            <IconActionSearch />
           </Grid>
         </Grid.Container>
       </div>

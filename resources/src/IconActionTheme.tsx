@@ -1,6 +1,6 @@
 import { useContext } from 'react'
-import { Tooltip } from '@geist-ui/react'
-import { Moon, Sun } from '@geist-ui/react-icons'
+import { Tooltip } from '@geist-ui/core'
+import { Moon, Sun } from '@geist-ui/icons'
 import { ThemeType, ThemeTypeContext } from './ThemeType'
 
 const IconActionTheme = (props: { side?: boolean }) => {

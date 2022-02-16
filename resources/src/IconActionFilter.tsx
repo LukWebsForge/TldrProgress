@@ -1,6 +1,6 @@
 import { Fragment, useContext, useMemo, useState } from 'react'
-import { Link, Modal, Pagination, Select, Spacer, Text, Tooltip, useModal } from '@geist-ui/react'
-import { Filter } from '@geist-ui/react-icons'
+import { Link, Modal, Pagination, Select, Spacer, Text, Tooltip, useModal } from '@geist-ui/core'
+import { Filter } from '@geist-ui/icons'
 import { DataContext, TranslationData, TranslationStatus } from './Data'
 import { FileAction, tldrPageUrl } from './tldrPageUrl'
 import { useEscClose } from './useEscClose'
@@ -35,11 +35,11 @@ const FilterSelection = (props: {
       <Spacer inline y={0.25} />
       <Select
         initialValue={props.initial.type}
-        size="small"
         onChange={(value: FilterType) => {
           setType(value)
           props.onChange({ type: value, language })
         }}
+        scale={0.5}
       >
         <Select.Option key="outdated" value="outdated">
           ◇ outdated
@@ -53,11 +53,11 @@ const FilterSelection = (props: {
       <Spacer inline y={0.25} />
       <Select
         initialValue={props.initial.language}
-        size="small"
         onChange={(value: string) => {
           setLanguage(value)
           props.onChange({ type, language: value })
         }}
+        scale={0.5}
       >
         {languageOptions}
       </Select>
