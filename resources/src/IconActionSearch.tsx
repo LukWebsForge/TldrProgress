@@ -3,7 +3,7 @@ import { Keyboard, Tooltip, useToasts } from '@geist-ui/core'
 import { isIOS, isMacOs } from 'react-device-detect'
 
 const IconActionSearch = (props: { side?: boolean }) => {
-  const [, setToast] = useToasts()
+  const { setToast } = useToasts()
 
   const placement = props.side ? 'left' : 'top'
   const hotkey = isIOS || isMacOs ? <Keyboard command>f</Keyboard> : <>(ctrl + f)</>
