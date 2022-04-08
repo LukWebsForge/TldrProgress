@@ -44,10 +44,10 @@ You can configure certain details using environment variables.
 You can either let the program generate a new SSH key pair, or you can use your own even if a password is required.
 This application doesn't support HTTP authentication.
 
-The SSH key pair `id_rsa` and `id_rsa.pub` in the folder `keys` will be used to access the tldr repository and 
+The SSH key pair `id_ed25519` and `id_ed25519.pub` in the folder `keys` will be used to access the tldr repository and 
 publish changes to the deployment repository (`SITE_REMOTE_URL`). 
 If the key pair is missing, it'll be generated during the startup of the application.
-The generated public key `id_rsa.pub` will be printed to the console.
+The generated public key `id_ed25519.pub` will be printed to the console.
 I recommend adding the public key as a deployment key (with writing access) for the deployment repository.
 
 Each day at midnight (UTC) the program will execute the update.
@@ -94,7 +94,7 @@ systemctl enable tldrprogress.service
 # Start the program now
 sudo systemctl start tldrprogress.service
 # Optional: View generated the public SSH key
-cat /home/tldr/progress/keys/id_rsa.pub
+cat /home/tldr/progress/keys/id_ed25519.pub
 ```
 
 ## Contributing
