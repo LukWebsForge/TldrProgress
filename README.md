@@ -19,7 +19,7 @@ docker build -t ghcr.io/lukwebsforge/tldrprogress:latest .
 
 ### Local installation
 
-To build this project without Docker, you'll need the task runner Task and a Go SDK (>= 1.16).
+To build this project without Docker, you'll need the task runner Task and a Go SDK (>= 1.18).
 
 The build instructions are defined in the [`Taskfile.yml`](Taskfile.yml). 
 Install [Task](https://taskfile.dev/#/installation) and run
