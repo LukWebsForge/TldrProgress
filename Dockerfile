@@ -23,5 +23,7 @@ FROM alpine:latest
 WORKDIR /tldrprogress/
 VOLUME /tldrprogress/keys/
 
+RUN apk add tzdata
+
 COPY --from=0 /go/src/tldrprogress/out/update /bin/tldrprogress
 CMD ["/bin/tldrprogress"]
