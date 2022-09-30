@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.4] - 30th September 2022
+- Add package `tzdata` to Docker image to respect time zone setting
+
 ## [1.3.3] - 08th April 2022
 - Upgrade Geist UI to version 2.3.8
 - Upgrade Go to version 1.18
@@ -68,7 +71,8 @@ This is the first release. If you spot any bugs, please let us know.
 - Configuration files for systemd
 - This Changelog  
 
-[Unreleased]: https://github.com/LukWebsForge/TldrProgress/compare/v1.3.3...HEAD
+[Unreleased]: https://github.com/LukWebsForge/TldrProgress/compare/v1.3.4...HEAD
+[1.3.4]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.3.3
 [1.3.3]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.3.3
 [1.3.2]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.3.2
 [1.3.1]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.3.1
