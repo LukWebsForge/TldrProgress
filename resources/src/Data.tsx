@@ -59,7 +59,7 @@ const DataFetcher = (props: PropsWithChildren<{ error: ReactElement; loading: Re
         (error) => {
           setError(error.toString())
           setIsLoaded(true)
-        }
+        },
       )
   }, [])
   // [] = only run on component mount

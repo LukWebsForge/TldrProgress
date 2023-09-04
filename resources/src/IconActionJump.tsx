@@ -10,7 +10,7 @@ const IconActionJump = (props: { side?: boolean }) => {
   content.push(
     <Popover.Item key="title" title>
       Jump to
-    </Popover.Item>
+    </Popover.Item>,
   )
 
   if (data?.entries) {
@@ -19,7 +19,7 @@ const IconActionJump = (props: { side?: boolean }) => {
         <Popover.Item key={os}>
           <Link href={'#' + os}>{os}</Link>
         </Popover.Item>
-      ))
+      )),
     )
   }
 

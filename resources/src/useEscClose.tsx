@@ -7,7 +7,7 @@ function useEscClose(visible: boolean, setVisible: (value: boolean) => void) {
       ? () => {
           setVisible(false)
         }
-      : undefined
+      : undefined,
   )
 }
 

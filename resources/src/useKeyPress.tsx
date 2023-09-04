@@ -10,7 +10,7 @@ function useKeyPress(targetKey: string, onPressed?: () => void) {
         onPressed()
       }
     },
-    [targetKey, onPressed]
+    [targetKey, onPressed],
   )
 
   useEffect(() => {
