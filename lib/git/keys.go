@@ -8,11 +8,11 @@ import (
 // If successful it returns the public key as a string, otherwise returns an error
 func CreateSSHKey(path string, password string) (string, error) {
 	// Create a key pair with the keygen library: https://github.com/charmbracelet/keygen
-	keyPair, err := keygen.NewWithWrite(path, []byte(password), keygen.Ed25519)
+	keyPair, err := keygen.New(path, keygen.WithPassphrase(password), keygen.WithKeyType(keygen.Ed25519), keygen.WithWrite())
 	if err != nil {
 		return "", err
 	}
 
 	// Returns the public key as a string
-	return string(keyPair.PublicKey()), nil
+	return keyPair.AuthorizedKey(), nil
 }

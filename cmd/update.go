@@ -17,8 +17,7 @@ const TldrDir = "tldr"
 const UpstreamDir = "upstream"
 const DataJsonFile = "data.json"
 
-const KeyName = "keys/id"
-const KeyPath = KeyName + "_ed25519"
+const KeyPath = "keys/id_ed25519"
 const TldrGitUrl = "git@github.com:tldr-pages/tldr.git"
 
 var quit = make(chan struct{})
@@ -57,7 +56,7 @@ func createSSHKey() {
 	keyPassword := env("SSH_KEY_PASSWORD", true)
 
 	if _, err := os.Stat(KeyPath); os.IsNotExist(err) {
-		publicKey, err1 := git.CreateSSHKey(KeyName, keyPassword)
+		publicKey, err1 := git.CreateSSHKey(KeyPath, keyPassword)
 		if err1 != nil {
 			log.Fatalln(err1)
 		}
