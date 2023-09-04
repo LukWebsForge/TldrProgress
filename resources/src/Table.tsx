@@ -15,21 +15,20 @@ const DataTableHeader = () => {
 
   // We're applying the sticky class to each <th>, because Chrome does not support sticky on <thead> and <tr>
   // https://bugs.chromium.org/p/chromium/issues/detail?id=702927
-  const languageRows = data?.languages.map((lang) => {
-    let classNames = 'vertical-padding sticky bg-white-transparent'
-    if (lang.length > 3) {
-      classNames += ' small-font'
-    }
-    if (highlighted.has(lang)) {
-      classNames += ' highlighted'
-    }
+  const languageRows = data?.languages
+    .filter((lang) => highlighted.has(lang))
+    .map((lang) => {
+      let classNames = 'vertical-padding sticky bg-white-transparent'
+      if (lang.length > 3) {
+        classNames += ' small-font'
+      }
 
-    return (
-      <th key={lang} className={classNames}>
-        {lang}
-      </th>
-    )
-  })
+      return (
+        <th key={lang} className={classNames}>
+          {lang}
+        </th>
+      )
+    })
 
   return (
     <thead>
@@ -58,19 +57,17 @@ const DataTableOSHeader = (props: { os: OperatingSystem }) => {
   const { data, highlighted } = useContext(DataContext)
   const osProgress = data!.entries[props.os].progress
 
-  const percentages = data!.languages.map((lang) => {
-    let classNames = 'vertical-padding small-font'
+  const percentages = data!.languages
+    .filter((lang) => highlighted.has(lang))
+    .map((lang) => {
+      let classNames = 'vertical-padding small-font'
 
-    if (highlighted.has(lang)) {
-      classNames += ' highlighted'
-    }
-
-    return (
-      <td key={lang} className={classNames}>
-        {osProgress[lang]}%
-      </td>
-    )
-  })
+      return (
+        <td key={lang} className={classNames}>
+          {osProgress[lang]}%
+        </td>
+      )
+    })
 
   return (
     <tr className="background-blue" id={props.os}>
@@ -105,41 +102,39 @@ const DataTableOSPageRow = (props: { os: OperatingSystem; pageName: string }) =>
   }
 
   // Pick symbols from: https://rsms.me/inter/#charset
-  const cells = data!.languages.map((lang) => {
-    let classNames = 'cursor-pointer'
-    let onClick = null
-    let symbol = '?'
+  const cells = data!.languages
+    .filter((lang) => highlighted.has(lang))
+    .map((lang) => {
+      let classNames = 'cursor-pointer'
+      let onClick = null
+      let symbol = '?'
 
-    if (lang in pageData.status) {
-      const status = pageData.status[lang]
-      switch (status) {
-        case TranslationStatus.Translated:
-          classNames += ' background-green'
-          onClick = () => handleClick(FileAction.View, lang)
-          symbol = '✓'
-          break
-        case TranslationStatus.Outdated:
-          classNames += ' background-yellow'
-          onClick = () => handleClick(FileAction.View, lang)
-          symbol = '◇'
-          break
+      if (lang in pageData.status) {
+        const status = pageData.status[lang]
+        switch (status) {
+          case TranslationStatus.Translated:
+            classNames += ' background-green'
+            onClick = () => handleClick(FileAction.View, lang)
+            symbol = '✓'
+            break
+          case TranslationStatus.Outdated:
+            classNames += ' background-yellow'
+            onClick = () => handleClick(FileAction.View, lang)
+            symbol = '◇'
+            break
+        }
+      } else {
+        classNames += ' background-red'
+        onClick = () => handleClick(FileAction.Create, lang)
+        symbol = '✗'
       }
-    } else {
-      classNames += ' background-red'
-      onClick = () => handleClick(FileAction.Create, lang)
-      symbol = '✗'
-    }
 
-    if (highlighted.has(lang)) {
-      classNames += ' highlighted'
-    }
-
-    return (
-      <td key={lang} className={classNames} onClick={onClick}>
-        {symbol}
-      </td>
-    )
-  })
+      return (
+        <td key={lang} className={classNames} onClick={onClick}>
+          {symbol}
+        </td>
+      )
+    })
 
   return (
     <tr>

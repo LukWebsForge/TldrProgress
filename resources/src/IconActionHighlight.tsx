@@ -1,6 +1,6 @@
-import { useContext, useState, useEffect } from 'react'
-import { Checkbox, Grid, Modal, Tooltip, useModal } from '@geist-ui/core'
-import { Bookmark } from '@geist-ui/icons'
+import { useContext, useState } from 'react'
+import { Button, Checkbox, Grid, Modal, Text, Tooltip, useModal } from '@geist-ui/core'
+import { MessageCircle, Save } from '@geist-ui/icons'
 import { useEscClose } from './useEscClose'
 import { DataContext, Language } from './Data'
 
@@ -12,7 +12,9 @@ const HighlightCheckboxes = (props: {
 
   const checkboxes = data!.languages.map((language) => (
     <Grid key={language} xs={6}>
-      <Checkbox value={language}>{language}</Checkbox>
+      <Checkbox value={language} disabled={language === 'en'}>
+        {language}
+      </Checkbox>
     </Grid>
   ))
 
@@ -25,6 +27,28 @@ const HighlightCheckboxes = (props: {
   )
 }
 
+const SelectHighlights = (props: {}) => {
+  // Columns which are being highlighted
+  const { highlighted, setHighlighted } = useContext(DataContext)
+  // We only want to apply the highlight selection once it has been confirmed, so we create a temporary store
+  const [tmpHighlighted, setTmpHighlighted] = useState(Array.from(highlighted))
+
+  return (
+    <>
+      <Text h3>Select languages to show</Text>
+      <br />
+      <HighlightCheckboxes
+        highlighted={tmpHighlighted}
+        onChange={(selected) => setTmpHighlighted(selected)}
+      />
+      <br />
+      <Button auto type="secondary" icon={<Save />} onClick={() => setHighlighted(tmpHighlighted)}>
+        Continue
+      </Button>
+    </>
+  )
+}
+
 const IconActionHighlight = (props: { side?: boolean }) => {
   const { visible, setVisible, bindings } = useModal()
   useEscClose(visible, setVisible)
@@ -33,23 +57,13 @@ const IconActionHighlight = (props: { side?: boolean }) => {
   const { highlighted, setHighlighted } = useContext(DataContext)
   // We only want to apply the highlight selection once it has been confirmed, so we create a temporary store
   const [tmpHighlighted, setTmpHighlighted] = useState(Array.from(highlighted))
-  // An extra state to begin saving the selection and applying it to the table
-  const [saving, setSaving] = useState(false)
-
-  useEffect(() => {
-    if (saving) {
-      setHighlighted(tmpHighlighted)
-      setVisible(false)
-      setSaving(false)
-    }
-  }, [saving, setHighlighted, setVisible, tmpHighlighted])
 
   const placement = props.side ? 'left' : 'top'
 
   return (
     <>
-      <Tooltip text="Highlight" enterDelay={0} placement={placement}>
-        <Bookmark
+      <Tooltip text="Languages" enterDelay={0} placement={placement}>
+        <MessageCircle
           className="cursor-pointer"
           size={28}
           onClick={() => {
@@ -60,8 +74,8 @@ const IconActionHighlight = (props: { side?: boolean }) => {
         />
       </Tooltip>
       <Modal {...bindings}>
-        <Modal.Title>Highlight columns</Modal.Title>
-        <Modal.Subtitle>Choose columns to highlight</Modal.Subtitle>
+        <Modal.Title>Select Languages</Modal.Title>
+        <Modal.Subtitle>Choose languages to display</Modal.Subtitle>
         <Modal.Content>
           <HighlightCheckboxes
             highlighted={tmpHighlighted}
@@ -78,9 +92,9 @@ const IconActionHighlight = (props: { side?: boolean }) => {
         </Modal.Action>
         <Modal.Action
           onClick={() => {
-            setSaving(true)
+            setVisible(false)
+            setHighlighted(tmpHighlighted)
           }}
-          loading={saving}
         >
           Save
         </Modal.Action>
@@ -89,4 +103,4 @@ const IconActionHighlight = (props: { side?: boolean }) => {
   )
 }
 
-export { IconActionHighlight }
+export { IconActionHighlight, SelectHighlights }

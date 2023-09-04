@@ -1,4 +1,11 @@
-import { ReactElement, createContext, useEffect, useState, PropsWithChildren } from 'react'
+import {
+  createContext,
+  PropsWithChildren,
+  ReactElement,
+  useEffect,
+  useState,
+  useTransition,
+} from 'react'
 
 // https://reactjs.org/docs/faq-ajax.html
 // https://reactjs.org/docs/hooks-reference.html#usecontext
@@ -32,13 +39,21 @@ const DataContext = createContext<{
   error: string | null
   highlighted: Set<Language>
   setHighlighted: (languages: Language[]) => void
-}>({ data: null, error: null, highlighted: new Set(), setHighlighted: () => {} })
+}>({
+  data: null,
+  error: null,
+  highlighted: new Set(['en']),
+  setHighlighted: () => {},
+})
 
-const DataFetcher = (props: PropsWithChildren<{ error: ReactElement; loading: ReactElement }>) => {
+const DataFetcher = (
+  props: PropsWithChildren<{ error: ReactElement; loading: ReactElement; selection: ReactElement }>,
+) => {
   const [error, setError] = useState<string | null>(null)
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
   const [data, setData] = useState<TranslationData | null>(null)
-  const [highlighted, setHighlighted] = useState<Set<Language>>(new Set())
+  const [highlighted, setHighlighted] = useState<Set<Language>>(new Set(['en']))
+  const [isPending, startTransition] = useTransition()
   const webStorageHighlightedKey = 'language-highlighted'
 
   // Fetch the data.json file
@@ -53,12 +68,16 @@ const DataFetcher = (props: PropsWithChildren<{ error: ReactElement; loading: Re
       })
       .then(
         (result) => {
-          setData(result as TranslationData)
-          setIsLoaded(true)
+          startTransition(() => {
+            setData(result as TranslationData)
+            setIsLoaded(true)
+          })
         },
         (error) => {
-          setError(error.toString())
-          setIsLoaded(true)
+          startTransition(() => {
+            setError(error.toString())
+            setIsLoaded(true)
+          })
         },
       )
   }, [])
@@ -68,14 +87,16 @@ const DataFetcher = (props: PropsWithChildren<{ error: ReactElement; loading: Re
   useEffect(() => {
     const stored = localStorage.getItem(webStorageHighlightedKey)
     if (stored) {
-      setHighlighted(new Set(JSON.parse(stored)))
+      let languages: Set<string> = new Set(JSON.parse(stored))
+      languages.add('en')
+      startTransition(() => setHighlighted(new Set(languages)))
     }
   }, [])
 
   const setHighlightedExternal = (languages: Language[]) => {
     // Convert the array to a set for better performance and broadcast the change
     // See: https://stackoverflow.com/a/57277566/4106848
-    setHighlighted(new Set(languages))
+    startTransition(() => setHighlighted(new Set(languages)))
     // Persist the user selection of highlighted columns
     localStorage.setItem(webStorageHighlightedKey, JSON.stringify(Array.from(languages)))
   }
@@ -90,7 +111,7 @@ const DataFetcher = (props: PropsWithChildren<{ error: ReactElement; loading: Re
     return <DataContext.Provider value={provided}>{props.error}</DataContext.Provider>
   }
 
-  if (!isLoaded) {
+  if (!isLoaded || isPending) {
     return props.loading
   }
 
@@ -100,7 +121,11 @@ const DataFetcher = (props: PropsWithChildren<{ error: ReactElement; loading: Re
     highlighted: highlighted,
     setHighlighted: setHighlightedExternal,
   }
-  return <DataContext.Provider value={provided}>{props.children}</DataContext.Provider>
+  return (
+    <DataContext.Provider value={provided}>
+      {highlighted.size < 2 ? props.selection : props.children}
+    </DataContext.Provider>
+  )
 }
 
 export { DataFetcher, DataContext, TranslationStatus }
