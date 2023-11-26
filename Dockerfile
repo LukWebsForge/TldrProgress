@@ -1,5 +1,5 @@
 # Building the application
-FROM golang:1.20-alpine
+FROM golang:1.21-alpine
 
 # Installing dependencies
 RUN apk add curl git yarn && sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /bin
