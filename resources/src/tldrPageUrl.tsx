@@ -7,14 +7,14 @@ function tldrPageUrl(action: FileAction, os: string, page: string, language: str
   const languageSuffix = language === 'en' ? '' : '.' + language
 
   const baseUrl = 'https://github.com/tldr-pages/tldr'
-  const filePath = `/main/pages${languageSuffix}/${os}/${page}.md`
+  const folderPath = `/main/pages${languageSuffix}/${os}`
 
   if (action === FileAction.Create) {
-    return baseUrl + '/new' + filePath + `?filename=${page}.md`
+    return `${baseUrl}/new${folderPath}?filename=${page}.md`
   }
 
   if (action === FileAction.View) {
-    return baseUrl + '/blob' + filePath
+    return `${baseUrl}/blob${folderPath}/${page}.md`
   }
 
   throw new Error('Unknown FileAction: ' + action)
