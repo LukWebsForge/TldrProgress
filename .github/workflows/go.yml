@@ -18,7 +18,7 @@ jobs:
           go-version: ^1.22
       - uses: actions/setup-node@v2
         with:
-          node-version: '18'
+          node-version: '20'
       - uses: actions/checkout@v2
       - name: Setup Task
         run: curl -sL https://taskfile.dev/install.sh | sh
@@ -39,7 +39,7 @@ jobs:
           go-version: ^1.22
       - uses: actions/setup-node@v2
         with:
-          node-version: '18'
+          node-version: '20'
       - uses: actions/checkout@v2
       - name: Setup Task
         run: curl -sL https://taskfile.dev/install.sh | sh
