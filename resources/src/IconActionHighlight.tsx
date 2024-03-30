@@ -42,7 +42,13 @@ const SelectHighlights = (props: {}) => {
         onChange={(selected) => setTmpHighlighted(selected)}
       />
       <br />
-      <Button auto type="secondary" icon={<Save />} onClick={() => setHighlighted(tmpHighlighted)}>
+      <Button
+        auto
+        type="secondary"
+        icon={<Save />}
+        disabled={tmpHighlighted.length < 2}
+        onClick={() => setHighlighted(tmpHighlighted)}
+      >
         Continue
       </Button>
     </>
