@@ -1,6 +1,6 @@
 module tldr-translation-progress
 
-go 1.22
+go 1.23
 
 require (
 	github.com/charmbracelet/keygen v0.5.1
