@@ -14,7 +14,7 @@
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.0.0",
     "install": "^0.13.0",
-    "inter-ui": "^4.0.1",
+    "inter-ui": "^4.1.0",
     "normalize-url": "^8.0.0",
     "postcss": "^8.4.49",
     "react": "^18.0.0",

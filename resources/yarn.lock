@@ -5242,10 +5242,10 @@ install@^0.13.0:
   resolved "https://registry.yarnpkg.com/install/-/install-0.13.0.tgz#6af6e9da9dd0987de2ab420f78e60d9c17260776"
   integrity sha512-zDml/jzr2PKU9I8J/xyZBQn8rPCAY//UOYNmR01XwNwyfhEWObo2SWfSl1+0tm1u6PhxLwDnfsT/6jB7OUxqFA==
 
-inter-ui@^4.0.1:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/inter-ui/-/inter-ui-4.0.2.tgz#e1bcfcaad509a084396e22cb23480df8caa9a8a2"
-  integrity sha512-YmfzwEtzuVzEenQwSB/tmmqi/A0a2GnFk4mG4ZFULXiO5DNk0fJWiO3o9i1sdVKuMVGx9iiNQnCq8ghWZJVVHw==
+inter-ui@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/inter-ui/-/inter-ui-4.1.0.tgz#f812624aa0dcdc9d5bfc3c65b2ff67c0f04ff0b5"
+  integrity sha512-lUJ5YLtpj7jWsrhTbN5w32MLOqISGFGOTMRNn+IGhLrbt67z5yvmBRoqpLCWLVlJ+l7kqnH6su4meEqvLMfAAA==
 
 internal-slot@^1.0.7:
   version "1.0.7"
