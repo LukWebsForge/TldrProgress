@@ -10,7 +10,7 @@
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^14.6.1",
     "@types/jest": "^29.5.13",
-    "@types/node": "^22.13.8",
+    "@types/node": "^22.13.16",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "install": "^0.13.0",
