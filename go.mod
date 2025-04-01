@@ -1,9 +1,8 @@
 module tldr-translation-progress
 
 go 1.24.0
-
 require (
-	github.com/charmbracelet/keygen v0.5.1
+	github.com/charmbracelet/keygen v0.5.3
 	github.com/go-git/go-git/v5 v5.14.0
 	github.com/iancoleman/orderedmap v0.3.0
 	github.com/robfig/cron/v3 v3.0.1
