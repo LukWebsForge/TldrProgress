@@ -1,6 +1,7 @@
 package git
 
 import (
+	"errors"
 	"fmt"
 	"github.com/go-git/go-git/v5"
 	"github.com/go-git/go-git/v5/config"
@@ -104,9 +105,9 @@ func (g *TldrGit) Pull(url string, path string) error {
 		Auth: g.publicKey,
 	}
 	err = worktree.Pull(pullOptions)
-	if git.NoErrAlreadyUpToDate == err {
+	if errors.Is(err, git.NoErrAlreadyUpToDate) {
 		return nil
-	} else if err == git.ErrNonFastForwardUpdate || err == git.ErrUnstagedChanges {
+	} else if errors.Is(err, git.ErrNonFastForwardUpdate) || errors.Is(err, git.ErrUnstagedChanges) {
 		// Trying to hard reset the repository to the HEAD & attempt to pull again
 		head, err := repository.Head()
 		if err != nil {
@@ -122,7 +123,7 @@ func (g *TldrGit) Pull(url string, path string) error {
 		}
 
 		err = worktree.Pull(pullOptions)
-		if err != git.NoErrAlreadyUpToDate && err != nil {
+		if !errors.Is(err, git.NoErrAlreadyUpToDate) && err != nil {
 			return fmt.Errorf("can't update the repository %v automatically, please try to fix it by hand: %v", path, err)
 		}
 	} else if err != nil {
@@ -179,12 +180,12 @@ func (g *TldrGit) Push(path string, origin string) error {
 	}
 
 	err = remote.Fetch(&git.FetchOptions{Auth: g.publicKey})
-	if err != git.NoErrAlreadyUpToDate && err != nil {
+	if !errors.Is(err, git.NoErrAlreadyUpToDate) && err != nil {
 		return err
 	}
 
 	err = remote.Push(&git.PushOptions{Auth: g.publicKey})
-	if err != git.NoErrAlreadyUpToDate && err != nil {
+	if !errors.Is(err, git.NoErrAlreadyUpToDate) && err != nil {
 		return err
 	}
 
@@ -198,7 +199,7 @@ func (g *TldrGit) setupDefaultRemote(repository *git.Repository, url string) (*g
 
 	// Checking if the remote exists, if not creating it
 	remote, err := repository.Remote(DefaultRemoteName)
-	if err == git.ErrRemoteNotFound {
+	if errors.Is(err, git.ErrRemoteNotFound) {
 		resetRemote = true
 	} else if err != nil {
 		return nil, err
