@@ -19,3 +19,6 @@ jobs:
         working-directory: resources
       - run: yarn lint
         working-directory: resources
+
+permissions:
+  contents: read
