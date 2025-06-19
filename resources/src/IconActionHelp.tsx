@@ -22,8 +22,8 @@ const HelpContent = () => (
     <Text h3>this website</Text>
     <Text p>
       The main feature of this website is a table which lists the translation status for all tldr
-      pages. You can click every status icon (legend) and you&#39;ll be taken to the respective page on
-      GitHub or to a dialogue to create a new one.
+      pages. You can click every status icon (legend) and you&#39;ll be taken to the respective page
+      on GitHub or to a dialogue to create a new one.
     </Text>
     <Text p>
       The pages are grouped by operating system and are sorted in alphabetical order. Each blue row

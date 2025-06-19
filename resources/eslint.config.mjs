@@ -10,7 +10,7 @@ export default defineConfig([
       react: {
         version: 'detect',
       },
-    }
+    },
   },
   {
     files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
