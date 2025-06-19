@@ -7,7 +7,7 @@ const IconActionSearch = (props: { side?: boolean }) => {
 
   const placement = props.side ? 'left' : 'top'
   const hotkey = isIOS || isMacOs ? <Keyboard command>f</Keyboard> : <>(ctrl + f)</>
-  const toastText = <div>Use your browser's search functionality {hotkey} to search</div>
+  const toastText = <div>Use your browser&#39;s search functionality {hotkey} to search</div>
 
   return (
     <Tooltip text="Search" placement={placement} enterDelay={0}>

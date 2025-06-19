@@ -27,7 +27,7 @@ const HighlightCheckboxes = (props: {
   )
 }
 
-const SelectHighlights = (props: {}) => {
+const SelectHighlights = () => {
   // Columns which are being highlighted
   const { highlighted, setHighlighted } = useContext(DataContext)
   // We only want to apply the highlight selection once it has been confirmed, so we create a temporary store

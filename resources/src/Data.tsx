@@ -87,7 +87,7 @@ const DataFetcher = (
   useEffect(() => {
     const stored = localStorage.getItem(webStorageHighlightedKey)
     if (stored) {
-      let languages: Set<string> = new Set(JSON.parse(stored))
+      const languages: Set<string> = new Set(JSON.parse(stored))
       languages.add('en')
       startTransition(() => setHighlighted(new Set(languages)))
     }

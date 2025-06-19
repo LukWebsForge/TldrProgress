@@ -13,7 +13,7 @@ const ThemeTypeContext = createContext<{
   setThemeType: () => {},
 })
 
-const ThemeTypeProvider = (props: PropsWithChildren<{}>) => {
+const ThemeTypeProvider = (props: PropsWithChildren<object>) => {
   const [themeType, setThemeType] = useState(ThemeType.Light)
   const webStorageThemeTypeKey = 'theme-type'
 

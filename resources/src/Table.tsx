@@ -60,7 +60,7 @@ const DataTableOSHeader = (props: { os: OperatingSystem }) => {
   const percentages = data!.languages
     .filter((lang) => highlighted.has(lang))
     .map((lang) => {
-      let classNames = 'vertical-padding small-font'
+      const classNames = 'vertical-padding small-font'
 
       return (
         <td key={lang} className={classNames}>

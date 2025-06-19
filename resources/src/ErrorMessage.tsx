@@ -12,7 +12,7 @@ const ErrorMessage = () => {
   return (
     <>
       <Note type="error">
-        Can't fetch the translation progress data from GitHub
+        Can&#39;t fetch the translation progress data from GitHub
         <span style={{ verticalAlign: 'middle', cursor: 'pointer' }}>
           {' '}
           <Info
@@ -25,7 +25,7 @@ const ErrorMessage = () => {
       </Note>
       <Modal {...bindings} width="50rem">
         <Modal.Title>Error</Modal.Title>
-        <Modal.Subtitle>Can't fetch the data from GitHub</Modal.Subtitle>
+        <Modal.Subtitle>Can&#39;t fetch the data from GitHub</Modal.Subtitle>
         <Modal.Content style={{ overflow: 'auto' }}>
           <Code block width="100%">
             {error}
