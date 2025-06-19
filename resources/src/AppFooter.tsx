@@ -1,10 +1,11 @@
 import { Link, Text } from '@geist-ui/core'
-import GitInfo from 'react-git-info/macro'
+
+console.log(__COMMIT__HASH__)
 
 const AppFooter = () => {
-  const gitInfo = GitInfo()
-  const version = gitInfo.tags.length > 0 ? gitInfo.tags[0] : gitInfo.commit.shortHash
-  const commitUrl = 'https://github.com/LukWebsForge/TldrProgress/commit/' + gitInfo.commit.hash
+  const gitInfo = __COMMIT__HASH__
+  const version = gitInfo.tag.length > 0 ? gitInfo.tag : gitInfo.commit
+  const commitUrl = 'https://github.com/LukWebsForge/TldrProgress/commit/' + gitInfo.commit
 
   return (
     <Text p>
