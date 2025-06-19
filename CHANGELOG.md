@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.9] - 19th June 2025
+- Upgrades Go and Node dependencies
+
 ## [1.3.8] - 6th October 2024
 - Upgrades Go to version 1.23
 - Upgrades Node dependencies
@@ -87,8 +90,9 @@ This is the first release. If you spot any bugs, please let us know.
 - Configuration files for systemd
 - This Changelog  
 
-[Unreleased]: https://github.com/LukWebsForge/TldrProgress/compare/v1.3.8...HEAD
-[1.3.7]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.3.8
+[Unreleased]: https://github.com/LukWebsForge/TldrProgress/compare/v1.3.9...HEAD
+[1.3.9]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.3.9
+[1.3.8]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.3.8
 [1.3.7]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.3.7
 [1.3.6]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.3.6
 [1.3.5]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.3.5
