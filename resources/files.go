@@ -9,7 +9,7 @@ import (
 
 const defaultFileMask = 0740
 const baseFSDir = "build"
-const staticDir = "static"
+const assetsDir = "assets"
 
 //go:embed build
 var f embed.FS
@@ -17,8 +17,8 @@ var f embed.FS
 // Writes all static asset files from the 'resources/build' folder (now in the binary) to the given folder
 func WriteTo(ospath string) error {
 
-	// Removes the 'static' directory to prevent old hashed asset files from piling up
-	staticDirPath := filepath.Join(ospath, staticDir)
+	// Removes the 'assets' directory to prevent old hashed asset files from piling up
+	staticDirPath := filepath.Join(ospath, assetsDir)
 	if _, err := os.Stat(staticDirPath); !os.IsNotExist(err) {
 		err := os.RemoveAll(staticDirPath)
 		if err != nil {
