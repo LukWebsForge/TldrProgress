@@ -28,7 +28,7 @@
   },
   "scripts": {
     "start": "vite",
-    "build": "vite build",
+    "build": "vite build --base ''",
     "serve": "vite preview",
     "lint": "eslint src/*.tsx && prettier --check .",
     "format": "prettier --write .",
