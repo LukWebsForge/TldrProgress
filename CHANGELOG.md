@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.10] - 30th June 2025
+- Adds cross-platform build for Docker image (linux/amd64,linux/arm64)
+- Uses relative paths for building the HTML with Vite (#102)
+- Cleans up the correct assets directory upon writing the resources
+- Removes unused systemd configuration
+- Removes release action for publishing binaries
+
 ## [1.3.9] - 19th June 2025
 - Upgrades Go and Node dependencies
 
@@ -90,7 +97,8 @@ This is the first release. If you spot any bugs, please let us know.
 - Configuration files for systemd
 - This Changelog  
 
-[Unreleased]: https://github.com/LukWebsForge/TldrProgress/compare/v1.3.9...HEAD
+[Unreleased]: https://github.com/LukWebsForge/TldrProgress/compare/v1.3.10...HEAD
+[1.3.10]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.3.10
 [1.3.9]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.3.9
 [1.3.8]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.3.8
 [1.3.7]: https://github.com/LukWebsForge/TldrProgress/releases/tag/v1.3.7
