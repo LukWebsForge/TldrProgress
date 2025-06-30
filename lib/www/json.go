@@ -69,6 +69,8 @@ func GenerateJson(index *tldr.Index, path string) error {
 					status[string(language)] = jsonStatusOutdated
 				case tldr.StatusTranslated:
 					status[string(language)] = jsonStatusTranslated
+				default:
+
 				}
 			}
 

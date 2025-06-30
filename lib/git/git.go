@@ -55,7 +55,7 @@ func (g *TldrGit) CloneOrUpdate(url string, path string) error {
 		return g.Clone(url, path)
 	} else {
 		err = g.Pull(url, path)
-		if err == git.ErrRepositoryNotExists {
+		if errors.Is(err, git.ErrRepositoryNotExists) {
 			err = os.RemoveAll(path)
 			if err != nil {
 				return err
