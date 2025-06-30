@@ -29,44 +29,5 @@ jobs:
           name: compiled-application-amd64-ubuntu
           path: out/*
 
-  release:
-    runs-on: ubuntu-latest
-    # Only create a release if a new tags has been pushed: https://stackoverflow.com/a/58478262/4106848
-    if: startsWith(github.ref, 'refs/tags/v')
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/setup-go@v5
-        with:
-          go-version: ^1.24
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - uses: actions/checkout@v4
-      - name: Setup Task
-        run: curl -sL https://taskfile.dev/install.sh | sh
-      - name: Build using Taskfile.yml
-        run: ./bin/task release
-      - uses: actions/upload-artifact@v4
-        with:
-          name: compiled-application-amd64-ubuntu
-          path: out/*
-      - uses: softprops/action-gh-release@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          files: |
-            out/update_linux_amd64
-            out/update_linux_arm
-            out/update_windows_amd64.exe
-          draft: true
-          name: Release ${{ github.ref }}
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
-
-            - [ ] You've listed all important changes / pull requests
-
 permissions:
   contents: read

@@ -7,14 +7,6 @@ tasks:
     cmds:
       - go build -v -o out/ cmd/update.go
 
-  release:
-    desc: Builds executables for Windows (amd64) and Linux (amd64, armhf)
-    deps: [ assets ]
-    cmds:
-      - GOOS=windows GOARCH=amd64 go build -v -o out/update_windows_amd64.exe cmd/update.go
-      - GOOS=linux GOARCH=amd64 go build -v -o out/update_linux_amd64 cmd/update.go
-      - GOOS=linux GOARCH=arm go build -v -o out/update_linux_arm cmd/update.go
-
   assets:
     desc: Creates the assets using yarn
     dir: resources
