@@ -1,5 +1,5 @@
 # Building the application
-FROM golang:1.24-alpine
+FROM --platform=$BUILDPLATFORM golang:1.24-alpine
 
 # Installing dependencies
 RUN apk add curl git yarn && sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /bin
@@ -13,9 +13,13 @@ RUN go mod download
 COPY resources/package.json resources/yarn.lock resources/
 RUN cd resources && yarn
 
-# Building the application
+# Copy all the files
 COPY . .
-RUN /bin/task build
+
+# Building the application (cross-platform)
+ARG TARGETOS
+ARG TARGETARCH
+RUN GOOS=$TARGETOS GOARCH=$TARGETARCH /bin/task build
 
 # Packing the built application in a small container
 FROM alpine:latest
