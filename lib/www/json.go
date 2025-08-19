@@ -2,10 +2,11 @@ package www
 
 import (
 	"encoding/json"
-	"github.com/iancoleman/orderedmap"
 	"os"
 	"time"
 	"tldr-translation-progress/lib/tldr"
+
+	"github.com/iancoleman/orderedmap"
 )
 
 const defaultFileMask = 0740

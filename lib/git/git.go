@@ -3,14 +3,15 @@ package git
 import (
 	"errors"
 	"fmt"
+	"net"
+	"os"
+	"time"
+
 	"github.com/go-git/go-git/v5"
 	"github.com/go-git/go-git/v5/config"
 	"github.com/go-git/go-git/v5/plumbing/object"
 	"github.com/go-git/go-git/v5/plumbing/transport/ssh"
 	ssh2 "golang.org/x/crypto/ssh"
-	"net"
-	"os"
-	"time"
 )
 
 const DefaultFileMask = 0740

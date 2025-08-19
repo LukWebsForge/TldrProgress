@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/robfig/cron/v3"
 	"log"
 	"os"
 	"path/filepath"
@@ -11,6 +10,8 @@ import (
 	"tldr-translation-progress/lib/tldr"
 	"tldr-translation-progress/lib/www"
 	"tldr-translation-progress/resources"
+
+	"github.com/robfig/cron/v3"
 )
 
 const TldrDir = "tldr"
