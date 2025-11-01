@@ -6,7 +6,7 @@
   "dependencies": {
     "@geist-ui/core": "~2.3.8",
     "@geist-ui/icons": "^1.0.1",
-    "@types/node": "^24.3.0",
+    "@types/node": "^24.9.2",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^5.0.1",
