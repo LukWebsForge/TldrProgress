@@ -14,3 +14,6 @@
 # Keep .gitkeep files
 # Such directories must be ignored with a wildcard at the end: hello/*
 !/**/.gitkeep
+
+# macOS
+.DS_Store
