@@ -24,7 +24,7 @@ jobs:
         run: curl -sL https://taskfile.dev/install.sh | sh
       - name: Build using Taskfile.yml
         run: ./bin/task build
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v6
         with:
           name: compiled-application-amd64-ubuntu
           path: out/*
