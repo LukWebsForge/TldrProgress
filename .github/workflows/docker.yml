@@ -58,7 +58,7 @@ jobs:
       # Setup QEMU for multiplatform builds with cross-compilation
       # # https://docs.docker.com/build/ci/github-actions/multi-platform/
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@v4
 
       # Setup Buildx for multiplatform builds with cross-compilation
       # https://docs.docker.com/build/ci/github-actions/multi-platform/
