@@ -8,7 +8,8 @@ export default defineConfig([
   {
     settings: {
       react: {
-        version: 'detect',
+        // https://github.com/vercel/next.js/issues/89764
+        version: '19',
       },
     },
   },
