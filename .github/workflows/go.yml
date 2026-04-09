@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/setup-go@v6
         with:
-          go-version: ^1.25
+          go-version: ^1.26
       - uses: actions/setup-node@v6
         with:
           node-version: '24'
@@ -24,7 +24,7 @@ jobs:
         run: curl -sL https://taskfile.dev/install.sh | sh
       - name: Build using Taskfile.yml
         run: ./bin/task build
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: compiled-application-amd64-ubuntu
           path: out/*

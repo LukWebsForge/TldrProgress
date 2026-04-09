@@ -1,5 +1,5 @@
 # Building the application
-FROM --platform=$BUILDPLATFORM golang:1.25-alpine
+FROM --platform=$BUILDPLATFORM golang:1.26-alpine
 
 # Installing dependencies
 RUN apk add curl git yarn && sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /bin
