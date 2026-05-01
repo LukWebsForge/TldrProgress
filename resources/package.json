@@ -16,7 +16,7 @@
     "react-dom": "^19.2.5",
     "react-intersection-observer": "^10.0.3",
     "typescript": "^6.0.2",
-    "vite": "^8.0.8"
+    "vite": "^8.0.10"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
