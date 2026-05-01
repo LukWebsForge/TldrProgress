@@ -7,7 +7,7 @@ require (
 	github.com/go-git/go-git/v5 v5.18.0
 	github.com/iancoleman/orderedmap v0.3.0
 	github.com/robfig/cron/v3 v3.0.1
-	golang.org/x/crypto v0.49.0
+	golang.org/x/crypto v0.50.0
 )
 
 require (
