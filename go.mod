@@ -1,13 +1,13 @@
 module tldr-translation-progress
 
-go 1.25.0
+go 1.26.0
 
 require (
 	github.com/charmbracelet/keygen v0.5.4
 	github.com/go-git/go-git/v5 v5.19.2
 	github.com/iancoleman/orderedmap v0.3.0
 	github.com/robfig/cron/v3 v3.0.1
-	golang.org/x/crypto v0.55.0
+	golang.org/x/crypto v0.57.0
 )
 
 require (
@@ -28,6 +28,6 @@ require (
 	github.com/skeema/knownhosts v1.3.2 // indirect
 	github.com/xanzy/ssh-agent v0.3.3 // indirect
 	golang.org/x/net v0.58.0 // indirect
-	golang.org/x/sys v0.47.0 // indirect
+	golang.org/x/sys v0.48.0 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 )
